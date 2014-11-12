@@ -34,10 +34,5 @@
 
 			return null;
 		}
-
-		public static string CutString(this HtmlHelper helper, string input, int limitLength, string suffix)
-		{
-			return CommonTools.CutString(input, limitLength, suffix);
-		}
 	}
 }

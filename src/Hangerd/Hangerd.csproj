@@ -84,8 +84,8 @@
     <Compile Include="Specification\ParametersRebinder.cs" />
     <Compile Include="Specification\Specification.cs" />
     <Compile Include="Specification\TrueSpecification.cs" />
-    <Compile Include="UnitOfWork\ISql.cs" />
-    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="Repository\IRepositoryContext.cs" />
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Utility\Generator\CodeGenerator.cs" />
     <Compile Include="Utility\Generator\IdentityGenerator.cs" />
     <Compile Include="HangerdFramework.cs" />

@@ -5,9 +5,9 @@
 	using System.Web;
 	using System.Web.Mvc;
 
-	public class HangerController : Controller
+	public class HangerdController : Controller
 	{
-		public HangerController() { }
+		public HangerdController() { }
 
 		protected ActionResult AlertAndRedirect(string message, string url)
 		{

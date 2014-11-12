@@ -2,13 +2,13 @@
 <package> 
   <metadata> 
     <id>Hangerd.Mvc</id> 
-    <version>1.0.1</version> 
+    <version>1.0.2</version> 
     <title>Hangerd.Mvc</title> 
     <authors>l3oz</authors> 
     <projectUrl>https://github.com/010227leo/Hangerd</projectUrl> 
-    <description>Simple and useful</description>
+    <description>Hangerd.Mvc</description>
 		<dependencies>
-			<dependency id="Hangerd" version="1.0.1" />
+			<dependency id="Hangerd" version="1.0.2" />
 			<dependency id="Microsoft.AspNet.Mvc" version="5.2.2" />
 		</dependencies>
   </metadata> 

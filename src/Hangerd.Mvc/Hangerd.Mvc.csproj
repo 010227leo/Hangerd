@@ -86,7 +86,7 @@
     <Compile Include="UnityControllerFactory.cs" />
     <Compile Include="Attributes\ExceptionHandlerAttribute.cs" />
     <Compile Include="Attributes\LoginAuthAttribute.cs" />
-    <Compile Include="HangerController.cs" />
+    <Compile Include="HangerdController.cs" />
     <Compile Include="Authentication\LoginHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterServiceTask.cs" />

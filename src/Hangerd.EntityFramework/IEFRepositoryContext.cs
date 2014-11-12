@@ -1,10 +1,10 @@
-﻿namespace Hangerd.EntityFramework.UnitOfWork
+﻿namespace Hangerd.EntityFramework
 {
 	using Hangerd.Entity;
-	using Hangerd.UnitOfWork;
+	using Hangerd.Repository;
 	using System.Data.Entity;
 
-	public interface IEFUnitOfWork : IUnitOfWork, ISql
+	public interface IEFRepositoryContext : IRepositoryContext
 	{
 		DbSet<TEntity> CreateSet<TEntity>() where TEntity : EntityBase;
 

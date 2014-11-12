@@ -1,4 +1,4 @@
-﻿namespace Hangerd.UnitOfWork
+﻿namespace Hangerd
 {
 	using System;
 

@@ -1,13 +1,62 @@
-﻿namespace Hangerd.EntityFramework.UnitOfWork
+﻿namespace Hangerd.EntityFramework
 {
 	using Hangerd.Entity;
 	using System;
+	using System.Collections.Generic;
 	using System.Data.Entity;
 	using System.Data.Entity.ModelConfiguration.Conventions;
 	using System.Linq;
 
-	public class StorageContext : DbContext
+	public abstract class EFRepositoryContext : DbContext, IEFRepositoryContext
 	{
+		#region IUnitOfWork
+		 
+		public void Commit()
+		{
+			SaveChanges();
+		}
+
+		public void Rollback()
+		{
+			ChangeTracker.Entries()
+				.ToList()
+				.ForEach(entry => entry.State = EntityState.Unchanged);
+		}
+
+		#endregion
+
+		#region IEFRepositoryContext
+
+		public IEnumerable<TEntity> ExecuteQuery<TEntity>(string sqlQuery, params object[] parameters)
+		{
+			return base.Database.SqlQuery<TEntity>(sqlQuery, parameters);
+		}
+
+		public int ExecuteCommand(string sqlCommand, params object[] parameters)
+		{
+			return base.Database.ExecuteSqlCommand(sqlCommand, parameters);
+		}
+
+		public DbSet<TEntity> CreateSet<TEntity>()
+			where TEntity : EntityBase
+        {
+            return base.Set<TEntity>();
+        }
+
+        public void Attach<TEntity>(TEntity item)
+            where TEntity : EntityBase
+        {
+            base.Entry<TEntity>(item).State = EntityState.Unchanged;
+        }
+
+        public void SetModified<TEntity>(TEntity item)
+			where TEntity : EntityBase
+        {
+            base.Entry<TEntity>(item).State = EntityState.Modified;
+        }
+
+		#endregion
+
 		public override int SaveChanges()
 		{
 			//Id自动生成
@@ -57,5 +106,5 @@
 
 			base.OnModelCreating(modelBuilder);
 		}
-	}
+    }
 }

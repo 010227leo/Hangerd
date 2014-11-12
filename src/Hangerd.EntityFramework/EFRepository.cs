@@ -1,7 +1,6 @@
-﻿namespace Hangerd.EntityFramework.Repository
+﻿namespace Hangerd.EntityFramework
 {
 	using Hangerd.Entity;
-	using Hangerd.EntityFramework.UnitOfWork;
 	using Hangerd.Repository;
 	using Hangerd.Specification;
 	using System;
@@ -12,16 +11,23 @@
 	public class EFRepository<TEntity> : IRepository<TEntity>
 		where TEntity : EntityBase
 	{
-		private IEFUnitOfWork _unitOfWork;
+		private IEFRepositoryContext _context;
 
-		public EFRepository(IEFUnitOfWork unitOfWork)
+		public EFRepository(IRepositoryContext context)
 		{
-			_unitOfWork = unitOfWork;
+			if (context is IEFRepositoryContext)
+			{
+				this._context = context as IEFRepositoryContext;
+			}
+			else 
+			{
+				throw new ArgumentException("RepositoryContext is not IEFRepositoryContext");
+			}
 		}
 
-		IDbSet<TEntity> GetSet()
+		private IDbSet<TEntity> GetSet()
 		{
-			return _unitOfWork.CreateSet<TEntity>();
+			return _context.CreateSet<TEntity>();
 		}
 
 		public virtual TEntity Get(string id, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)
@@ -78,7 +84,7 @@
 		{
 			if (entity != null)
 			{
-				_unitOfWork.SetModified(entity);
+				_context.SetModified(entity);
 			}
 
 			if (recordModify)
@@ -91,7 +97,7 @@
 		{
 			if (entity != null)
 			{
-				_unitOfWork.Attach(entity);
+				_context.Attach(entity);
 
 				this.GetSet().Remove(entity);
 			}
@@ -102,7 +108,7 @@
 			entity.CleanModifiedPropertiesRecords();
 
 			var entityType = entity.GetType();
-			var dbEntityEntry = (_unitOfWork as DbContext).Entry(entity);
+			var dbEntityEntry = (_context as DbContext).Entry(entity);
 
 			switch (dbEntityEntry.State)
 			{

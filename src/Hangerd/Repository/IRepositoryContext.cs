@@ -1,8 +1,8 @@
-﻿namespace Hangerd.UnitOfWork
+﻿namespace Hangerd.Repository
 {
 	using System.Collections.Generic;
 
-    public interface ISql
+	public interface IRepositoryContext : IUnitOfWork
     {
         IEnumerable<TEntity> ExecuteQuery<TEntity>(string sqlQuery, params object[] parameters);
 
