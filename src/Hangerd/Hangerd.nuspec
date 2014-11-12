@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?> 
+<package> 
+  <metadata> 
+    <id>Hangerd</id> 
+    <version>1.0.1</version> 
+    <title>hanger for ddd</title> 
+    <authors>l3oz</authors> 
+    <projectUrl>https://github.com/010227leo/Hangerd</projectUrl> 
+    <description>Simple and useful</description>
+		<dependencies>
+			<dependency id="Unity" version="3.5.1404.0" />
+			<dependency id="Newtonsoft.Json" version="6.0.1" />
+		</dependencies>
+  </metadata> 
+  <files> 
+    <file src="bin\Release\Hangerd.dll" target="lib\net45" />
+  </files> 
+</package> 
