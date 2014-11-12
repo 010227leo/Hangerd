@@ -45,7 +45,10 @@
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,7 +56,49 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrapper\BootstrapperManager.cs" />
+    <Compile Include="Bootstrapper\BootstrapperTask.cs" />
+    <Compile Include="Bootstrapper\InitServiceBootstrapperTask.cs" />
+    <Compile Include="Bootstrapper\RegisterServiceBootstrapperTask.cs" />
+    <Compile Include="Components\LocalConfigService.cs" />
+    <Compile Include="Components\LocalLoggingService.cs" />
+    <Compile Include="Components\LocalServiceLocator.cs" />
+    <Compile Include="Entity\EntityBase.cs" />
+    <Compile Include="Entity\IDeletable.cs" />
+    <Compile Include="Entity\RecordModifyAttribute.cs" />
+    <Compile Include="Events\DomainEvent.cs" />
+    <Compile Include="Events\IDomainEvent.cs" />
+    <Compile Include="Events\IDomainEventHandler.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\JsonExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Extensions\UnityContainerExtensions.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Specification\AndSpecification.cs" />
+    <Compile Include="Specification\CompositeSpecification.cs" />
+    <Compile Include="Specification\DirectSpecification.cs" />
+    <Compile Include="Specification\ExpressionBuilder.cs" />
+    <Compile Include="Specification\ISpecification.cs" />
+    <Compile Include="Specification\NotSpecification.cs" />
+    <Compile Include="Specification\OrSpecification.cs" />
+    <Compile Include="Specification\ParametersRebinder.cs" />
+    <Compile Include="Specification\Specification.cs" />
+    <Compile Include="Specification\TrueSpecification.cs" />
+    <Compile Include="UnitOfWork\ISql.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="Utility\Generator\CodeGenerator.cs" />
+    <Compile Include="Utility\Generator\IdentityGenerator.cs" />
+    <Compile Include="HangerdFramework.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\BuildManagerWrapper.cs" />
+    <Compile Include="Disposable.cs" />
+    <Compile Include="HangerdException.cs" />
+    <Compile Include="Utility\CryptoHelper.cs" />
+    <Compile Include="Utility\FileHelper.cs" />
+    <Compile Include="Utility\LambdaComparer.cs" />
+    <Compile Include="Components\PerRequestLifetimeManager.cs" />
+    <Compile Include="Utility\CommonTools.cs" />
+    <Compile Include="Utility\ValidationHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Hangerd.nuspec" />
