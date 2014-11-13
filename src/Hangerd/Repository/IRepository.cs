@@ -3,6 +3,7 @@
 	using Hangerd.Entity;
 	using Hangerd.Specification;
 	using System;
+	using System.Collections.Generic;
 	using System.Linq;
 	using System.Linq.Expressions;
 
@@ -22,5 +23,13 @@
 		void Update(TEntity entity, bool recordModify);
 
 		void Delete(TEntity entity);
+
+		#region Sql
+
+		IEnumerable<TEntity> ExecuteQuery<TEntity>(string sqlQuery, params object[] parameters);
+
+		int ExecuteCommand(string sqlCommand, params object[] parameters);
+
+		#endregion
 	}
 }

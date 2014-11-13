@@ -27,16 +27,6 @@
 
 		#region IEFRepositoryContext
 
-		public IEnumerable<TEntity> ExecuteQuery<TEntity>(string sqlQuery, params object[] parameters)
-		{
-			return base.Database.SqlQuery<TEntity>(sqlQuery, parameters);
-		}
-
-		public int ExecuteCommand(string sqlCommand, params object[] parameters)
-		{
-			return base.Database.ExecuteSqlCommand(sqlCommand, parameters);
-		}
-
 		public DbSet<TEntity> CreateSet<TEntity>()
 			where TEntity : EntityBase
         {

@@ -4,6 +4,7 @@
 	using Hangerd.Repository;
 	using Hangerd.Specification;
 	using System;
+	using System.Collections.Generic;
 	using System.Data.Entity;
 	using System.Linq;
 	using System.Linq.Expressions;
@@ -108,51 +109,84 @@
 			entity.CleanModifiedPropertiesRecords();
 
 			var entityType = entity.GetType();
-			var dbEntityEntry = (_context as DbContext).Entry(entity);
+			var dbContext = _context as DbContext;
 
-			switch (dbEntityEntry.State)
+			if (dbContext != null)
 			{
-				case EntityState.Added:
-					foreach (var propertyName in dbEntityEntry.CurrentValues.PropertyNames)
-					{
-						var recordModifyAttribute = entityType.GetProperty(propertyName)
-							.GetCustomAttributes(false).OfType<RecordModifyAttribute>().SingleOrDefault();
+				var dbEntityEntry = dbContext.Entry(entity);
 
-						if (recordModifyAttribute == null)
+				switch (dbEntityEntry.State)
+				{
+					case EntityState.Added:
+						foreach (var propertyName in dbEntityEntry.CurrentValues.PropertyNames)
 						{
-							continue;
+							var recordModifyAttribute = entityType.GetProperty(propertyName)
+								.GetCustomAttributes(false).OfType<RecordModifyAttribute>().SingleOrDefault();
+
+							if (recordModifyAttribute == null)
+							{
+								continue;
+							}
+
+							var property = dbEntityEntry.Property(propertyName);
+
+							entity.RecordModifiedProperty(propertyName, null, property.CurrentValue);
 						}
-
-						var property = dbEntityEntry.Property(propertyName);
-
-						entity.RecordModifiedProperty(propertyName, null, property.CurrentValue);
-					}
-					break;
-				case EntityState.Modified:
-					foreach (var propertyName in dbEntityEntry.OriginalValues.PropertyNames)
-					{
-						var recordModifyAttribute = entityType.GetProperty(propertyName)
-							.GetCustomAttributes(false).OfType<RecordModifyAttribute>().SingleOrDefault();
-
-						if (recordModifyAttribute == null)
+						break;
+					case EntityState.Modified:
+						foreach (var propertyName in dbEntityEntry.OriginalValues.PropertyNames)
 						{
-							continue;
+							var recordModifyAttribute = entityType.GetProperty(propertyName)
+								.GetCustomAttributes(false).OfType<RecordModifyAttribute>().SingleOrDefault();
+
+							if (recordModifyAttribute == null)
+							{
+								continue;
+							}
+
+							var property = dbEntityEntry.Property(propertyName);
+
+							if ((property.OriginalValue == null && property.CurrentValue == null)
+								|| (property.OriginalValue != null && property.OriginalValue.Equals(property.CurrentValue)))
+							{
+								continue;
+							}
+
+							entity.RecordModifiedProperty(propertyName, property.OriginalValue, property.CurrentValue);
 						}
-
-						var property = dbEntityEntry.Property(propertyName);
-
-						if ((property.OriginalValue == null && property.CurrentValue == null)
-							|| (property.OriginalValue != null && property.OriginalValue.Equals(property.CurrentValue)))
-						{
-							continue;
-						}
-
-						entity.RecordModifiedProperty(propertyName, property.OriginalValue, property.CurrentValue);
-					}
-					break;
-				default: 
-					break;
+						break;
+					default:
+						break;
+				}
 			}
 		}
+
+		#region Sql
+
+		public IEnumerable<TEntity> ExecuteQuery<TEntity>(string sqlQuery, params object[] parameters)
+		{
+			var dbContext = _context as DbContext;
+
+			if (dbContext != null)
+			{
+				return dbContext.Database.SqlQuery<TEntity>(sqlQuery, parameters);
+			}
+
+			return null;
+		}
+
+		public int ExecuteCommand(string sqlCommand, params object[] parameters)
+		{
+			var dbContext = _context as DbContext;
+
+			if (dbContext != null)
+			{
+				return dbContext.Database.ExecuteSqlCommand(sqlCommand, parameters);
+			}
+
+			return 0;
+		}
+
+		#endregion
 	}
 }

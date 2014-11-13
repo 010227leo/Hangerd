@@ -2,13 +2,13 @@
 <package> 
   <metadata> 
     <id>Hangerd.Mongodb</id> 
-    <version>1.0.1</version> 
+    <version>1.0.3</version> 
     <title>Hangerd.Mongodb</title> 
     <authors>l3oz</authors> 
     <projectUrl>https://github.com/010227leo/Hangerd</projectUrl> 
     <description>Simple and useful</description>
 		<dependencies>
-			<dependency id="Hangerd" version="1.0.2" />
+			<dependency id="Hangerd" version="1.0.3" />
 			<dependency id="mongocsharpdriver" version="1.9.2" />
 		</dependencies>
   </metadata> 

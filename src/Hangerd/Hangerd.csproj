@@ -73,6 +73,10 @@
     <Compile Include="Extensions\JsonExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Extensions\UnityContainerExtensions.cs" />
+    <Compile Include="MemoryQueue\IMemoryQueueService.cs" />
+    <Compile Include="MemoryQueue\Imp\MemoryQueueService.cs" />
+    <Compile Include="MemoryQueue\MemoryQueueServiceConfiguration.cs" />
+    <Compile Include="RegisterServiceTask.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Specification\AndSpecification.cs" />
     <Compile Include="Specification\CompositeSpecification.cs" />
