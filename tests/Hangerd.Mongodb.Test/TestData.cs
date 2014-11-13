@@ -1,0 +1,15 @@
+﻿namespace Hangerd.Mongodb.Test
+{
+	using System;
+
+	public class TestData
+	{
+		public string Operator { get; set; }
+
+		public string OperationType { get; set; }
+
+		public bool IsSuccess { get; set; }
+
+		public DateTime OperationTime { get; set; }
+	}
+}
