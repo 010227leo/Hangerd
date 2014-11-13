@@ -13,6 +13,11 @@
 		private MemoryQueueServiceConfiguration<T> _configuration;
 		private long _totalConsumeItemCount = 0;
 
+		public long TotalConsumeItemCount
+		{
+			get { return _totalConsumeItemCount; }
+		}
+
 		public void Init(MemoryQueueServiceConfiguration<T> configuration)
 		{
 			this._configuration = configuration;

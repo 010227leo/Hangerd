@@ -1,6 +1,8 @@
 ﻿namespace Hangerd
 {
 	using Hangerd.Bootstrapper;
+	using Hangerd.Caching;
+	using Hangerd.Extensions;
 	using Hangerd.MemoryQueue;
 	using Hangerd.MemoryQueue.Imp;
 	using Microsoft.Practices.Unity;
@@ -16,7 +18,13 @@
 
 		public override void Execute()
 		{
+			container.RegisterTypeAsSingleton<ICacheProvider, MemoryCacheProvider>();
 			container.RegisterType(typeof(IMemoryQueueService<>), typeof(MemoryQueueService<>));
+		}
+
+		protected override void InternalDispose()
+		{
+			container.Resolve<ICacheProvider>().Dispose();
 		}
 	}
 }
