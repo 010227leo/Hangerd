@@ -70,9 +70,9 @@
     <Compile Include="Entity\EntityBase.cs" />
     <Compile Include="Entity\IDeletable.cs" />
     <Compile Include="Entity\RecordModifyAttribute.cs" />
-    <Compile Include="Events\DomainEvent.cs" />
-    <Compile Include="Events\IDomainEvent.cs" />
-    <Compile Include="Events\IDomainEventHandler.cs" />
+    <Compile Include="Event\DomainEvent.cs" />
+    <Compile Include="Event\IDomainEvent.cs" />
+    <Compile Include="Event\IDomainEventHandler.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\JsonExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />

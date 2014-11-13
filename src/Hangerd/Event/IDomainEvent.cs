@@ -1,4 +1,4 @@
-﻿namespace Hangerd.Events
+﻿namespace Hangerd.Event
 {
 	using Hangerd.Entity;
 

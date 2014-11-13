@@ -1,4 +1,4 @@
-﻿namespace Hangerd.Events
+﻿namespace Hangerd.Event
 {
 	/// <summary>
 	/// 表示继承于该接口的类型是领域事件处理器类型
