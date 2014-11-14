@@ -5,13 +5,13 @@
 	public class TestBase
 	{
 		[SetUp]
-		protected void TestSetUp()
+		protected virtual void TestSetUp()
 		{
 			HangerdFramework.Start();
 		}
 
 		[TearDown]
-		protected void TestTearDown()
+		protected virtual void TestTearDown()
 		{
 			HangerdFramework.End();
 		}
