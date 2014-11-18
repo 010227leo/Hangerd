@@ -47,13 +47,14 @@ public class RegisterServiceTask : RegisterServiceBootstrapperTask
 	}
 }
 
-public void Main()
+static void Main(string[] args)
 {
 	var myService = LocalServiceLocator.GetService<IMyService>();
 }
 ```
 
 - **Domain entity**
+
 ```csharp
 public abstract class Account : EntityBase, IDeletable
 {
@@ -72,6 +73,7 @@ public abstract class Account : EntityBase, IDeletable
 ```
 
 - **Domain event**
+
 ```csharp
 public class AccountNameModifiedEvent : DomainEvent
 {
@@ -82,7 +84,7 @@ public class AccountNameModifiedEvent : DomainEvent
 
 public class AccountNameModifiedEventHandler : IDomainEventHandler<AccountNameModifiedEvent>
 {
-  public void Handle(AccountNameModifiedEvent e)
+	public void Handle(AccountNameModifiedEvent e)
 	{
 		var account = e.Source as Account;
 

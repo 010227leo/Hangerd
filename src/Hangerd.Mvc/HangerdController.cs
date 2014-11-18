@@ -30,7 +30,7 @@
 		{
 			var json = obj == null ? "null" : obj.ObjectToJson();
 
-			return Content(json, "text/json");
+			return Content(json, "application/json");
 		}
 	}
 }

@@ -2,6 +2,13 @@
 {
 	using System;
 
+	public interface ITestService : IDisposable
+	{
+		string ServiceId { get; }
+
+		bool Disposed { get; }
+	}
+
 	public class TestService : ITestService
 	{
 		private string _serviceId;

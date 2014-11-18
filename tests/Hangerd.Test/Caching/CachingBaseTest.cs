@@ -60,6 +60,5 @@
 			Assert.AreEqual("value", value);
 			Assert.IsNull(value1);
 		}
-
 	}
 }

@@ -7,25 +7,13 @@
 
 	public class CryptoHelper
 	{
-		static string _IV = "#kRz4rK^Z#kLMgQ^!ZHsY0u6";
-		static string _Key = "S()%s@z^";
-
-		public string IV
-		{
-			get { return _IV; }
-			set { _IV = value; }
-		}
-
-		public string Key
-		{
-			get { return _Key; }
-			set { _Key = value; }
-		}
+		static string _iv = "#kRz4rK^Z#kLMgQ^!ZHsY0u6";
+		static string _key = "S()%s@z^";
 
 		public static string Encrypt(string input)
 		{
-			var btKey = Encoding.Default.GetBytes(_Key);
-			var btIV = Encoding.Default.GetBytes(_IV);
+			var btKey = Encoding.Default.GetBytes(_key);
+			var btIV = Encoding.Default.GetBytes(_iv);
 			var des = new DESCryptoServiceProvider();
 
 			using (MemoryStream ms = new MemoryStream())
@@ -44,8 +32,8 @@
 
 		public static string Decrypt(string input)
 		{
-			var btKey = Encoding.Default.GetBytes(_Key);
-			var btIV = Encoding.Default.GetBytes(_IV);
+			var btKey = Encoding.Default.GetBytes(_key);
+			var btIV = Encoding.Default.GetBytes(_iv);
 			var des = new DESCryptoServiceProvider();
 
 			using (MemoryStream ms = new MemoryStream())

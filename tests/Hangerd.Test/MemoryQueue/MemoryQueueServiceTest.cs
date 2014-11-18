@@ -3,7 +3,6 @@
 	using Hangerd.Components;
 	using Hangerd.MemoryQueue;
 	using NUnit.Framework;
-	using System;
 	using System.Threading;
 
 	public class MemoryQueueServiceTest : TestBase
@@ -15,14 +14,16 @@
 
 			testQueueService.Init(new MemoryQueueServiceConfiguration<string>("test_queue", items => { }));
 
-			for (var i = 0; i < 10; i++)
+			var itemCount = 10;
+
+			for (var i = 0; i < itemCount; i++)
 			{
 				testQueueService.Enqueue(string.Format("test_{0}", i));
 			}
 
 			Thread.Sleep(1000);
 
-			Assert.AreEqual(10, testQueueService.TotalConsumeItemCount);
+			Assert.AreEqual(itemCount, testQueueService.TotalConsumeItemCount);
 		}
 
 		[Test]
@@ -34,20 +35,23 @@
 			testQueueService1.Init(new MemoryQueueServiceConfiguration<string>("test_queue_1", items => { }));
 			testQueueService2.Init(new MemoryQueueServiceConfiguration<int>("test_queue_2", items => { }));
 
-			for (var i = 0; i < 10; i++)
+			var itemCount1 = 10;
+			var itemCount2 = 20;
+
+			for (var i = 0; i < itemCount1; i++)
 			{
 				testQueueService1.Enqueue(string.Format("test_{0}", i));
 			}
 
-			for (var i = 0; i < 20; i++)
+			for (var i = 0; i < itemCount2; i++)
 			{
 				testQueueService2.Enqueue(i);
 			}
 
 			Thread.Sleep(1000);
 
-			Assert.AreEqual(10, testQueueService1.TotalConsumeItemCount);
-			Assert.AreEqual(20, testQueueService2.TotalConsumeItemCount);
+			Assert.AreEqual(itemCount1, testQueueService1.TotalConsumeItemCount);
+			Assert.AreEqual(itemCount2, testQueueService2.TotalConsumeItemCount);
 		}
 	}
 }
