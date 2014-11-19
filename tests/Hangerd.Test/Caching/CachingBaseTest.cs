@@ -1,6 +1,8 @@
 ﻿namespace Hangerd.Test.Caching
 {
 	using Hangerd.Caching;
+	using Hangerd.Components;
+	using Hangerd.Extensions;
 	using NUnit.Framework;
 	using System;
 	using System.Threading;
@@ -59,6 +61,17 @@
 
 			Assert.AreEqual("value", value);
 			Assert.IsNull(value1);
+		}
+
+		[Test]
+		public void CustomerCacheProviderTest()
+		{
+			HangerdFramework.Container.RegisterTypeAsSingleton<ICacheProvider, MyCacheProvider>();
+
+			var myCacheProvider = LocalServiceLocator.GetService<ICacheProvider>();
+
+			Assert.IsNotNull(myCacheProvider);
+			Assert.AreEqual(typeof(MyCacheProvider), myCacheProvider.GetType());
 		}
 	}
 }

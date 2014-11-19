@@ -2,6 +2,7 @@
 {
 	using Hangerd.Bootstrapper;
 	using Hangerd.Caching;
+	using Hangerd.Event.Bus;
 	using Hangerd.Extensions;
 	using Hangerd.MemoryQueue;
 	using Hangerd.MemoryQueue.Imp;
@@ -18,7 +19,8 @@
 
 		public override void Execute()
 		{
-			container.RegisterTypeAsSingleton<ICacheProvider, MemoryCacheProvider>();
+			container.RegisterTypeAsSingleton<ICacheProvider, DefaultCacheProvider>();
+			container.RegisterTypeAsPerRequest<IEventBus, DefaultEventBus>();
 			container.RegisterType(typeof(IMemoryQueueService<>), typeof(MemoryQueueService<>));
 		}
 

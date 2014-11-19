@@ -4,11 +4,11 @@
 	using System;
 	using System.Runtime.Caching;
 
-	public class MemoryCacheProvider : Disposable, ICacheProvider
+	public class DefaultCacheProvider : Disposable, ICacheProvider
 	{
 		private static readonly ObjectCache _cache = MemoryCache.Default;
 
-		public MemoryCacheProvider() { }
+		public DefaultCacheProvider() { }
 
 		public T Get<T>(string key)
 		{

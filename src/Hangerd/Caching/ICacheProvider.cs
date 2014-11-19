@@ -2,7 +2,7 @@
 {
 	using System;
 
-	internal interface ICacheProvider : IDisposable
+	public interface ICacheProvider : IDisposable
 	{
 		T Get<T>(string key);
 

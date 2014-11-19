@@ -2,7 +2,7 @@
 {
 	using Hangerd.Entity;
 
-	internal class SampleEntity : EntityBase
+	public class SampleEntity : EntityBase
 	{
 		public string Name { get; set; }
 

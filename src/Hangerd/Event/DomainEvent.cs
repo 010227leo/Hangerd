@@ -2,6 +2,7 @@
 {
 	using Hangerd.Components;
 	using Hangerd.Entity;
+	using System;
 
 	/// <summary>
 	/// 表示继承于该类的类型为领域事件。
@@ -10,11 +11,18 @@
 	{
 		private readonly EntityBase _source;
 
+		public virtual Guid Id { get; set; }
+
+		public virtual DateTime Timestamp { get; set; }
+
 		public DomainEvent() { }
 
 		public DomainEvent(EntityBase source)
 		{
 			this._source = source;
+
+			this.Id = Guid.NewGuid();
+			this.Timestamp = DateTime.Now;
 		}
 
 		public EntityBase Source

@@ -55,9 +55,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Caching\CachingBaseTest.cs" />
+    <Compile Include="Caching\MyCacheProvider.cs" />
     <Compile Include="Components\LocalConfigServiceTest.cs" />
     <Compile Include="Components\LocalServiceLocatorTest.cs" />
     <Compile Include="Components\LocalLoggingServiceTest.cs" />
+    <Compile Include="Event\Bus\DefaultEventBusTest.cs" />
+    <Compile Include="Event\DomainEventTest.cs" />
+    <Compile Include="Event\TestEvent.cs" />
+    <Compile Include="Event\TestDomainEventHandler.cs" />
+    <Compile Include="Event\TestEventHandler2.cs" />
+    <Compile Include="Event\TestEventHandler1.cs" />
     <Compile Include="MemoryQueue\MemoryQueueServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleEntity.cs" />
