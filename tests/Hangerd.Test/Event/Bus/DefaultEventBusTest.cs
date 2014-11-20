@@ -28,6 +28,8 @@
 				Assert.Fail("EventBus is null");
 			}
 
+			_eventHandledResults.Clear();
+
 			bus.Publish(new TestEvent());
 			bus.Commit();
 

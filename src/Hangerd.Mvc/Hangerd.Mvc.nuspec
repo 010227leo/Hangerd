@@ -6,7 +6,7 @@
     <title>Hangerd.Mvc</title> 
     <authors>l3oz</authors> 
     <projectUrl>https://github.com/010227leo/Hangerd</projectUrl> 
-    <description>Hangerd.Mvc</description>
+    <description>Hangerd.Mvc v1.0.4</description>
 		<dependencies>
 			<dependency id="Hangerd" version="1.0.3" />
 			<dependency id="Microsoft.AspNet.Mvc" version="5.2.2" />

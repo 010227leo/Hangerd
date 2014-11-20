@@ -14,8 +14,7 @@
 		static DefaultEventBus()
 		{
 			var concreteTypes = BuildManagerWrapper.Current.ConcreteTypes;
-			var eventTypes = concreteTypes
-				.Where(t => typeof(IEvent).IsAssignableFrom(t));
+			var eventTypes = concreteTypes.Where(t => typeof(IEvent).IsAssignableFrom(t));
 
 			foreach (var eventType in eventTypes)
 			{

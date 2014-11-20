@@ -7,9 +7,9 @@ Components
 ===================
 
 - Hangerd
-- Hangerd.Mvc
 - Hangerd.EntityFramework
 - Hangerd.Mongodb
+- Hangerd.Mvc
 
 Dependencies
 ===================

@@ -6,7 +6,7 @@
     <title>Hangerd.Mongodb</title> 
     <authors>l3oz</authors> 
     <projectUrl>https://github.com/010227leo/Hangerd</projectUrl> 
-    <description>Simple and useful</description>
+    <description>Hangerd.Mongodb v1.0.3</description>
 		<dependencies>
 			<dependency id="Hangerd" version="1.0.3" />
 			<dependency id="mongocsharpdriver" version="1.9.2" />
