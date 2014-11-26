@@ -86,11 +86,11 @@
 			if (entity != null)
 			{
 				_context.SetModified(entity);
-			}
 
-			if (recordModify)
-			{
-				this.RecordModifiedProperties(entity);
+				if (recordModify)
+				{
+					this.RecordModifiedProperties(entity);
+				}
 			}
 		}
 
@@ -163,7 +163,7 @@
 
 		#region Sql
 
-		public IEnumerable<TEntity> ExecuteQuery<TEntity>(string sqlQuery, params object[] parameters)
+		public IEnumerable<TEntity> ExecuteQuery(string sqlQuery, params object[] parameters)
 		{
 			var dbContext = _context as DbContext;
 

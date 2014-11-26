@@ -6,7 +6,7 @@
 
 	public abstract class EntityBase
 	{
-		private Dictionary<string, string> _modifiedPropertitiesRecords = new Dictionary<string, string>();
+		private readonly Dictionary<string, string> _modifiedPropertitiesRecords = new Dictionary<string, string>();
 		private int? _requestedHashCode;
 
 		public virtual string Id { get; set; }

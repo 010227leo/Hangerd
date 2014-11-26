@@ -2,13 +2,13 @@
 <package> 
   <metadata> 
     <id>Hangerd.EntityFramework</id> 
-    <version>1.0.5</version> 
+    <version>1.0.6</version> 
     <title>Hangerd.EntityFramework</title> 
     <authors>l3oz</authors> 
     <projectUrl>https://github.com/010227leo/Hangerd</projectUrl> 
-    <description>Hangerd.EntityFramework v1.0.5</description>
+    <description>Hangerd.EntityFramework v1.0.6</description>
 		<dependencies>
-			<dependency id="Hangerd" version="1.0.4" />
+			<dependency id="Hangerd" version="1.0.6" />
 			<dependency id="EntityFramework" version="6.1.1" />
 		</dependencies>
   </metadata> 

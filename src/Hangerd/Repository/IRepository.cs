@@ -26,7 +26,7 @@
 
 		#region Sql
 
-		IEnumerable<TEntity> ExecuteQuery<TEntity>(string sqlQuery, params object[] parameters);
+		IEnumerable<TEntity> ExecuteQuery(string sqlQuery, params object[] parameters);
 
 		int ExecuteCommand(string sqlCommand, params object[] parameters);
 
