@@ -123,14 +123,12 @@
 							var recordModifyAttribute = entityType.GetProperty(propertyName)
 								.GetCustomAttributes(false).OfType<RecordModifyAttribute>().SingleOrDefault();
 
-							if (recordModifyAttribute == null)
+							if (recordModifyAttribute != null)
 							{
-								continue;
+								var property = dbEntityEntry.Property(propertyName);
+
+								entity.RecordModifiedProperty(propertyName, null, property.CurrentValue);
 							}
-
-							var property = dbEntityEntry.Property(propertyName);
-
-							entity.RecordModifiedProperty(propertyName, null, property.CurrentValue);
 						}
 						break;
 					case EntityState.Modified:
@@ -139,20 +137,18 @@
 							var recordModifyAttribute = entityType.GetProperty(propertyName)
 								.GetCustomAttributes(false).OfType<RecordModifyAttribute>().SingleOrDefault();
 
-							if (recordModifyAttribute == null)
+							if (recordModifyAttribute != null)
 							{
-								continue;
+								var property = dbEntityEntry.Property(propertyName);
+
+								if ((property.OriginalValue == null && property.CurrentValue == null)
+									|| (property.OriginalValue != null && property.OriginalValue.Equals(property.CurrentValue)))
+								{
+									continue;
+								}
+
+								entity.RecordModifiedProperty(propertyName, property.OriginalValue, property.CurrentValue);
 							}
-
-							var property = dbEntityEntry.Property(propertyName);
-
-							if ((property.OriginalValue == null && property.CurrentValue == null)
-								|| (property.OriginalValue != null && property.OriginalValue.Equals(property.CurrentValue)))
-							{
-								continue;
-							}
-
-							entity.RecordModifiedProperty(propertyName, property.OriginalValue, property.CurrentValue);
 						}
 						break;
 					default:

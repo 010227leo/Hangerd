@@ -50,42 +50,42 @@
 
 		public override int SaveChanges()
 		{
-			//Id自动生成
 			foreach (var dbEntityEntry in ChangeTracker.Entries().Where(x => x.State == EntityState.Added))
 			{
 				var entity = dbEntityEntry.Entity as EntityBase;
 
 				if (entity != null && entity.IsTransient())
 				{
+					//Id自动生成
 					entity.GenerateNewId();
 				}
 
 				ValidateEntity(dbEntityEntry);
 			}
 
-			//最后修改时间戳
 			foreach (var dbEntityEntry in ChangeTracker.Entries().Where(x => x.State == EntityState.Modified))
 			{
 				var entity = dbEntityEntry.Entity as EntityBase;
 
 				if (entity != null)
 				{
+					//最后修改时间戳
 					entity.LastModified = DateTime.Now;
 				}
 
 				ValidateEntity(dbEntityEntry);
 			}
 
-			//逻辑删除
 			foreach (var dbEntityEntry in ChangeTracker.Entries().Where(x => x.State == EntityState.Deleted))
 			{
 				var entity = dbEntityEntry.Entity as IDeletable;
 
 				if (entity != null)
 				{
+					//逻辑删除
 					entity.IsDeleted = true;
 
-					base.Entry(entity).State = EntityState.Modified;
+					dbEntityEntry.State = EntityState.Modified;
 				}
 			}
 
@@ -94,11 +94,11 @@
 
 		private static void ValidateEntity(DbEntityEntry dbEntityEntry)
 		{
-			var validatableEntity = dbEntityEntry.Entity as IValidatable;
+			var entity = dbEntityEntry.Entity as IValidatable;
 
-			if (validatableEntity != null)
+			if (entity != null)
 			{
-				validatableEntity.Validate();
+				entity.Validate();
 			}
 		}
 
