@@ -6,12 +6,20 @@
 
 	public abstract class EntityBase
 	{
-		private readonly Dictionary<string, string> _modifiedPropertitiesRecords = new Dictionary<string, string>();
+		private readonly Dictionary<string, ModifiedProperty> _modifiedPropertitiesRecords = new Dictionary<string, ModifiedProperty>();
 		private int? _requestedHashCode;
 
-		public virtual string Id { get; set; }
+		public virtual string Id { get; private set; }
 
 		public virtual DateTime LastModified { get; set; }
+
+		public Dictionary<string, ModifiedProperty> ModifiedPropertiesRecords
+		{
+			get
+			{
+				return _modifiedPropertitiesRecords;
+			}
+		}
 
 		public EntityBase()
 		{
@@ -31,21 +39,11 @@
 			}
 		}
 
-		public Dictionary<string, string> GetModifiedPropertiesRecords()
-		{
-			return _modifiedPropertitiesRecords;
-		}
-
-		public void CleanModifiedPropertiesRecords()
-		{
-			_modifiedPropertitiesRecords.Clear();
-		}
-
 		public void RecordModifiedProperty(string propertyName, object oldValue, object newValue)
 		{
 			if (!_modifiedPropertitiesRecords.ContainsKey(propertyName))
 			{
-				_modifiedPropertitiesRecords.Add(propertyName, string.Format("old:'{0}',new:'{1}'", oldValue, newValue));
+				_modifiedPropertitiesRecords.Add(propertyName, new ModifiedProperty(oldValue, newValue));
 			}
 		}
 

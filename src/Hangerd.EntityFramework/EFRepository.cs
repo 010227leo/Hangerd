@@ -106,7 +106,7 @@
 
 		private void RecordModifiedProperties(TEntity entity)
 		{
-			entity.CleanModifiedPropertiesRecords();
+			entity.ModifiedPropertiesRecords.Clear();
 
 			var entityType = entity.GetType();
 			var dbContext = _context as DbContext;

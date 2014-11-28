@@ -67,9 +67,11 @@
     <Compile Include="Components\LocalConfigService.cs" />
     <Compile Include="Components\LocalLoggingService.cs" />
     <Compile Include="Components\LocalServiceLocator.cs" />
+    <Compile Include="Dto\DtoBase.cs" />
     <Compile Include="Entity\EntityBase.cs" />
     <Compile Include="Entity\IDeletable.cs" />
     <Compile Include="Entity\IValidatable.cs" />
+    <Compile Include="Entity\ModifiedProperty.cs" />
     <Compile Include="Entity\RecordModifyAttribute.cs" />
     <Compile Include="Event\DomainEvent.cs" />
     <Compile Include="Event\Bus\DefaultEventBus.cs" />
