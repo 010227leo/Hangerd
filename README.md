@@ -1,25 +1,22 @@
+# Hangerd
+
 [![Build status](https://ci.appveyor.com/api/projects/status/6lq99cxneooqhhk1/branch/master?svg=true)](https://ci.appveyor.com/project/010227leo/hangerd/branch/master)
-Hangerd
-===================
 
 A lightweight and efficient .NET based application development framework. It provides the fundamental libraries and tools for practicing and implementing Domain-Driven Design.
 
-Components
-===================
+## Components
 
 - Hangerd
 - Hangerd.EntityFramework
 - Hangerd.Mongodb
 - Hangerd.Mvc
 
-Dependencies
-===================
+## Dependencies
 
 - Unity v3.5.1404.0
 - Newtonsoft.Json v6.0.1
 
-Sample
-===================
+## Sample
 
 - **How to start**
 
