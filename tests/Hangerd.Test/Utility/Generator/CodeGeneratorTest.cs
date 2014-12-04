@@ -44,22 +44,5 @@
 
 			Assert.IsFalse(hasConflict);
 		}
-
-		[Test]
-		public void CostTimeTest()
-		{
-			var stopwatch = Stopwatch.StartNew();
-
-			for (var i = 0; i < 100000; i++)
-			{
-				var code = CodeGenerator.Create(16);
-			}
-
-			stopwatch.Stop();
-
-			Console.WriteLine("cost: {0}ms", stopwatch.ElapsedMilliseconds);
-
-			Assert.IsTrue(stopwatch.ElapsedMilliseconds < 50);
-		}
 	}
 }
