@@ -24,14 +24,14 @@
 
 			InternalInit();
 
-			LocalLoggingService.Info("成功初始化内存队列 '{0}'", configuration.MemoryQueueName);
+			LocalLoggingService.Info("Init MemoryQueue '{0}'", configuration.MemoryQueueName);
 		}
 
 		public void Enqueue(T item)
 		{
 			if (this._configuration == null)
 			{
-				throw new HangerdException("内存队列未初始化: '{0}'", this.GetType().FullName);
+				throw new Exception(string.Format("MemoryQueue uninitialized: '{0}'", this.GetType().FullName));
 			}
 
 			try

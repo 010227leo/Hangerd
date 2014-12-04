@@ -5,26 +5,14 @@
 
 	public class MemoryQueueServiceConfiguration<T>
 	{
-		/// <summary>
-		/// 内存队列名
-		/// </summary>
 		public string MemoryQueueName { get; set; }
 
-		/// <summary>
-		/// 消费数据的委托
-		/// </summary>
 		public Action<IList<T>> ConsumeAction { get; set; }
 
-		/// <summary>
-		/// 消费数据的时间间隔毫秒
-		/// </summary>
 		public int ConsumeIntervalMilliseconds { get; set; }
 
 		private int _consumeThreadCount;
 
-		/// <summary>
-		/// 消费的线程总数
-		/// </summary>
 		public int ConsumeThreadCount
 		{
 			get
@@ -44,9 +32,6 @@
 
 		private int _consumeItemCountInOneBatch;
 
-		/// <summary>
-		/// 消费数据的批量项数
-		/// </summary>
 		public int ConsumeItemCountInOneBatch
 		{
 			get

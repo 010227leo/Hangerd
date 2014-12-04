@@ -4,9 +4,6 @@
 	using Hangerd.Entity;
 	using System;
 
-	/// <summary>
-	/// 表示继承于该类的类型为领域事件。
-	/// </summary>
 	public abstract class DomainEvent : IDomainEvent
 	{
 		private readonly EntityBase _source;

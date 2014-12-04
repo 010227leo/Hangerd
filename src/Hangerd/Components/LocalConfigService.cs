@@ -52,7 +52,7 @@
 				}
 				catch (Exception ex)
 				{
-					LocalLoggingService.Exception("加载配置文件 {0} 失败！异常信息：{1}", fileFullName, ex.Message);
+					LocalLoggingService.Exception("LocalConfigService error: failed to load config file {0}：{1}", fileFullName, ex.Message);
 
 					return defaultValue;
 				}
@@ -71,7 +71,7 @@
 					}
 					catch (Exception ex)
 					{
-						LocalLoggingService.Exception("反序列化异常，类型名称：{0}，异常信息：{1}", typeof(T).Name, ex.Message);
+						LocalLoggingService.Exception("LocalConfigService error: failed to deserialize type {0} : {1}", typeof(T).Name, ex.Message);
 
 						return defaultValue;
 					}
@@ -116,7 +116,7 @@
 					}
 					catch (Exception ex)
 					{
-						LocalLoggingService.Exception("序列化异常，类型名称：{0}，异常信息：{1}", typeof(T).Name, ex.Message);
+						LocalLoggingService.Exception("LocalConfigService error: failed to serialize type {0} : {1}", typeof(T).Name, ex.Message);
 					}
 				}
 			}
@@ -137,7 +137,7 @@
 			}
 			catch (Exception ex)
 			{
-				LocalLoggingService.Exception("创建目录 {0} 失败！异常信息：{1}", _localConfigDirectory, ex.Message);
+				LocalLoggingService.Exception("LocalConfigService error: failed to create directory {0}：{1}", _localConfigDirectory, ex.Message);
 
 				return false;
 			}

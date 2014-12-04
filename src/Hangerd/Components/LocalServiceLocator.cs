@@ -14,7 +14,7 @@
 			}
 			catch (Exception ex)
 			{
-				LocalLoggingService.Exception("Resolve error '{0}', Message：{1}", typeof(T).FullName, ex.ToString());
+				LocalLoggingService.Exception("LocalServiceLocator Resolve error '{0}', Message：{1}", typeof(T).FullName, ex.ToString());
 
 				return default(T);
 			}
@@ -28,7 +28,7 @@
 			}
 			catch (Exception ex)
 			{
-				LocalLoggingService.Exception("ResolveAll error '{0}', Message：{1}", typeof(T).FullName, ex.ToString());
+				LocalLoggingService.Exception("LocalServiceLocator ResolveAll error '{0}', Message：{1}", typeof(T).FullName, ex.ToString());
 
 				return default(IEnumerable<T>);
 			}

@@ -1,5 +1,4 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/6lq99cxneooqhhk1/branch/master?svg=true)](https://ci.appveyor.com/project/010227leo/hangerd/branch/master)
-
 Hangerd
 ===================
 

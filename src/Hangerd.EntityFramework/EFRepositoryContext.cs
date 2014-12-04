@@ -56,7 +56,6 @@
 
 				if (entity != null && entity.IsTransient())
 				{
-					//Id自动生成
 					entity.GenerateNewId();
 				}
 
@@ -69,7 +68,6 @@
 
 				if (entity != null)
 				{
-					//最后修改时间戳
 					entity.LastModified = DateTime.Now;
 				}
 
@@ -82,7 +80,6 @@
 
 				if (entity != null)
 				{
-					//逻辑删除
 					entity.IsDeleted = true;
 
 					dbEntityEntry.State = EntityState.Modified;

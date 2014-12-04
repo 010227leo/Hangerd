@@ -2,9 +2,6 @@
 {
 	using System;
 
-	/// <summary>
-	/// 随机生成验证码
-	/// </summary>
 	public class CodeGenerator
 	{
 		private static readonly char[] _mixedClear = new char[] { 
