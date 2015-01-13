@@ -8,8 +8,8 @@
 
 	public class MemoryQueueService<T> : Disposable, IMemoryQueueService<T>
 	{
-		private Queue<T> _memoryQueue = new Queue<T>();
-		private List<Thread> _consumeThreads = new List<Thread>();
+		private readonly Queue<T> _memoryQueue = new Queue<T>();
+		private readonly List<Thread> _consumeThreads = new List<Thread>();
 		private MemoryQueueServiceConfiguration<T> _configuration;
 		private long _totalConsumeItemCount = 0;
 
@@ -102,7 +102,7 @@
 				}
 				catch (Exception ex)
 				{
-					LocalLoggingService.Exception("内存队列服务 '{0}' 消费出错: {1}", _configuration.MemoryQueueName, ex.Message);
+					LocalLoggingService.Exception("MemoryQueueService('{0}') consume error: {1}", _configuration.MemoryQueueName, ex.Message);
 				}
 				finally
 				{

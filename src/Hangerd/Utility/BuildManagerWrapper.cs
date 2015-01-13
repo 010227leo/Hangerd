@@ -29,9 +29,10 @@
 				if (HttpContext.Current == null)
 				{
 					var path = AppDomain.CurrentDomain.BaseDirectory;
-					var allAssemblies = new List<Assembly>();
-
-					allAssemblies.Add(Assembly.GetEntryAssembly());
+					var allAssemblies = new List<Assembly>
+					{
+						Assembly.GetEntryAssembly()
+					};
 
 					foreach (var dll in Directory.GetFiles(path, "*.dll"))
 					{

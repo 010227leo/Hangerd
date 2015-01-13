@@ -14,41 +14,38 @@
 		static DefaultEventBus()
 		{
 			var concreteTypes = BuildManagerWrapper.Current.ConcreteTypes;
-			var eventTypes = concreteTypes.Where(t => typeof(IEvent).IsAssignableFrom(t));
+			var eventTypes = concreteTypes.Where(t => typeof (IEvent).IsAssignableFrom(t));
 
 			foreach (var eventType in eventTypes)
 			{
-				var genericHandlerType = typeof(IEventHandler<>).MakeGenericType(eventType);
+				var genericHandlerType = typeof (IEventHandler<>).MakeGenericType(eventType);
 
-				if (genericHandlerType != null)
+				var handlerTypes = concreteTypes
+					.Where(t => genericHandlerType.IsAssignableFrom(t));
+
+				foreach (var handlerType in handlerTypes)
 				{
-					var handlerTypes = concreteTypes
-						.Where(t => genericHandlerType.IsAssignableFrom(t));
+					var handler = Activator.CreateInstance(handlerType);
 
-					foreach (var handlerType in handlerTypes)
+					if (_handlers.ContainsKey(eventType))
 					{
-						var handler = Activator.CreateInstance(handlerType);
+						var registeredHandlers = _handlers[eventType];
 
-						if (_handlers.ContainsKey(eventType))
+						if (registeredHandlers != null)
 						{
-							var registeredHandlers = _handlers[eventType];
-
-							if (registeredHandlers != null)
+							if (!registeredHandlers.Contains(handler))
 							{
-								if (!registeredHandlers.Contains(handler))
-								{
-									registeredHandlers.Add(handler);
-								}
-							}
-							else
-							{
-								_handlers.Add(eventType, new List<object> { handler });
+								registeredHandlers.Add(handler);
 							}
 						}
 						else
 						{
-							_handlers.Add(eventType, new List<object> { handler });
+							_handlers.Add(eventType, new List<object> {handler});
 						}
+					}
+					else
+					{
+						_handlers.Add(eventType, new List<object> {handler});
 					}
 				}
 			}
@@ -70,12 +67,12 @@
 			{
 				while (_eventQueue.Count > 0)
 				{
-					this.HandleEvent(_eventQueue.Dequeue());
+					HandleEvent(_eventQueue.Dequeue());
 				}
 			}
 		}
 
-		private void HandleEvent<TEvent>(TEvent @event) where TEvent : class, IEvent
+		private static void HandleEvent<TEvent>(TEvent @event) where TEvent : class, IEvent
 		{
 			var eventType = @event.GetType();
 

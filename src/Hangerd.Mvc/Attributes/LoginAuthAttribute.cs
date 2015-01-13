@@ -7,27 +7,15 @@
 
 	public abstract class LoginAuthAttribute : AuthorizeAttribute
 	{
-		private string _loginController;
-		private string _loginAction;
-		private string _loginArea;
-
-		private bool _ajax = false;
-
-		public bool Ajax
-		{
-			get { return _ajax; }
-			set { _ajax = value; }
-		}
-
-		private bool _jumpBack = false;
-
-		public bool JumpBack
-		{
-			get { return _jumpBack; }
-			set { _jumpBack = value; }
-		}
-
+		private readonly string _loginController;
+		private readonly string _loginAction;
+		private readonly string _loginArea;
 		private string _defaultAjaxResult = string.Empty;
+
+		public bool Ajax { get; set; }
+
+		public bool JumpBack { get; set; }
+
 
 		public string DefaultAjaxResult
 		{
@@ -37,6 +25,8 @@
 
 		public LoginAuthAttribute(string loginAction, string loginController, string loginArea = null)
 		{
+			JumpBack = false;
+			Ajax = false;
 			_loginAction = loginAction;
 			_loginController = loginController;
 			_loginArea = loginArea;
@@ -81,7 +71,7 @@
 				routeValue.Add("Area", _loginArea);
 			}
 
-			if (_jumpBack)
+			if (JumpBack)
 			{
 				routeValue.Add("returnUrl", filterContext.RequestContext.HttpContext.Request.RawUrl);
 			}

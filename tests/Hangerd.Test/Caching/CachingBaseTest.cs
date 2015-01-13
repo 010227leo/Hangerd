@@ -12,8 +12,8 @@
 		[Test]
 		public void GetTest()
 		{
-			var key = "GetTest.Key";
-			var value = CacheManager.Get<string>(true, key, TimeSpan.FromSeconds(2), () => { return "value"; });
+			const string key = "GetTest.Key";
+			var value = CacheManager.Get<string>(true, key, TimeSpan.FromSeconds(2), () => "value");
 
 			Assert.AreEqual("value", value);
 		}
@@ -21,15 +21,15 @@
 		[Test]
 		public void SetOrUpdateTest()
 		{
-			var key = "SetOrUpdateTest_2.Key";
+			const string key = "SetOrUpdateTest_2.Key";
 
 			CacheManager.SetOrUpdate<string>(key, "value1", TimeSpan.FromSeconds(30));
 
-			var value1 = CacheManager.Get<string>(true, key, TimeSpan.FromSeconds(30), () => { return null; });
+			var value1 = CacheManager.Get<string>(true, key, TimeSpan.FromSeconds(30), () => null);
 
 			CacheManager.SetOrUpdate<string>(key, "value2", TimeSpan.FromSeconds(30));
 
-			var value2 = CacheManager.Get<string>(true, key, TimeSpan.FromSeconds(30), () => { return null; });
+			var value2 = CacheManager.Get<string>(true, key, TimeSpan.FromSeconds(30), () => null);
 
 			Assert.AreEqual("value1", value1);
 			Assert.AreEqual("value2", value2);
@@ -38,8 +38,8 @@
 		[Test]
 		public void RemoveKeyTest()
 		{
-			var key = "RemoveKeyTest.Key";
-			var value = CacheManager.Get<string>(true, key, TimeSpan.FromSeconds(30), () => { return  "value" ; });
+			const string key = "RemoveKeyTest.Key";
+			var value = CacheManager.Get<string>(true, key, TimeSpan.FromSeconds(30), () => "value");
 
 			CacheManager.RemoveKey(key);
 
@@ -52,12 +52,12 @@
 		[Test]
 		public void CacheExpiresTest()
 		{
-			var key = "CacheExpiresTest.Key";
-			var value = CacheManager.Get<string>(true, key, TimeSpan.FromMilliseconds(300), () => { return "value"; });
+			const string key = "CacheExpiresTest.Key";
+			var value = CacheManager.Get<string>(true, key, TimeSpan.FromMilliseconds(300), () => "value");
 
 			Thread.Sleep(500);
 
-			var value1 = CacheManager.Get<string>(true, key, TimeSpan.FromSeconds(30), () => { return null; });
+			var value1 = CacheManager.Get<string>(true, key, TimeSpan.FromSeconds(30), () => null);
 
 			Assert.AreEqual("value", value);
 			Assert.IsNull(value1);

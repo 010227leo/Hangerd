@@ -4,11 +4,11 @@
 
 	public abstract class BootstrapperTask : Disposable
 	{
-		protected IUnityContainer container;
+		protected IUnityContainer _container;
 
 		public BootstrapperTask(IUnityContainer container)
 		{
-			this.container = container;
+			_container = container;
 		}
 
 		public virtual int Order

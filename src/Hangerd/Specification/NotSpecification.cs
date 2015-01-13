@@ -11,7 +11,7 @@
 	{
 		#region Members
 
-		private Expression<Func<T, bool>> _originalCriteria;
+		private readonly Expression<Func<T, bool>> _originalCriteria;
 
 		#endregion
 
@@ -22,7 +22,7 @@
 		/// </summary>
 		public NotSpecification(ISpecification<T> originalSpecification)
 		{
-			if (originalSpecification == (ISpecification<T>)null)
+			if (originalSpecification == null)
 			{
 				throw new ArgumentNullException("originalSpecification");
 			}
@@ -35,7 +35,7 @@
 		/// </summary>
 		public NotSpecification(Expression<Func<T, bool>> originalSpecification)
 		{
-			if (originalSpecification == (Expression<Func<T, bool>>)null)
+			if (originalSpecification == null)
 			{
 				throw new ArgumentNullException("originalSpecification");
 			}

@@ -12,7 +12,7 @@
     {
         #region Members
 
-		private Expression<Func<T, bool>> _matchingCriteria;
+		private readonly Expression<Func<T, bool>> _matchingCriteria;
 
         #endregion
 
@@ -23,7 +23,7 @@
         /// </summary>
 		public DirectSpecification(Expression<Func<T, bool>> matchingCriteria)
         {
-			if (matchingCriteria == (Expression<Func<T, bool>>)null)
+			if (matchingCriteria == null)
 			{
 				throw new ArgumentNullException("matchingCriteria");
 			}

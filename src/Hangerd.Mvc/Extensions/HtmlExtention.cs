@@ -7,32 +7,17 @@
 	{
 		public static MvcHtmlString IsSelected(this HtmlHelper helper, bool isSelected)
 		{
-			if (isSelected)
-			{
-				return new MvcHtmlString("selected='selected'");
-			}
-
-			return null;
+			return isSelected ? new MvcHtmlString("selected='selected'") : null;
 		}
 
 		public static MvcHtmlString IsChecked(this HtmlHelper helper, bool isChecked)
 		{
-			if (isChecked)
-			{
-				return new MvcHtmlString("checked='checked'");
-			}
-
-			return null;
+			return isChecked ? new MvcHtmlString("checked='checked'") : null;
 		}
 
 		public static MvcHtmlString IsVisible(this HtmlHelper helper, bool isVisible)
 		{
-			if (!isVisible)
-			{
-				return new MvcHtmlString("style='display:none;'");
-			}
-
-			return null;
+			return !isVisible ? new MvcHtmlString("style='display:none;'") : null;
 		}
 	}
 }

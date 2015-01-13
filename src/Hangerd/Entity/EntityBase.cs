@@ -49,7 +49,7 @@
 
 		public override bool Equals(object obj)
 		{
-			if (obj == null || !(obj is EntityBase))
+			if (!(obj is EntityBase))
 			{
 				return false;
 			}
@@ -59,7 +59,7 @@
 				return true;
 			}
 
-			var item = obj as EntityBase;
+			var item = (EntityBase) obj;
 
 			if (item.IsTransient() || this.IsTransient())
 			{

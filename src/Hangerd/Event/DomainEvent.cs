@@ -8,13 +8,13 @@
 	{
 		private readonly EntityBase _source;
 
-		public virtual Guid Id { get; set; }
+		public Guid Id { get; set; }
 
-		public virtual DateTime Timestamp { get; set; }
+		public DateTime Timestamp { get; set; }
 
-		public DomainEvent() { }
+		protected DomainEvent() { }
 
-		public DomainEvent(EntityBase source)
+		protected DomainEvent(EntityBase source)
 		{
 			this._source = source;
 

@@ -36,12 +36,12 @@
 		{
 			BuildManagerWrapper.Current.ConcreteTypes
 				.Where(type => typeof(IController).IsAssignableFrom(type))
-				.Each(type => container.RegisterType(typeof(IController), type));
+				.Each(type => _container.RegisterType(typeof(IController), type));
 		}
 
 		private void RegisterFactories()
 		{
-			ControllerBuilder.Current.SetControllerFactory(new UnityControllerFactory(container));
+			ControllerBuilder.Current.SetControllerFactory(new UnityControllerFactory(_container));
 		}
 
 		private static void RegisterFilters()

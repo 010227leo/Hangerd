@@ -7,20 +7,20 @@
 
 	public class CryptoHelper
 	{
-		static string _iv = "#kRz4rK^Z#kLMgQ^!ZHsY0u6";
-		static string _key = "S()%s@z^";
+		static readonly string _iv = "#kRz4rK^Z#kLMgQ^!ZHsY0u6";
+		static readonly string _key = "S()%s@z^";
 
 		public static string Encrypt(string input)
 		{
 			var btKey = Encoding.Default.GetBytes(_key);
-			var btIV = Encoding.Default.GetBytes(_iv);
+			var btIv = Encoding.Default.GetBytes(_iv);
 			var des = new DESCryptoServiceProvider();
 
-			using (MemoryStream ms = new MemoryStream())
+			using (var ms = new MemoryStream())
 			{
 				var inData = Encoding.Default.GetBytes(input);
 
-				using (CryptoStream cs = new CryptoStream(ms, des.CreateEncryptor(btKey, btIV), CryptoStreamMode.Write))
+				using (var cs = new CryptoStream(ms, des.CreateEncryptor(btKey, btIv), CryptoStreamMode.Write))
 				{
 					cs.Write(inData, 0, inData.Length);
 					cs.FlushFinalBlock();
@@ -33,14 +33,14 @@
 		public static string Decrypt(string input)
 		{
 			var btKey = Encoding.Default.GetBytes(_key);
-			var btIV = Encoding.Default.GetBytes(_iv);
+			var btIv = Encoding.Default.GetBytes(_iv);
 			var des = new DESCryptoServiceProvider();
 
-			using (MemoryStream ms = new MemoryStream())
+			using (var ms = new MemoryStream())
 			{
 				var inData = Convert.FromBase64String(input);
 
-				using (CryptoStream cs = new CryptoStream(ms, des.CreateDecryptor(btKey, btIV), CryptoStreamMode.Write))
+				using (var cs = new CryptoStream(ms, des.CreateDecryptor(btKey, btIv), CryptoStreamMode.Write))
 				{
 					cs.Write(inData, 0, inData.Length);
 					cs.FlushFinalBlock();
@@ -58,9 +58,9 @@
 
 			var md5Builder = new StringBuilder();
 
-			for (var i = 0; i < hash.Length; i++)
+			foreach (var t in hash)
 			{
-				md5Builder.Append(hash[i].ToString("X2"));
+				md5Builder.Append(t.ToString("X2"));
 			}
 
 			return md5Builder.ToString();
@@ -74,9 +74,9 @@
 
 			var sha1Builder = new StringBuilder();
 
-			for (var i = 0; i < hash.Length; i++)
+			foreach (var t in hash)
 			{
-				sha1Builder.Append(hash[i].ToString("X2"));
+				sha1Builder.Append(t.ToString("X2"));
 			}
 
 			return sha1Builder.ToString();

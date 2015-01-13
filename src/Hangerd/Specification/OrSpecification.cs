@@ -10,8 +10,8 @@
 	{
 		#region Members
 
-		private ISpecification<T> _rightSideSpecification = null;
-		private ISpecification<T> _leftSideSpecification = null;
+		private readonly ISpecification<T> _rightSideSpecification = null;
+		private readonly ISpecification<T> _leftSideSpecification = null;
 
 		#endregion
 
@@ -22,12 +22,12 @@
 		/// </summary>
 		public OrSpecification(ISpecification<T> leftSide, ISpecification<T> rightSide)
 		{
-			if (leftSide == (ISpecification<T>)null)
+			if (leftSide == null)
 			{
 				throw new ArgumentNullException("leftSide");
 			}
 
-			if (rightSide == (ISpecification<T>)null)
+			if (rightSide == null)
 			{
 				throw new ArgumentNullException("rightSide");
 			}

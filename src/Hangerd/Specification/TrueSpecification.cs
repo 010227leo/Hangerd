@@ -12,7 +12,7 @@
 
 		public override Expression<Func<T, bool>> SatisfiedBy()
 		{
-			var result = true;
+			const bool result = true;
 
 			Expression<Func<T, bool>> trueExpression = t => result;
 

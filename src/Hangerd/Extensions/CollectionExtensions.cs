@@ -9,12 +9,14 @@
 	{
 		public static void Each<T>(this IEnumerable<T> instance, Action<T> action)
 		{
-			if (instance != null)
+			if (instance == null)
 			{
-				foreach (T item in instance)
-				{
-					action(item);
-				}
+				return;
+			}
+
+			foreach (var item in instance)
+			{
+				action(item);
 			}
 		}
 
@@ -22,7 +24,7 @@
 		{
 			if (instance != null)
 			{
-				Parallel.ForEach(instance, item => action(item));
+				Parallel.ForEach(instance, action);
 			}
 		}
 

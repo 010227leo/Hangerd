@@ -9,13 +9,13 @@
 
 	internal class BootstrapperManager : Disposable
 	{
-		private IUnityContainer _container;
+		private readonly IUnityContainer _container;
 
 		public BootstrapperManager(IUnityContainer container)
 		{
-			this._container = container;
+			_container = container;
 
-			container.RegisterInstance<IUnityContainer>(container);
+			container.RegisterInstance(container);
 
 			BuildManagerWrapper.Current.ConcreteTypes
 				.Where(type => typeof(BootstrapperTask).IsAssignableFrom(type))

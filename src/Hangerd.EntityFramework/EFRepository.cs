@@ -12,7 +12,7 @@
 	public class EFRepository<TEntity> : IRepository<TEntity>
 		where TEntity : EntityBase
 	{
-		private IEFRepositoryContext _context;
+		private readonly IEFRepositoryContext _context;
 
 		public EFRepository(IRepositoryContext context)
 		{
@@ -56,9 +56,9 @@
 
 			if (eagerLoadingProperties != null && eagerLoadingProperties.Length > 0)
 			{
-				for (var i = 0; i < eagerLoadingProperties.Length; i++)
+				foreach (var property in eagerLoadingProperties)
 				{
-					dbset = dbset.Include(eagerLoadingProperties[i]);
+					dbset = dbset.Include(property);
 				}
 			}
 

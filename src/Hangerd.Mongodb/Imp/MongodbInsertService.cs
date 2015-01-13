@@ -8,7 +8,7 @@
 
 	public class MongodbInsertService : MongodbServiceBase, IMongodbInsertService
 	{
-		private Dictionary<string, IMemoryQueueService<MongodbItem>> _submitDataMemoryQueueServices = new Dictionary<string, IMemoryQueueService<MongodbItem>>();
+		private readonly Dictionary<string, IMemoryQueueService<MongodbItem>> _submitDataMemoryQueueServices = new Dictionary<string, IMemoryQueueService<MongodbItem>>();
 
 		public void Insert(MongodbItem item)
 		{

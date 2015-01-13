@@ -1,11 +1,11 @@
-﻿namespace Hangerd.Caching
-{
-	using Hangerd.Components;
-	using System;
+﻿using System;
+using Hangerd.Components;
 
+namespace Hangerd.Caching
+{
 	public class CacheManager
 	{
-		private static readonly Lazy<ICacheProvider> _cacheProvider = new Lazy<ICacheProvider>(() => LocalServiceLocator.GetService<ICacheProvider>());
+		private static readonly Lazy<ICacheProvider> _cacheProvider = new Lazy<ICacheProvider>(LocalServiceLocator.GetService<ICacheProvider>);
 
 		private static ICacheProvider CacheProvider
 		{
@@ -19,14 +19,16 @@
 		{
 			var value = fromCache ? CacheProvider.Get<TEntity>(key) : default(TEntity);
 
-			if (value == null || value.Equals(default(TEntity)))
+			if (value != null && !value.Equals(default(TEntity)))
 			{
-				value = getItem();
+				return value;
+			}
 
-				if (fromCache)
-				{
-					CacheProvider.Set<TEntity>(key, value, cacheTime);
-				}
+			value = getItem();
+
+			if (fromCache)
+			{
+				CacheProvider.Set(key, value, cacheTime);
 			}
 
 			return value;
@@ -39,7 +41,7 @@
 
 		public static void SetOrUpdate<TEntity>(string key, TEntity value, TimeSpan cacheTime)
 		{
-			CacheProvider.Set<TEntity>(key, value, cacheTime);
+			CacheProvider.Set(key, value, cacheTime);
 		}
 
 		public static void RemoveKey(string key)

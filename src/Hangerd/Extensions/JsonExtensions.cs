@@ -11,12 +11,7 @@
 
 		public static T JsonToObject<T>(this string json)
 		{
-			if (string.IsNullOrWhiteSpace(json))
-			{
-				return default(T);
-			}
-
-			return JsonConvert.DeserializeObject<T>(json);
+			return string.IsNullOrWhiteSpace(json) ? default(T) : JsonConvert.DeserializeObject<T>(json);
 		}
 	}
 }

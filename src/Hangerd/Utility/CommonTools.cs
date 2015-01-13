@@ -52,9 +52,6 @@
 			output = Regex.Replace(output, @"&(nbsp|#160);", " ", RegexOptions.IgnoreCase);
 			output = Regex.Replace(output, @"&#(\d+);", string.Empty, RegexOptions.IgnoreCase);
 
-			output.Replace("<", string.Empty);
-			output.Replace(">", string.Empty);
-
 			return output;
 		}
 

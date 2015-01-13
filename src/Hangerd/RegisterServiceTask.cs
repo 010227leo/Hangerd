@@ -19,14 +19,14 @@
 
 		public override void Execute()
 		{
-			container.RegisterTypeAsSingleton<ICacheProvider, DefaultCacheProvider>();
-			container.RegisterTypeAsPerRequest<IEventBus, DefaultEventBus>();
-			container.RegisterType(typeof(IMemoryQueueService<>), typeof(MemoryQueueService<>));
+			_container.RegisterTypeAsSingleton<ICacheProvider, DefaultCacheProvider>();
+			_container.RegisterTypeAsPerRequest<IEventBus, DefaultEventBus>();
+			_container.RegisterType(typeof(IMemoryQueueService<>), typeof(MemoryQueueService<>));
 		}
 
 		protected override void InternalDispose()
 		{
-			container.Resolve<ICacheProvider>().Dispose();
+			_container.Resolve<ICacheProvider>().Dispose();
 		}
 	}
 }

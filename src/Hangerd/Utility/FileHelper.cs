@@ -11,8 +11,7 @@
 	{
 		public static void Upload(Stream stream, string physicalPath, string fileName)
 		{
-			var bufferSize = 256;
-			var bytesRead = 0;
+			const int bufferSize = 256;
 
 			var buffer = new byte[bufferSize];
 
@@ -25,6 +24,8 @@
 
 			try
 			{
+				var bytesRead = 0;
+
 				do
 				{
 					bytesRead = stream.Read(buffer, 0, bufferSize);

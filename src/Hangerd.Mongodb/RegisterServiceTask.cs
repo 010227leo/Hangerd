@@ -16,8 +16,8 @@
 
 		public override void Execute()
 		{
-			container.RegisterTypeAsSingleton<IMongodbInsertService, MongodbInsertService>();
-			container.RegisterTypeAsSingleton<IMongodbQueryService, MongodbQueryService>();
+			_container.RegisterTypeAsSingleton<IMongodbInsertService, MongodbInsertService>();
+			_container.RegisterTypeAsSingleton<IMongodbQueryService, MongodbQueryService>();
 		}
 	}
 }

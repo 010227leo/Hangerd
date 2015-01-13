@@ -7,10 +7,10 @@
 
 	public class LocalLoggingService
 	{
-		private static object _locker = new object();
+		private const int _changePathInterval = 15 * 60 * 1000;
+		private static readonly object _locker = new object();
 		private static StreamWriter _streamWriter;
 		private static Timer _changePathTimer;
-		private static readonly int _changePathInterval = 15 * 60 * 1000;
 
 		internal static void Init()
 		{
@@ -36,8 +36,10 @@
 
 		private static void InitStreamWriter()
 		{
-			_streamWriter = new StreamWriter(GetLogFileName(), true, Encoding.UTF8, 1024);
-			_streamWriter.AutoFlush = true;
+			_streamWriter = new StreamWriter(GetLogFileName(), true, Encoding.UTF8, 1024)
+			{
+				AutoFlush = true
+			};
 		}
 
 		private static string GetLogFileName()

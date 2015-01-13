@@ -29,7 +29,7 @@
             else
             {
                 //Fallback to default behavior.
-                return base.GetControllerInstance(requestContext, controllerType);
+                return base.GetControllerInstance(requestContext, null);
             }
         }
     }
