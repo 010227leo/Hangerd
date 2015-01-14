@@ -21,7 +21,7 @@
 				script.AppendFormat("window.location.href='{0}';", HttpUtility.UrlDecode(url));
 			}
 
-			return Content(string.Format("<script type='text/javascript'>{0}</script>", script.ToString()));
+			return Content(string.Format("<script type='text/javascript'>{0}</script>", script));
 		}
 
 		protected ContentResult JsonContent(object obj)

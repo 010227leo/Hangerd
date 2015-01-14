@@ -13,7 +13,7 @@
 		public void GetTest()
 		{
 			const string key = "GetTest.Key";
-			var value = CacheManager.Get<string>(true, key, TimeSpan.FromSeconds(2), () => "value");
+			var value = CacheManager.Get(true, key, TimeSpan.FromSeconds(2), () => "value");
 
 			Assert.AreEqual("value", value);
 		}
@@ -23,11 +23,11 @@
 		{
 			const string key = "SetOrUpdateTest_2.Key";
 
-			CacheManager.SetOrUpdate<string>(key, "value1", TimeSpan.FromSeconds(30));
+			CacheManager.SetOrUpdate(key, "value1", TimeSpan.FromSeconds(30));
 
 			var value1 = CacheManager.Get<string>(true, key, TimeSpan.FromSeconds(30), () => null);
 
-			CacheManager.SetOrUpdate<string>(key, "value2", TimeSpan.FromSeconds(30));
+			CacheManager.SetOrUpdate(key, "value2", TimeSpan.FromSeconds(30));
 
 			var value2 = CacheManager.Get<string>(true, key, TimeSpan.FromSeconds(30), () => null);
 
@@ -39,7 +39,7 @@
 		public void RemoveKeyTest()
 		{
 			const string key = "RemoveKeyTest.Key";
-			var value = CacheManager.Get<string>(true, key, TimeSpan.FromSeconds(30), () => "value");
+			var value = CacheManager.Get(true, key, TimeSpan.FromSeconds(30), () => "value");
 
 			CacheManager.RemoveKey(key);
 
@@ -53,7 +53,7 @@
 		public void CacheExpiresTest()
 		{
 			const string key = "CacheExpiresTest.Key";
-			var value = CacheManager.Get<string>(true, key, TimeSpan.FromMilliseconds(300), () => "value");
+			var value = CacheManager.Get(true, key, TimeSpan.FromMilliseconds(300), () => "value");
 
 			Thread.Sleep(500);
 

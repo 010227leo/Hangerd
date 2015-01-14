@@ -11,7 +11,7 @@
 		private readonly Queue<T> _memoryQueue = new Queue<T>();
 		private readonly List<Thread> _consumeThreads = new List<Thread>();
 		private MemoryQueueServiceConfiguration<T> _configuration;
-		private long _totalConsumeItemCount = 0;
+		private long _totalConsumeItemCount;
 
 		public long TotalConsumeItemCount
 		{

@@ -2,7 +2,6 @@
 {
 	using Hangerd.Event;
 	using Hangerd.Test.Event.Bus;
-	using System;
 
 	public class TestEventHandler2 : IEventHandler<TestEvent>
 	{

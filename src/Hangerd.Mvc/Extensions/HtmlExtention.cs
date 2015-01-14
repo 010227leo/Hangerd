@@ -1,6 +1,5 @@
 ﻿namespace Hangerd.Mvc.Extensions
 {
-	using Hangerd.Utility;
 	using System.Web.Mvc;
 
 	public static class HtmlExtention

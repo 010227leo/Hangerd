@@ -24,7 +24,7 @@
 
 			try
 			{
-				var bytesRead = 0;
+				int bytesRead;
 
 				do
 				{

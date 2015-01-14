@@ -8,20 +8,17 @@
 		enum TestEnum
 		{
 			[System.ComponentModel.Description("FirstDayOfWeek")]
-			Sunday = 1,
-
-			[System.ComponentModel.Description("SecondDayOfWeek")]
-			Monday = 2
+			Sunday
 		}
 
 		[Test]
 		public void GetDescriptionTest()
 		{
-			const TestEnum monday = TestEnum.Monday;
+			const TestEnum sunday = TestEnum.Sunday;
 
-			var description = CommonTools.GetEnumDescription(monday);
+			var description = CommonTools.GetEnumDescription(sunday);
 
-			Assert.AreEqual("SecondDayOfWeek", description);
+			Assert.AreEqual("FirstDayOfWeek", description);
 		}
 
 		[Test]

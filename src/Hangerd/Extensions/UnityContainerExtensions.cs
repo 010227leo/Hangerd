@@ -11,7 +11,7 @@
 		{
 			lock (instance)
 			{
-				return instance.RegisterInstance<TFrom>(obj, new ContainerControlledLifetimeManager());
+				return instance.RegisterInstance(obj, new ContainerControlledLifetimeManager());
 			}
 		}
 
@@ -19,7 +19,7 @@
 		{
 			lock (instance)
 			{
-				return instance.RegisterInstance<TFrom>(obj, new PerResolveLifetimeManager());
+				return instance.RegisterInstance(obj, new PerResolveLifetimeManager());
 			}
 		}
 

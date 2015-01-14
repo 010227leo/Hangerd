@@ -14,6 +14,8 @@
 				var str = string.Empty;
 				var str2 = str.Substring(0, 2);
 
+				LocalLoggingService.Debug(str2);
+
 				Assert.Fail();
 			}
 			catch (ArgumentOutOfRangeException ex)

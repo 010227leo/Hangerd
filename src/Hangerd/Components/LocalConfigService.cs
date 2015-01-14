@@ -22,7 +22,8 @@
 
 		public static T GetConfig<T>(string fileName, T defaultValue)
 		{
-			object instance = null;
+			object instance;
+
 			var fileFullName = GetConfigFileFullName(fileName);
 
 			if (_configCache.TryGetValue(fileFullName, out instance))

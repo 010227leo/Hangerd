@@ -1,8 +1,6 @@
 ﻿namespace Hangerd.Event.Bus
 {
-	using System;
-
-	public interface IEventBus : IUnitOfWork, IDisposable
+	public interface IEventBus : IUnitOfWork
 	{
 		void Publish<TEvent>(TEvent @event) where TEvent : class, IEvent;
 	}
