@@ -2,7 +2,6 @@
 {
 	using Hangerd.Entity;
 	using System;
-	using System.Collections.Generic;
 	using System.Data.Entity;
 	using System.Data.Entity.Infrastructure;
 	using System.Data.Entity.ModelConfiguration.Conventions;
@@ -37,13 +36,13 @@
         public void Attach<TEntity>(TEntity item)
             where TEntity : EntityBase
         {
-            base.Entry<TEntity>(item).State = EntityState.Unchanged;
+            base.Entry(item).State = EntityState.Unchanged;
         }
 
         public void SetModified<TEntity>(TEntity item)
 			where TEntity : EntityBase
         {
-            base.Entry<TEntity>(item).State = EntityState.Modified;
+            base.Entry(item).State = EntityState.Modified;
         }
 
 		#endregion

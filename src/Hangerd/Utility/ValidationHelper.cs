@@ -11,42 +11,22 @@
 
 		public static bool IsIdentityNumber(string input)
 		{
-			if (string.IsNullOrWhiteSpace(input))
-			{
-				return false;
-			}
-
-			return Regex.IsMatch(input, _identityNumberPattern, RegexOptions.IgnoreCase);
+			return !string.IsNullOrWhiteSpace(input) && Regex.IsMatch(input, _identityNumberPattern, RegexOptions.IgnoreCase);
 		}
 
 		public static bool IsMobileNumber(string input)
 		{
-			if (string.IsNullOrWhiteSpace(input))
-			{
-				return false;
-			}
-
-			return Regex.IsMatch(input, _mobileNumberPattern, RegexOptions.IgnoreCase);
+			return !string.IsNullOrWhiteSpace(input) && Regex.IsMatch(input, _mobileNumberPattern, RegexOptions.IgnoreCase);
 		}
 
 		public static bool IsEmailAddress(string input)
 		{
-			if (string.IsNullOrWhiteSpace(input))
-			{
-				return false;
-			}
-
-			return Regex.IsMatch(input, _emailAddressPattern, RegexOptions.IgnoreCase);
+			return !string.IsNullOrWhiteSpace(input) && Regex.IsMatch(input, _emailAddressPattern, RegexOptions.IgnoreCase);
 		}
 
 		public static bool IsUrlAddress(string input)
 		{
-			if (string.IsNullOrWhiteSpace(input))
-			{
-				return false;
-			}
-
-			return Regex.IsMatch(input, _urlAddressPattern, RegexOptions.IgnoreCase);
+			return !string.IsNullOrWhiteSpace(input) && Regex.IsMatch(input, _urlAddressPattern, RegexOptions.IgnoreCase);
 		}
 	}
 }

@@ -8,8 +8,6 @@
 	{
 		private static readonly ObjectCache _cache = MemoryCache.Default;
 
-		public DefaultCacheProvider() { }
-
 		public T Get<T>(string key)
 		{
 			var value = _cache.Get(key);

@@ -5,8 +5,6 @@
 
 	public class MyCacheProvider : Disposable, ICacheProvider
 	{
-		public MyCacheProvider() { }
-
 		public T Get<T>(string key) { return default(T); }
 
 		public void Set<T>(string key, T value, TimeSpan cacheTime) { }

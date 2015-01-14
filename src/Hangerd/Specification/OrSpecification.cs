@@ -10,8 +10,8 @@
 	{
 		#region Members
 
-		private readonly ISpecification<T> _rightSideSpecification = null;
-		private readonly ISpecification<T> _leftSideSpecification = null;
+		private readonly ISpecification<T> _rightSideSpecification;
+		private readonly ISpecification<T> _leftSideSpecification;
 
 		#endregion
 
@@ -32,8 +32,8 @@
 				throw new ArgumentNullException("rightSide");
 			}
 
-			this._leftSideSpecification = leftSide;
-			this._rightSideSpecification = rightSide;
+			_leftSideSpecification = leftSide;
+			_rightSideSpecification = rightSide;
 		}
 
 		#endregion
@@ -58,8 +58,8 @@
 
 		public override Expression<Func<T, bool>> SatisfiedBy()
 		{
-			Expression<Func<T, bool>> left = _leftSideSpecification.SatisfiedBy();
-			Expression<Func<T, bool>> right = _rightSideSpecification.SatisfiedBy();
+			var left = _leftSideSpecification.SatisfiedBy();
+			var right = _rightSideSpecification.SatisfiedBy();
 
 			return (left.Or(right));
 		}

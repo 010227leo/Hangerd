@@ -2,6 +2,6 @@
 {
 	using System;
 
-	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+	[AttributeUsage(AttributeTargets.Property)]
 	public class RecordModifyAttribute : Attribute { }
 }

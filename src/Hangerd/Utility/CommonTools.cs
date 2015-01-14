@@ -57,20 +57,16 @@
 
 		public static string GetEnumDescription(Enum value)
 		{
-			var description = string.Empty;
 			var field = value.GetType().GetField(value.ToString());
 
-			if (field != null)
+			if (field == null)
 			{
-				var attributes = field.GetCustomAttributes(typeof(DescriptionAttribute), false);
-
-				if (attributes.Length > 0)
-				{
-					description = ((DescriptionAttribute)attributes[0]).Description;
-				}
+				return string.Empty;
 			}
 
-			return description;
+			var attributes = field.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+			return attributes.Length > 0 ? ((DescriptionAttribute)attributes[0]).Description : string.Empty;
 		}
 	}
 }

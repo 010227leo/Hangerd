@@ -8,8 +8,8 @@
 
 		public ModifiedProperty(object oldValue, object newValue)
 		{
-			this.OldValue = oldValue;
-			this.NewValue = newValue;
+			OldValue = oldValue;
+			NewValue = newValue;
 		}
 	}
 }

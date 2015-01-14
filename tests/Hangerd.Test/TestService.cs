@@ -11,7 +11,7 @@
 
 	public class TestService : ITestService
 	{
-		private string _serviceId;
+		private readonly string _serviceId;
 
 		public string ServiceId
 		{

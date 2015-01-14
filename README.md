@@ -65,7 +65,7 @@ public abstract class Account : EntityBase, IDeletable
 		if (string.IsNullOrWhiteSpace(loginName))
 			throw new HangerdException("LoginName can not be null");
 
-		this.LoginName = loginName;
+		LoginName = loginName;
 	}
 }
 ```
@@ -102,7 +102,7 @@ public class RegisterServiceTask : RegisterServiceBootstrapperTask
 	
 public void ModifyName(string name)
 {
-	this.Name = name;
+	Name = name;
 
 	DomainEvent.Publish(new AccountNameModifiedEvent(this));
 }

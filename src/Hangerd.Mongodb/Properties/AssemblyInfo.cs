@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Hangerd.Mongodb")]
@@ -15,6 +14,4 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("346b86e2-b748-494f-ba48-5781553d1f18")]
 
-// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.3.*")]
-//[assembly: AssemblyFileVersion("1.0.0.*")]

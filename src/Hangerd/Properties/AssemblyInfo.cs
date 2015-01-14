@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Hangerd")]
@@ -15,6 +14,4 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("1cb8ce57-ce45-46d3-b924-35e3ef66399f")]
 
-// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.7.*")]
-//[assembly: AssemblyFileVersion("1.0.0.*")]

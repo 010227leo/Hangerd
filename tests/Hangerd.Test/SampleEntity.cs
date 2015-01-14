@@ -10,7 +10,7 @@
 
 		public SampleEntity() 
 		{
-			this.GenerateNewId();
+			GenerateNewId();
 		}
 	}
 }

@@ -16,17 +16,14 @@
 
 		public bool JumpBack { get; set; }
 
-
 		public string DefaultAjaxResult
 		{
 			get { return _defaultAjaxResult; }
 			set { _defaultAjaxResult = value; }
 		}
 
-		public LoginAuthAttribute(string loginAction, string loginController, string loginArea = null)
+		protected LoginAuthAttribute(string loginAction, string loginController, string loginArea = null)
 		{
-			JumpBack = false;
-			Ajax = false;
 			_loginAction = loginAction;
 			_loginController = loginController;
 			_loginArea = loginArea;
@@ -36,13 +33,13 @@
 		{
 			if (!LoginAuthorizeCore(filterContext.HttpContext))
 			{
-				if (this.Ajax)
+				if (Ajax)
 				{
-					this.ResponseDefaultAjaxResult(filterContext);
+					ResponseDefaultAjaxResult(filterContext);
 				}
 				else
 				{
-					this.RedirectToLoginPage(filterContext);
+					RedirectToLoginPage(filterContext);
 				}
 			}
 			else
@@ -81,7 +78,7 @@
 
 		protected void ResponseDefaultAjaxResult(AuthorizationContext filterContext)
 		{
-			filterContext.Result = new ContentResult { Content = this.DefaultAjaxResult };
+			filterContext.Result = new ContentResult { Content = DefaultAjaxResult };
 		}
 
 		protected void ResponseViewResult(AuthorizationContext filterContext, string viewName)

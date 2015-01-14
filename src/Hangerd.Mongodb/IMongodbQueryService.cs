@@ -1,6 +1,4 @@
 ﻿namespace Hangerd.Mongodb
 {
-	public interface IMongodbQueryService
-	{
-	}
+	public interface IMongodbQueryService { }
 }

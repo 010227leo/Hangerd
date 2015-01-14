@@ -20,7 +20,7 @@
 
 		public void Init(MemoryQueueServiceConfiguration<T> configuration)
 		{
-			this._configuration = configuration;
+			_configuration = configuration;
 
 			InternalInit();
 
@@ -29,9 +29,9 @@
 
 		public void Enqueue(T item)
 		{
-			if (this._configuration == null)
+			if (_configuration == null)
 			{
-				throw new Exception(string.Format("MemoryQueue uninitialized: '{0}'", this.GetType().FullName));
+				throw new Exception(string.Format("MemoryQueue uninitialized: '{0}'", GetType().FullName));
 			}
 
 			try

@@ -4,7 +4,7 @@
 
 	public abstract class InitServiceBootstrapperTask : BootstrapperTask
 	{
-		public InitServiceBootstrapperTask(IUnityContainer container) : base(container) { }
+		protected InitServiceBootstrapperTask(IUnityContainer container) : base(container) { }
 
 		public override int Order
 		{

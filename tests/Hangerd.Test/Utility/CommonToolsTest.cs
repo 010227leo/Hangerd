@@ -17,7 +17,8 @@
 		[Test]
 		public void GetDescriptionTest()
 		{
-			var monday = TestEnum.Monday;
+			const TestEnum monday = TestEnum.Monday;
+
 			var description = CommonTools.GetEnumDescription(monday);
 
 			Assert.AreEqual("SecondDayOfWeek", description);
@@ -26,7 +27,7 @@
 		[Test]
 		public void CutStringTest()
 		{
-			var input = "010227leo@gmail.com";
+			const string input = "010227leo@gmail.com";
 
 			Assert.AreEqual("010227leo@#", CommonTools.CutString(input, 10, "#"));
 		}
@@ -34,7 +35,7 @@
 		[Test]
 		public void FilterHtmlTest()
 		{
-			var input = @"<html><header><script>alert('test');</script></header><body>hello world!</body></html>";
+			const string input = @"<html><header><script>alert('test');</script></header><body>hello world!</body></html>";
 
 			Assert.AreEqual("hello world!", CommonTools.FilterHtml(input));
 		}

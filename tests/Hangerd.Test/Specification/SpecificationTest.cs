@@ -7,8 +7,8 @@
 
 	public class SpecificationTests
 	{
-		readonly static string _EntityName = "Test Entity Name";
-		readonly static string _OtherEntityName = "Other Test Entity Name";
+		private const string _EntityName = "Test Entity Name";
+		private const string _OtherEntityName = "Other Test Entity Name";
 
 		readonly static List<SampleEntity> _EntityList = new List<SampleEntity>
 			{

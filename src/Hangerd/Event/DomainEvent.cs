@@ -16,10 +16,10 @@
 
 		protected DomainEvent(EntityBase source)
 		{
-			this._source = source;
+			_source = source;
 
-			this.Id = Guid.NewGuid();
-			this.Timestamp = DateTime.Now;
+			Id = Guid.NewGuid();
+			Timestamp = DateTime.Now;
 		}
 
 		public EntityBase Source

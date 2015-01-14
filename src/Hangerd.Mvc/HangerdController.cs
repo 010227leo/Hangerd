@@ -7,8 +7,6 @@
 
 	public class HangerdController : Controller
 	{
-		public HangerdController() { }
-
 		protected ActionResult AlertAndRedirect(string message, string url)
 		{
 			var script = new StringBuilder();

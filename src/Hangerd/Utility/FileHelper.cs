@@ -101,8 +101,6 @@
 						y = (originalImage.Height - oh) / 2;
 					}
 					break;
-				default:
-					break;
 			}
 
 			var bitmap = new Bitmap(towidth, toheight);

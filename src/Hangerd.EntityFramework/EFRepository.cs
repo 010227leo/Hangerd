@@ -16,9 +16,11 @@
 
 		public EFRepository(IRepositoryContext context)
 		{
-			if (context is IEFRepositoryContext)
+			var repositoryContext = context as IEFRepositoryContext;
+
+			if (repositoryContext != null)
 			{
-				this._context = context as IEFRepositoryContext;
+				_context = repositoryContext;
 			}
 			else 
 			{
@@ -35,24 +37,22 @@
 		{
 			if (!string.IsNullOrWhiteSpace(id))
 			{
-				return this.GetAll(tracking, eagerLoadingProperties)
+				return GetAll(tracking, eagerLoadingProperties)
 					.FirstOrDefault(e => e.Id == id);
 			}
-			else
-			{
-				return null;
-			}
+
+			return null;
 		}
 
 		public virtual TEntity Get(ISpecification<TEntity> spec, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)
 		{
-			return this.GetAll(tracking, eagerLoadingProperties)
+			return GetAll(tracking, eagerLoadingProperties)
 				.FirstOrDefault(spec.SatisfiedBy());
 		}
 
 		public virtual IQueryable<TEntity> GetAll(bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)
 		{
-			var dbset = tracking ? this.GetSet() : this.GetSet().AsNoTracking();
+			var dbset = tracking ? GetSet() : GetSet().AsNoTracking();
 
 			if (eagerLoadingProperties != null && eagerLoadingProperties.Length > 0)
 			{
@@ -67,17 +67,17 @@
 
 		public virtual IQueryable<TEntity> GetAll(ISpecification<TEntity> spec, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)
 		{
-			return this.GetAll(tracking, eagerLoadingProperties)
+			return GetAll(tracking, eagerLoadingProperties)
 				.Where(spec.SatisfiedBy());
 		}
 
 		public virtual void Add(TEntity entity, bool recordModify)
 		{
-			this.GetSet().Add(entity);
+			GetSet().Add(entity);
 
 			if (recordModify)
 			{
-				this.RecordModifiedProperties(entity);
+				RecordModifiedProperties(entity);
 			}
 		}
 
@@ -89,7 +89,7 @@
 
 				if (recordModify)
 				{
-					this.RecordModifiedProperties(entity);
+					RecordModifiedProperties(entity);
 				}
 			}
 		}
@@ -100,7 +100,7 @@
 			{
 				_context.Attach(entity);
 
-				this.GetSet().Remove(entity);
+				GetSet().Remove(entity);
 			}
 		}
 
@@ -151,8 +151,6 @@
 							}
 						}
 						break;
-					default:
-						break;
 				}
 			}
 		}
@@ -163,24 +161,14 @@
 		{
 			var dbContext = _context as DbContext;
 
-			if (dbContext != null)
-			{
-				return dbContext.Database.SqlQuery<TEntity>(sqlQuery, parameters);
-			}
-
-			return null;
+			return dbContext != null ? dbContext.Database.SqlQuery<TEntity>(sqlQuery, parameters) : null;
 		}
 
 		public int ExecuteCommand(string sqlCommand, params object[] parameters)
 		{
 			var dbContext = _context as DbContext;
 
-			if (dbContext != null)
-			{
-				return dbContext.Database.ExecuteSqlCommand(sqlCommand, parameters);
-			}
-
-			return 0;
+			return dbContext != null ? dbContext.Database.ExecuteSqlCommand(sqlCommand, parameters) : 0;
 		}
 
 		#endregion

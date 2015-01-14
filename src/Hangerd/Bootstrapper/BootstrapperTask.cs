@@ -6,7 +6,7 @@
 	{
 		protected IUnityContainer _container;
 
-		public BootstrapperTask(IUnityContainer container)
+		protected BootstrapperTask(IUnityContainer container)
 		{
 			_container = container;
 		}

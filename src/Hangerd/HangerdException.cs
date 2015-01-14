@@ -4,7 +4,7 @@
 
 	public class HangerdException: Exception
     {
-        public HangerdException() : base() { }
+        public HangerdException() { }
      
         public HangerdException(string message) : base(message) { }
       

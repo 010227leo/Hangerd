@@ -7,8 +7,8 @@
 
 	public class CryptoHelper
 	{
-		static readonly string _iv = "#kRz4rK^Z#kLMgQ^!ZHsY0u6";
-		static readonly string _key = "S()%s@z^";
+		private const string _iv = "#kRz4rK^Z#kLMgQ^!ZHsY0u6";
+		private const string _key = "S()%s@z^";
 
 		public static string Encrypt(string input)
 		{

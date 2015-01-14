@@ -14,7 +14,7 @@
 
 			testQueueService.Init(new MemoryQueueServiceConfiguration<string>("test_queue", items => { }));
 
-			var itemCount = 10;
+			const int itemCount = 10;
 
 			for (var i = 0; i < itemCount; i++)
 			{
@@ -35,8 +35,8 @@
 			testQueueService1.Init(new MemoryQueueServiceConfiguration<string>("test_queue_1", items => { }));
 			testQueueService2.Init(new MemoryQueueServiceConfiguration<int>("test_queue_2", items => { }));
 
-			var itemCount1 = 10;
-			var itemCount2 = 20;
+			const int itemCount1 = 10;
+			const int itemCount2 = 20;
 
 			for (var i = 0; i < itemCount1; i++)
 			{

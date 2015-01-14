@@ -28,14 +28,14 @@
 
 		public bool IsTransient()
 		{
-			return string.IsNullOrWhiteSpace(this.Id) || this.Id == Guid.Empty.ToString("N");
+			return string.IsNullOrWhiteSpace(Id) || Id == Guid.Empty.ToString("N");
 		}
 
 		public virtual void GenerateNewId()
 		{
-			if (this.IsTransient())
+			if (IsTransient())
 			{
-				this.Id = IdentityGenerator.NewSequentialGuid().ToString("N");
+				Id = IdentityGenerator.NewSequentialGuid().ToString("N");
 			}
 		}
 
@@ -61,43 +61,32 @@
 
 			var item = (EntityBase) obj;
 
-			if (item.IsTransient() || this.IsTransient())
+			if (item.IsTransient() || IsTransient())
 			{
 				return false;
 			}
-			else
-			{
-				return item.Id == this.Id;
-			}
+
+			return item.Id == Id;
 		}
 
 		public override int GetHashCode()
 		{
-			if (!IsTransient())
-			{
-				if (!_requestedHashCode.HasValue)
-				{
-					_requestedHashCode = this.Id.GetHashCode() ^ 31;
-				}
-
-				return _requestedHashCode.Value;
-			}
-			else
+			if (IsTransient())
 			{
 				return base.GetHashCode();
 			}
+
+			if (!_requestedHashCode.HasValue)
+			{
+				_requestedHashCode = Id.GetHashCode() ^ 31;
+			}
+
+			return _requestedHashCode.Value;
 		}
 
 		public static bool operator ==(EntityBase left, EntityBase right)
 		{
-			if (Object.Equals(left, null))
-			{
-				return (Object.Equals(right, null)) ? true : false;
-			}
-			else
-			{
-				return left.Equals(right);
-			}
+			return Object.Equals(left, null) ? Object.Equals(right, null) : left.Equals(right);
 		}
 
 		public static bool operator !=(EntityBase left, EntityBase right)

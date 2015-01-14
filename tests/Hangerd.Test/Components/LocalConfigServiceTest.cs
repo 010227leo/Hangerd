@@ -15,10 +15,10 @@
 		[Test]
 		public void GetConfigTest()
 		{
-			var config = LocalConfigService.GetConfig<TestConfig>(new TestConfig
-				{
-					Key = "010227"
-				});
+			var config = LocalConfigService.GetConfig(new TestConfig
+			{
+				Key = "010227"
+			});
 
 			Assert.AreEqual("010227", config.Key);
 
