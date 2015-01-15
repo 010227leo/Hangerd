@@ -102,8 +102,6 @@
 				}
 				catch (ThreadAbortException)
 				{
-					LocalLoggingService.Info("MemoryQueueService('{0}') thread aborted!", _configuration.MemoryQueueName);
-
 					break;
 				}
 				catch (Exception ex)
