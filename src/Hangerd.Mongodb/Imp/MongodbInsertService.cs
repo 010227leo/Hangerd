@@ -58,11 +58,9 @@
 
 			try
 			{
-				var mongoServer = base.CachedMongoServer;
-
-				if (mongoServer != null)
+				if (CachedMongoServer != null)
 				{
-					var database = mongoServer.GetDatabase(databaseName);
+					var database = CachedMongoServer.GetDatabase(databaseName);
 
 					foreach (var item in items)
 					{

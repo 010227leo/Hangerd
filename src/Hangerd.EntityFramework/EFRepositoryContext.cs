@@ -7,7 +7,7 @@
 	using System.Data.Entity.ModelConfiguration.Conventions;
 	using System.Linq;
 
-	public abstract class EFRepositoryContext : DbContext, IEFRepositoryContext
+	public abstract class EfRepositoryContext : DbContext, IEfRepositoryContext
 	{
 		#region IUnitOfWork
 		 
@@ -30,19 +30,19 @@
 		public DbSet<TEntity> CreateSet<TEntity>()
 			where TEntity : EntityBase
         {
-            return base.Set<TEntity>();
+            return Set<TEntity>();
         }
 
         public void Attach<TEntity>(TEntity item)
             where TEntity : EntityBase
         {
-            base.Entry(item).State = EntityState.Unchanged;
+            Entry(item).State = EntityState.Unchanged;
         }
 
         public void SetModified<TEntity>(TEntity item)
 			where TEntity : EntityBase
         {
-            base.Entry(item).State = EntityState.Modified;
+            Entry(item).State = EntityState.Modified;
         }
 
 		#endregion

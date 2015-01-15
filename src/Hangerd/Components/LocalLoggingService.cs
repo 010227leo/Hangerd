@@ -55,27 +55,14 @@
 			return Path.Combine(path, file);
 		}
 
-		private static void InternalAddLog(LogLevel logType, string msg)
-		{
-			lock (_locker)
-			{
-				var log = string.Format("[{0}] @{1}: - {2}",
-					logType.ToString(), DateTime.Now.ToString("HH:mm:ss.ffff"), msg);
-
-				_streamWriter.WriteLine(log);
-
-				Console.WriteLine(log);
-			}
-		}
-
 		public static void Info(string logFormat, params object[] args)
 		{
 			Info(string.Format(logFormat, args));
 		}
 
-		public static void Info(string log)
+		public static void Info(string message)
 		{
-			InternalAddLog(LogLevel.Info, log);
+			InternalAddLog(LogLevel.Info, message);
 		}
 
 		public static void Debug(string logFormat, params object[] args)
@@ -83,14 +70,9 @@
 			Debug(string.Format(logFormat, args));
 		}
 
-		public static void Debug(string log)
+		public static void Debug(string message)
 		{
-			InternalAddLog(LogLevel.Debug, log);
-		}
-
-		public static void Exception(string logFormat, params object[] args)
-		{
-			Exception(string.Format(logFormat, args));
+			InternalAddLog(LogLevel.Debug, message);
 		}
 
 		public static void Exception(Exception exception)
@@ -114,18 +96,35 @@
 			}
 		}
 
-		public static void Exception(string log)
+		public static void Exception(string logFormat, params object[] args)
 		{
-			InternalAddLog(LogLevel.Exception, log);
+			Exception(string.Format(logFormat, args));
+		}
+
+		public static void Exception(string message)
+		{
+			InternalAddLog(LogLevel.Exception, message);
+		}
+
+		private static void InternalAddLog(LogLevel logType, string message)
+		{
+			lock (_locker)
+			{
+				var log = string.Format("[{0}] @{1}: - {2}", logType, DateTime.Now.ToString("HH:mm:ss.ffff"), message);
+
+				_streamWriter.WriteLine(log);
+
+				Console.WriteLine(log);
+			}
 		}
 	}
 
 	public enum LogLevel
 	{
-		Info = 1,
+		Info,
 
-		Debug = 2,
+		Debug,
 
-		Exception = 3
+		Exception
 	}
 }

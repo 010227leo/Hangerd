@@ -54,7 +54,7 @@
 				return false;
 			}
 
-			if (Object.ReferenceEquals(this, obj))
+			if (ReferenceEquals(this, obj))
 			{
 				return true;
 			}

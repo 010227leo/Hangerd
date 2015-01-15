@@ -42,7 +42,7 @@
 			if (HttpContext.Current != null)
 			{
 				//HttpContext avaiable ( ASP.NET ..)
-				if (HttpContext.Current.Items[_key.ToString()] != null)
+				if (HttpContext.Current.Items.Contains(_key.ToString()) && HttpContext.Current.Items[_key.ToString()] != null)
 				{
 					HttpContext.Current.Items[_key.ToString()] = null;
 				}

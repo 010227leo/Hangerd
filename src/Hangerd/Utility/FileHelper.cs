@@ -66,7 +66,7 @@
 				case ThumbnailMode.Width:
 					if (originalImage.Width > width)
 					{
-						toheight = originalImage.Height * width / originalImage.Width;
+						toheight = originalImage.Height*width/originalImage.Width;
 					}
 					else
 					{
@@ -77,7 +77,7 @@
 				case ThumbnailMode.Height:
 					if (originalImage.Height > height)
 					{
-						towidth = originalImage.Width * height / originalImage.Height;
+						towidth = originalImage.Width*height/originalImage.Height;
 					}
 					else
 					{
@@ -86,19 +86,19 @@
 					}
 					break;
 				case ThumbnailMode.Cut:
-					if ((double)originalImage.Width / (double)originalImage.Height > (double)towidth / (double)toheight)
+					if (originalImage.Width/(double) originalImage.Height > towidth/(double) toheight)
 					{
 						oh = originalImage.Height;
-						ow = originalImage.Height * towidth / toheight;
+						ow = originalImage.Height*towidth/toheight;
 						y = 0;
-						x = (originalImage.Width - ow) / 2;
+						x = (originalImage.Width - ow)/2;
 					}
 					else
 					{
 						ow = originalImage.Width;
-						oh = originalImage.Width * height / towidth;
+						oh = originalImage.Width*height/towidth;
 						x = 0;
-						y = (originalImage.Height - oh) / 2;
+						y = (originalImage.Height - oh)/2;
 					}
 					break;
 			}
@@ -109,10 +109,8 @@
 			graphics.InterpolationMode = InterpolationMode.High;
 			graphics.SmoothingMode = SmoothingMode.HighQuality;
 			graphics.Clear(Color.Transparent);
-
-			graphics.DrawImage(
-				originalImage,
-				new Rectangle(0, 0, towidth, toheight),
+			graphics.DrawImage(originalImage, 
+				new Rectangle(0, 0, towidth, toheight), 
 				new Rectangle(x, y, ow, oh),
 				GraphicsUnit.Pixel);
 
@@ -135,12 +133,12 @@
 
 	public enum ThumbnailMode
 	{
-		HeightWidth = 1,
+		HeightWidth,
 
-		Width = 2,
+		Width,
 
-		Height = 3,
+		Height,
 
-		Cut = 4
+		Cut
 	}
 }

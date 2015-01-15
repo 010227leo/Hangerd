@@ -9,14 +9,14 @@
 	using System.Linq;
 	using System.Linq.Expressions;
 
-	public class EFRepository<TEntity> : IRepository<TEntity>
+	public class EfRepository<TEntity> : IRepository<TEntity>
 		where TEntity : EntityBase
 	{
-		private readonly IEFRepositoryContext _context;
+		private readonly IEfRepositoryContext _context;
 
-		public EFRepository(IRepositoryContext context)
+		public EfRepository(IRepositoryContext context)
 		{
-			var repositoryContext = context as IEFRepositoryContext;
+			var repositoryContext = context as IEfRepositoryContext;
 
 			if (repositoryContext != null)
 			{
@@ -56,10 +56,7 @@
 
 			if (eagerLoadingProperties != null && eagerLoadingProperties.Length > 0)
 			{
-				foreach (var property in eagerLoadingProperties)
-				{
-					dbset = dbset.Include(property);
-				}
+				dbset = eagerLoadingProperties.Aggregate(dbset, (current, property) => current.Include(property));
 			}
 
 			return dbset;

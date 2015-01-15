@@ -4,7 +4,7 @@
 	using Hangerd.Repository;
 	using System.Data.Entity;
 
-	public interface IEFRepositoryContext : IRepositoryContext
+	public interface IEfRepositoryContext : IRepositoryContext
 	{
 		DbSet<TEntity> CreateSet<TEntity>() where TEntity : EntityBase;
 
