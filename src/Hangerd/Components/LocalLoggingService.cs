@@ -11,7 +11,7 @@
 		private static StreamWriter _streamWriter;
 		private static readonly object _locker = new object();
 
-		static LocalLoggingService()
+		internal static void Init()
 		{
 			new Timer(state =>
 			{
@@ -25,7 +25,7 @@
 			InitStreamWriter();
 		}
 
-		private static void Close()
+		internal static void Close()
 		{
 			if (_streamWriter != null)
 			{

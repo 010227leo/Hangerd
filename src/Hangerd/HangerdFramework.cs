@@ -20,6 +20,7 @@
 		[MethodImpl(MethodImplOptions.Synchronized)]
 		public static void Start()
 		{
+			LocalLoggingService.Init();
 			LocalLoggingService.Info("Hangerd start!");
 
 			_bootstrapperManager = new BootstrapperManager(_container);
@@ -36,6 +37,7 @@
 			_bootstrapperManager.Dispose();
 
 			LocalLoggingService.Info("Hangerd dispose complete!");
+			LocalLoggingService.Close();
 		}
 	}
 }
