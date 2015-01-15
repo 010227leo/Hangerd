@@ -100,9 +100,16 @@
 						Interlocked.Add(ref _totalConsumeItemCount, consumeItems.Count);
 					}
 				}
+				catch (ThreadAbortException)
+				{
+					LocalLoggingService.Info("MemoryQueueService('{0}') thread aborted!", _configuration.MemoryQueueName);
+
+					break;
+				}
 				catch (Exception ex)
 				{
-					LocalLoggingService.Exception("MemoryQueueService('{0}') consume error: {1}", _configuration.MemoryQueueName, ex.Message);
+					LocalLoggingService.Exception("MemoryQueueService('{0}') consume error: {1}",
+						_configuration.MemoryQueueName, ex.Message);
 				}
 				finally
 				{

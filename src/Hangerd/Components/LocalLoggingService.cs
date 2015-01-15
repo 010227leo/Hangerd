@@ -10,18 +10,19 @@
 		private const int _changePathInterval = 15*60*1000;
 		private static StreamWriter _streamWriter;
 		private static readonly object _locker = new object();
-		private static readonly Timer _changePathTimer;
 
 		static LocalLoggingService()
 		{
-			_changePathTimer = new Timer(state =>
+			new Timer(state =>
 			{
 				lock (_locker)
 				{
 					Close();
 					InitStreamWriter();
 				}
-			}, null, 0, _changePathInterval);
+			}, null, _changePathInterval, _changePathInterval);
+
+			InitStreamWriter();
 		}
 
 		private static void Close()
