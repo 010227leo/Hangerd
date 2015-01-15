@@ -7,12 +7,12 @@
 
 	public class LocalLoggingService
 	{
-		private const int _changePathInterval = 15 * 60 * 1000;
-		private static readonly object _locker = new object();
+		private const int _changePathInterval = 15*60*1000;
 		private static StreamWriter _streamWriter;
-		private static Timer _changePathTimer;
+		private static readonly object _locker = new object();
+		private static readonly Timer _changePathTimer;
 
-		internal static void Init()
+		static LocalLoggingService()
 		{
 			_changePathTimer = new Timer(state =>
 			{
@@ -21,12 +21,10 @@
 					Close();
 					InitStreamWriter();
 				}
-			}, null, _changePathInterval, _changePathInterval);
-
-			InitStreamWriter();
+			}, null, 0, _changePathInterval);
 		}
 
-		internal static void Close()
+		private static void Close()
 		{
 			if (_streamWriter != null)
 			{
@@ -56,11 +54,11 @@
 			return Path.Combine(path, file);
 		}
 
-		private static void AddLog(LogLevel logType, string msg)
+		private static void InternalAddLog(LogLevel logType, string msg)
 		{
 			lock (_locker)
 			{
-				var log = string.Format("[{0}] @{1}: - {2}", 
+				var log = string.Format("[{0}] @{1}: - {2}",
 					logType.ToString(), DateTime.Now.ToString("HH:mm:ss.ffff"), msg);
 
 				_streamWriter.WriteLine(log);
@@ -76,7 +74,7 @@
 
 		public static void Info(string log)
 		{
-			AddLog(LogLevel.Info, log);
+			InternalAddLog(LogLevel.Info, log);
 		}
 
 		public static void Debug(string logFormat, params object[] args)
@@ -86,7 +84,7 @@
 
 		public static void Debug(string log)
 		{
-			AddLog(LogLevel.Debug, log);
+			InternalAddLog(LogLevel.Debug, log);
 		}
 
 		public static void Exception(string logFormat, params object[] args)
@@ -117,7 +115,7 @@
 
 		public static void Exception(string log)
 		{
-			AddLog(LogLevel.Exception, log);
+			InternalAddLog(LogLevel.Exception, log);
 		}
 	}
 

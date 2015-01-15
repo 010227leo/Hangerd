@@ -9,9 +9,9 @@
 		private readonly Dictionary<string, ModifiedProperty> _modifiedPropertitiesRecords = new Dictionary<string, ModifiedProperty>();
 		private int? _requestedHashCode;
 
-		public virtual string Id { get; private set; }
+		public string Id { get; private set; }
 
-		public virtual DateTime LastModified { get; set; }
+		public DateTime LastModified { get; set; }
 
 		public Dictionary<string, ModifiedProperty> ModifiedPropertiesRecords
 		{
@@ -21,7 +21,7 @@
 			}
 		}
 
-		public EntityBase()
+		protected EntityBase()
 		{
 			LastModified = DateTime.Now;
 		}
