@@ -13,6 +13,7 @@
 		public void GetTest()
 		{
 			const string key = "GetTest.Key";
+
 			var value = CacheManager.Get(true, key, TimeSpan.FromSeconds(2), () => "value");
 
 			Assert.AreEqual("value", value);
@@ -39,6 +40,7 @@
 		public void RemoveKeyTest()
 		{
 			const string key = "RemoveKeyTest.Key";
+
 			var value = CacheManager.Get(true, key, TimeSpan.FromSeconds(30), () => "value");
 
 			CacheManager.RemoveKey(key);
@@ -53,6 +55,7 @@
 		public void CacheExpiresTest()
 		{
 			const string key = "CacheExpiresTest.Key";
+
 			var value = CacheManager.Get(true, key, TimeSpan.FromMilliseconds(300), () => "value");
 
 			Thread.Sleep(500);

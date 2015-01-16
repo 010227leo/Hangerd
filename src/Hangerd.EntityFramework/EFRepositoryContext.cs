@@ -25,7 +25,7 @@
 
 		#endregion
 
-		#region IEFRepositoryContext
+		#region IEfRepositoryContext
 
 		public DbSet<TEntity> CreateSet<TEntity>()
 			where TEntity : EntityBase
@@ -77,12 +77,14 @@
 			{
 				var entity = dbEntityEntry.Entity as IDeletable;
 
-				if (entity != null)
+				if (entity == null)
 				{
-					entity.IsDeleted = true;
-
-					dbEntityEntry.State = EntityState.Modified;
+					continue;
 				}
+
+				entity.IsDeleted = true;
+
+				dbEntityEntry.State = EntityState.Modified;
 			}
 
 			return base.SaveChanges();

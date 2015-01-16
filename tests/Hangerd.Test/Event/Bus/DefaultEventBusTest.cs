@@ -34,11 +34,6 @@
 			bus.Commit();
 
 			Assert.AreEqual(2, _eventHandledResults.Count);
-
-			foreach (var result in _eventHandledResults)
-			{
-				Console.WriteLine(result);
-			}
 		}
 	}
 }

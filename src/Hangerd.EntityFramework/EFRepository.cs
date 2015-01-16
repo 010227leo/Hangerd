@@ -80,75 +80,81 @@
 
 		public virtual void Update(TEntity entity, bool recordModify)
 		{
-			if (entity != null)
+			if (entity == null)
 			{
-				_context.SetModified(entity);
+				return;
+			}
 
-				if (recordModify)
-				{
-					RecordModifiedProperties(entity);
-				}
+			_context.SetModified(entity);
+
+			if (recordModify)
+			{
+				RecordModifiedProperties(entity);
 			}
 		}
 
 		public virtual void Delete(TEntity entity)
 		{
-			if (entity != null)
+			if (entity == null)
 			{
-				_context.Attach(entity);
-
-				GetSet().Remove(entity);
+				return;
 			}
+
+			_context.Attach(entity);
+
+			GetSet().Remove(entity);
 		}
 
 		private void RecordModifiedProperties(TEntity entity)
 		{
-			entity.ModifiedPropertiesRecords.Clear();
-
-			var entityType = entity.GetType();
 			var dbContext = _context as DbContext;
 
-			if (dbContext != null)
+			if (dbContext == null)
 			{
-				var dbEntityEntry = dbContext.Entry(entity);
+				return;
+			}
 
-				switch (dbEntityEntry.State)
-				{
-					case EntityState.Added:
-						foreach (var propertyName in dbEntityEntry.CurrentValues.PropertyNames)
+			entity.ModifiedPropertiesRecords.Clear();
+
+			var dbEntityEntry = dbContext.Entry(entity);
+			var entityType = entity.GetType();
+
+			switch (dbEntityEntry.State)
+			{
+				case EntityState.Added:
+					foreach (var propertyName in dbEntityEntry.CurrentValues.PropertyNames)
+					{
+						var recordModifyAttribute = entityType.GetProperty(propertyName)
+							.GetCustomAttributes(false).OfType<RecordModifyAttribute>().SingleOrDefault();
+
+						if (recordModifyAttribute != null)
 						{
-							var recordModifyAttribute = entityType.GetProperty(propertyName)
-								.GetCustomAttributes(false).OfType<RecordModifyAttribute>().SingleOrDefault();
+							var property = dbEntityEntry.Property(propertyName);
 
-							if (recordModifyAttribute != null)
-							{
-								var property = dbEntityEntry.Property(propertyName);
-
-								entity.RecordModifiedProperty(propertyName, null, property.CurrentValue);
-							}
+							entity.RecordModifiedProperty(propertyName, null, property.CurrentValue);
 						}
-						break;
-					case EntityState.Modified:
-						foreach (var propertyName in dbEntityEntry.OriginalValues.PropertyNames)
+					}
+					break;
+				case EntityState.Modified:
+					foreach (var propertyName in dbEntityEntry.OriginalValues.PropertyNames)
+					{
+						var recordModifyAttribute = entityType.GetProperty(propertyName)
+							.GetCustomAttributes(false).OfType<RecordModifyAttribute>().SingleOrDefault();
+
+						if (recordModifyAttribute != null)
 						{
-							var recordModifyAttribute = entityType.GetProperty(propertyName)
-								.GetCustomAttributes(false).OfType<RecordModifyAttribute>().SingleOrDefault();
+							var property = dbEntityEntry.Property(propertyName);
 
-							if (recordModifyAttribute != null)
+							if ((property.OriginalValue == null && property.CurrentValue == null)
+							    || (property.OriginalValue != null && property.OriginalValue.Equals(property.CurrentValue)))
 							{
-								var property = dbEntityEntry.Property(propertyName);
-
-								if ((property.OriginalValue == null && property.CurrentValue == null)
-									|| (property.OriginalValue != null && property.OriginalValue.Equals(property.CurrentValue)))
-								{
-									continue;
-								}
-
-								entity.RecordModifiedProperty(propertyName, property.OriginalValue, property.CurrentValue);
+								continue;
 							}
+
+							entity.RecordModifiedProperty(propertyName, property.OriginalValue, property.CurrentValue);
 						}
-						break;
-				}
+					}
+					break;
 			}
 		}
 

@@ -10,17 +10,19 @@
 		{
 			get
 			{
-				if (_cachedMongoServer == null)
+				if (_cachedMongoServer != null)
 				{
-					var config = MongodbConfig.Current;
+					return _cachedMongoServer;
+				}
 
-					if (config != null && !string.IsNullOrWhiteSpace(config.MongodbServiceAddress))
-					{
-						var connectionString = string.Format("mongodb://{0}", config.MongodbServiceAddress);
-						var client = new MongoClient(connectionString);
+				var config = MongodbConfig.Current;
 
-						_cachedMongoServer = client.GetServer();
-					}
+				if (config != null && !string.IsNullOrWhiteSpace(config.MongodbServiceAddress))
+				{
+					var connectionString = string.Format("mongodb://{0}", config.MongodbServiceAddress);
+					var client = new MongoClient(connectionString);
+
+					_cachedMongoServer = client.GetServer();
 				}
 
 				return _cachedMongoServer;

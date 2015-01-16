@@ -20,16 +20,18 @@
 
 		public override void Execute()
 		{
-			if (HttpContext.Current != null)
+			if (HttpContext.Current == null)
 			{
-				RegisterControllers();
-
-				RegisterFactories();
-
-				RegisterFilters();
-
-				ResetViewEngines();
+				return;
 			}
+
+			RegisterControllers();
+
+			RegisterFactories();
+
+			RegisterFilters();
+
+			ResetViewEngines();
 		}
 
 		private void RegisterControllers()

@@ -58,7 +58,6 @@
     <Compile Include="Caching\MyCacheProvider.cs" />
     <Compile Include="Components\LocalConfigServiceTest.cs" />
     <Compile Include="Components\LocalServiceLocatorTest.cs" />
-    <Compile Include="Components\LocalLoggingServiceTest.cs" />
     <Compile Include="Event\Bus\DefaultEventBusTest.cs" />
     <Compile Include="Event\DomainEventTest.cs" />
     <Compile Include="Event\TestEvent.cs" />

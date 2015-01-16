@@ -18,12 +18,7 @@
 			get { return _serviceId; }
 		}
 
-		private bool _disposed;
-
-		public bool Disposed
-		{
-			get { return _disposed; }
-		}
+		public bool Disposed { get; private set; }
 
 		public TestService()
 		{
@@ -32,7 +27,7 @@
 
 		public void Dispose()
 		{
-			_disposed = true;
+			Disposed = true;
 		}
 	}
 }
