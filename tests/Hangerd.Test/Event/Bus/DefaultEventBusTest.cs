@@ -8,15 +8,7 @@
 
 	public class DefaultEventBusTest : TestBase
 	{
-		private static readonly List<string> _eventHandledResults = new List<string>();
-
-		public static List<string> EventHandledResults
-		{
-			get
-			{
-				return _eventHandledResults;
-			}
-		}
+		public static List<string> EventHandledResults { get; private set; }
 
 		[Test]
 		public void PublishAndCommitTest()
@@ -28,12 +20,12 @@
 				Assert.Fail("EventBus is null");
 			}
 
-			_eventHandledResults.Clear();
+			EventHandledResults = new List<string>();
 
 			bus.Publish(new TestEvent());
 			bus.Commit();
 
-			Assert.AreEqual(2, _eventHandledResults.Count);
+			Assert.AreEqual(2, EventHandledResults.Count);
 		}
 	}
 }

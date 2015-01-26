@@ -24,9 +24,7 @@
 
 		public void Execute()
 		{
-			var taskGroups = _container.ResolveAll<BootstrapperTask>().OrderBy(t => t.Order).ToList();
-
-			foreach (var task in taskGroups)
+			_container.ResolveAll<BootstrapperTask>().OrderBy(t => t.Order).Each(task =>
 			{
 				LocalLoggingService.Info("Bootstrapper begin execute '{0}'", task.GetType().FullName);
 
@@ -38,17 +36,17 @@
 				{
 					LocalLoggingService.Exception("Bootstrapper execute error '{0}'，Message：{1}", task.GetType().FullName, ex.ToString());
 				}
-			}
+			});
 		}
 
 		protected override void InternalDispose()
 		{
 			_container.ResolveAll<BootstrapperTask>().OrderByDescending(t => t.Order).Each(task =>
 			{
+				LocalLoggingService.Info("Bootstrapper begin dispose '{0}'", task.GetType().FullName);
+
 				try
 				{
-					LocalLoggingService.Info("Bootstrapper begin dispose '{0}'", task.GetType().FullName);
-
 					task.Dispose();
 				}
 				catch (Exception ex)
