@@ -38,6 +38,11 @@
 
 		public static string FilterHtml(string input)
 		{
+			if (string.IsNullOrWhiteSpace(input))
+			{
+				return string.Empty;
+			}
+
 			var output = input;
 
 			output = Regex.Replace(output, @"<script[^>]*?>.*?</script>", string.Empty, RegexOptions.IgnoreCase);
