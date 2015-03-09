@@ -1,11 +1,11 @@
-﻿namespace Hangerd.Mongodb.Test
-{
-	using Hangerd.Components;
-	using Hangerd.Test;
-	using NUnit.Framework;
-	using System;
-	using System.Threading;
+﻿using Hangerd.Components;
+using Hangerd.Test;
+using NUnit.Framework;
+using System;
+using System.Threading;
 
+namespace Hangerd.Mongodb.Test
+{
 	public class MongodbInsertServiceTest : TestBase
 	{
 		[Test]

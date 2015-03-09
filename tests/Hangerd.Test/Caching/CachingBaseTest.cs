@@ -1,12 +1,12 @@
-﻿namespace Hangerd.Test.Caching
-{
-	using Hangerd.Caching;
-	using Hangerd.Components;
-	using Hangerd.Extensions;
-	using NUnit.Framework;
-	using System;
-	using System.Threading;
+﻿using Hangerd.Caching;
+using Hangerd.Components;
+using Hangerd.Extensions;
+using NUnit.Framework;
+using System;
+using System.Threading;
 
+namespace Hangerd.Test.Caching
+{
 	public class CachingBaseTest : TestBase
 	{
 		[Test]

@@ -1,7 +1,7 @@
-﻿namespace Hangerd.Mongodb.Imp
-{
-	using MongoDB.Driver;
+﻿using MongoDB.Driver;
 
+namespace Hangerd.Mongodb.Imp
+{
 	public class MongodbServiceBase : Disposable
 	{
 		private MongoServer _cachedMongoServer;
@@ -11,9 +11,7 @@
 			get
 			{
 				if (_cachedMongoServer != null)
-				{
 					return _cachedMongoServer;
-				}
 
 				var config = MongodbConfig.Current;
 

@@ -1,8 +1,8 @@
-﻿namespace Hangerd.Utility
-{
-	using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
-	public class ValidationHelper
+namespace Hangerd.Utility
+{
+	public static class ValidationHelper
 	{
 		public static bool IsIdentityNumber(string input)
 		{

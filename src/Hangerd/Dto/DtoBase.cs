@@ -1,7 +1,7 @@
-﻿namespace Hangerd.Dto
-{
-	using System;
+﻿using System;
 
+namespace Hangerd.Dto
+{
 	public class DtoBase
 	{
 		public string Id { get; set; }

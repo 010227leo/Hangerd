@@ -1,8 +1,8 @@
-﻿namespace Hangerd.Test.Utility
-{
-	using Hangerd.Utility;
-	using NUnit.Framework;
+﻿using Hangerd.Utility;
+using NUnit.Framework;
 
+namespace Hangerd.Test.Utility
+{
 	public class ValidationHelperTest
 	{
 		[Test]

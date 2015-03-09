@@ -1,10 +1,10 @@
-﻿namespace Hangerd.Mvc.Authentication
-{
-	using System;
-	using System.Web;
-	using System.Web.Security;
+﻿using System;
+using System.Web;
+using System.Web.Security;
 
-	public class LoginHelper
+namespace Hangerd.Mvc.Authentication
+{
+	public static class LoginHelper
 	{
 		public static bool IsLogin()
 		{
@@ -19,9 +19,7 @@
 		public static void Login(string userId, string userData, DateTime expiration)
 		{
 			if (HttpContext.Current == null)
-			{
 				return;
-			}
 
 			var ticket = new FormsAuthenticationTicket(
 				1,

@@ -1,10 +1,10 @@
-﻿namespace Hangerd.Event.Bus
-{
-	using Hangerd.Utility;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
+﻿using Hangerd.Utility;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
+namespace Hangerd.Event.Bus
+{
 	public class DefaultEventBus : Disposable, IEventBus
 	{
 		private static readonly Dictionary<Type, List<object>> _handlers = new Dictionary<Type, List<object>>();
@@ -34,9 +34,7 @@
 						if (registeredHandlers != null)
 						{
 							if (!registeredHandlers.Contains(handler))
-							{
 								registeredHandlers.Add(handler);
-							}
 						}
 						else
 						{
@@ -66,9 +64,7 @@
 			lock (_queueLock)
 			{
 				while (_eventQueue.Count > 0)
-				{
 					HandleEvent(_eventQueue.Dequeue());
-				}
 			}
 		}
 

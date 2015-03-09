@@ -1,7 +1,7 @@
-﻿namespace Hangerd.Mvc.ViewModels
-{
-	using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace Hangerd.Mvc.ViewModels
+{
 	public class PagedListModel<TDto>
 	{
 		public int PageIndex { get; set; }

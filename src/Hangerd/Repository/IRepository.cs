@@ -1,12 +1,12 @@
-﻿namespace Hangerd.Repository
-{
-	using Hangerd.Entity;
-	using Hangerd.Specification;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Linq.Expressions;
+﻿using Hangerd.Entity;
+using Hangerd.Specification;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 
+namespace Hangerd.Repository
+{
 	public interface IRepository<TEntity>
 		where TEntity : EntityBase
 	{

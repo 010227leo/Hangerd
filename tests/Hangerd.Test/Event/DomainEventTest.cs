@@ -1,9 +1,9 @@
-﻿namespace Hangerd.Test.Event
-{
-	using Hangerd.Event;
-	using Hangerd.Extensions;
-	using NUnit.Framework;
+﻿using Hangerd.Event;
+using Hangerd.Extensions;
+using NUnit.Framework;
 
+namespace Hangerd.Test.Event
+{
 	public class DomainEventTest : TestBase
 	{
 		[Test]

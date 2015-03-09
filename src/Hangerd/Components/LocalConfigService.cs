@@ -1,13 +1,13 @@
-﻿namespace Hangerd.Components
-{
-	using System;
-	using System.Collections.Generic;
-	using System.IO;
-	using System.Text;
-	using System.Xml;
-	using System.Xml.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
-	public class LocalConfigService
+namespace Hangerd.Components
+{
+	public static class LocalConfigService
 	{
 		private static readonly string _localConfigDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Config");
 		private static readonly Dictionary<string, object> _configCache = new Dictionary<string, object>();
@@ -27,16 +27,12 @@
 			var fileFullName = GetConfigFileFullName(fileName);
 
 			if (_configCache.TryGetValue(fileFullName, out instance))
-			{
 				return (T)instance;
-			}
 
 			lock (_locker)
 			{
 				if (_configCache.TryGetValue(fileFullName, out instance))
-				{
 					return (T)instance;
-				}
 
 				if (!File.Exists(fileFullName))
 				{
@@ -83,21 +79,15 @@
 		private static void TryCreateConfig<T>(string fileName, T defaultValue)
 		{
 			if (!EnsureConfigDirectoryExists())
-			{
 				return;
-			}
 
 			var fileFullName = GetConfigFileFullName(fileName);
 
 			if (File.Exists(fileFullName))
-			{
 				return;
-			}
 
 			if (defaultValue == null)
-			{
 				return;
-			}
 
 			var settings = new XmlWriterSettings
 			{
@@ -126,9 +116,7 @@
 		private static bool EnsureConfigDirectoryExists()
 		{
 			if (Directory.Exists(_localConfigDirectory))
-			{
 				return true;
-			}
 
 			try
 			{

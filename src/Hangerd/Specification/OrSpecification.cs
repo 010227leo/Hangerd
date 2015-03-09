@@ -1,8 +1,8 @@
-﻿namespace Hangerd.Specification
-{
-	using System;
-	using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 
+namespace Hangerd.Specification
+{
 	/// <summary>
 	/// A Logic OR Specification
 	/// </summary>
@@ -23,14 +23,10 @@
 		public OrSpecification(ISpecification<T> leftSide, ISpecification<T> rightSide)
 		{
 			if (leftSide == null)
-			{
 				throw new ArgumentNullException("leftSide");
-			}
 
 			if (rightSide == null)
-			{
 				throw new ArgumentNullException("rightSide");
-			}
 
 			_leftSideSpecification = leftSide;
 			_rightSideSpecification = rightSide;

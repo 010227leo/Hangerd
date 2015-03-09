@@ -3,16 +3,13 @@ using Hangerd.Components;
 
 namespace Hangerd.Caching
 {
-	public class CacheManager
+	public static class CacheManager
 	{
 		private static readonly Lazy<ICacheProvider> _cacheProvider = new Lazy<ICacheProvider>(LocalServiceLocator.GetService<ICacheProvider>);
 
 		private static ICacheProvider CacheProvider
 		{
-			get
-			{
-				return _cacheProvider.Value;
-			}
+			get { return _cacheProvider.Value; }
 		}
 
 		public static TEntity Get<TEntity>(bool fromCache, string key, TimeSpan cacheTime, Func<TEntity> getItem)
@@ -20,16 +17,12 @@ namespace Hangerd.Caching
 			var value = fromCache ? CacheProvider.Get<TEntity>(key) : default(TEntity);
 
 			if (value != null && !value.Equals(default(TEntity)))
-			{
 				return value;
-			}
 
 			value = getItem();
 
 			if (fromCache)
-			{
 				CacheProvider.Set(key, value, cacheTime);
-			}
 
 			return value;
 		}

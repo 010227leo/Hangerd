@@ -1,8 +1,8 @@
-﻿namespace Hangerd.Utility.Generator
-{
-	using System;
+﻿using System;
 
-    public class IdentityGenerator
+namespace Hangerd.Utility.Generator
+{
+	public static class IdentityGenerator
     {
         public static Guid NewSequentialGuid()
         {

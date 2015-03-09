@@ -1,12 +1,12 @@
-﻿namespace Hangerd.Utility
-{
-	using Hangerd.Components;
-	using System;
-	using System.Drawing;
-	using System.Drawing.Drawing2D;
-	using System.Drawing.Imaging;
-	using System.IO;
+﻿using Hangerd.Components;
+using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
 
+namespace Hangerd.Utility
+{
 	public class FileHelper
 	{
 		public static void Upload(Stream stream, string physicalPath, string fileName)
@@ -16,9 +16,7 @@
 			var buffer = new byte[bufferSize];
 
 			if (!Directory.Exists(physicalPath))
-			{
 				Directory.CreateDirectory(physicalPath);
-			}
 
 			var fileStream = File.Create(Path.Combine(physicalPath, fileName), bufferSize);
 
@@ -31,9 +29,7 @@
 					bytesRead = stream.Read(buffer, 0, bufferSize);
 
 					if (bytesRead > 0)
-					{
 						fileStream.Write(buffer, 0, bytesRead);
-					}
 				} while (bytesRead > 0);
 			}
 			catch (Exception ex)
@@ -65,9 +61,7 @@
 					break;
 				case ThumbnailMode.Width:
 					if (originalImage.Width > width)
-					{
 						toheight = originalImage.Height*width/originalImage.Width;
-					}
 					else
 					{
 						towidth = originalImage.Width;
@@ -76,9 +70,7 @@
 					break;
 				case ThumbnailMode.Height:
 					if (originalImage.Height > height)
-					{
 						towidth = originalImage.Width*height/originalImage.Height;
-					}
 					else
 					{
 						towidth = originalImage.Width;
@@ -134,11 +126,8 @@
 	public enum ThumbnailMode
 	{
 		HeightWidth,
-
 		Width,
-
 		Height,
-
 		Cut
 	}
 }

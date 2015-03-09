@@ -1,9 +1,9 @@
-﻿namespace Hangerd.Specification
-{
-	using System;
-	using System.Linq;
-	using System.Linq.Expressions;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 
+namespace Hangerd.Specification
+{
 	/// <summary>
 	/// NotEspecification convert a original specification with NOT logic operator
 	/// </summary>
@@ -23,9 +23,7 @@
 		public NotSpecification(ISpecification<T> originalSpecification)
 		{
 			if (originalSpecification == null)
-			{
 				throw new ArgumentNullException("originalSpecification");
-			}
 
 			_originalCriteria = originalSpecification.SatisfiedBy();
 		}
@@ -36,9 +34,7 @@
 		public NotSpecification(Expression<Func<T, bool>> originalSpecification)
 		{
 			if (originalSpecification == null)
-			{
 				throw new ArgumentNullException("originalSpecification");
-			}
 
 			_originalCriteria = originalSpecification;
 		}

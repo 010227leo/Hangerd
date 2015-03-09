@@ -1,8 +1,8 @@
-﻿namespace Hangerd.MemoryQueue
-{
-	using System;
-	using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace Hangerd.MemoryQueue
+{
 	public class MemoryQueueServiceConfiguration<T>
 	{
 		public string MemoryQueueName { get; set; }
@@ -22,9 +22,7 @@
 			set
 			{
 				if (value <= 0)
-				{
 					throw new ArgumentException("Invalid argument!", "ConsumeThreadCount");
-				}
 
 				_consumeThreadCount = value;
 			}
@@ -41,9 +39,7 @@
 			set
 			{
 				if (value <= 0)
-				{
 					throw new ArgumentException("Invalid argument!", "ConsumeItemCountInOneBatch");
-				}
 
 				_consumeItemCountInOneBatch = value;
 			}

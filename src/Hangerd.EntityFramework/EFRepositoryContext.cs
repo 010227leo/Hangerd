@@ -1,12 +1,12 @@
-﻿namespace Hangerd.EntityFramework
-{
-	using Hangerd.Entity;
-	using System;
-	using System.Data.Entity;
-	using System.Data.Entity.Infrastructure;
-	using System.Data.Entity.ModelConfiguration.Conventions;
-	using System.Linq;
+﻿using Hangerd.Entity;
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Linq;
 
+namespace Hangerd.EntityFramework
+{
 	public abstract class EfRepositoryContext : DbContext, IEfRepositoryContext
 	{
 		#region IUnitOfWork
@@ -54,9 +54,7 @@
 				var entity = dbEntityEntry.Entity as EntityBase;
 
 				if (entity != null && entity.IsTransient())
-				{
 					entity.GenerateNewId();
-				}
 
 				ValidateEntity(dbEntityEntry);
 			}
@@ -66,9 +64,7 @@
 				var entity = dbEntityEntry.Entity as EntityBase;
 
 				if (entity != null)
-				{
 					entity.LastModified = DateTime.Now;
-				}
 
 				ValidateEntity(dbEntityEntry);
 			}
@@ -78,9 +74,7 @@
 				var entity = dbEntityEntry.Entity as IDeletable;
 
 				if (entity == null)
-				{
 					continue;
-				}
 
 				entity.IsDeleted = true;
 
@@ -95,9 +89,7 @@
 			var entity = dbEntityEntry.Entity as IValidatable;
 
 			if (entity != null)
-			{
 				entity.Validate();
-			}
 		}
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -1,11 +1,10 @@
-﻿namespace Hangerd.Test.Event.Bus
-{
-	using Hangerd.Components;
-	using Hangerd.Event.Bus;
-	using NUnit.Framework;
-	using System;
-	using System.Collections.Generic;
+﻿using Hangerd.Components;
+using Hangerd.Event.Bus;
+using NUnit.Framework;
+using System.Collections.Generic;
 
+namespace Hangerd.Test.Event.Bus
+{
 	public class DefaultEventBusTest : TestBase
 	{
 		public static List<string> EventHandledResults { get; private set; }
@@ -16,9 +15,7 @@
 			var bus = LocalServiceLocator.GetService<IEventBus>();
 
 			if (bus == null)
-			{
 				Assert.Fail("EventBus is null");
-			}
 
 			EventHandledResults = new List<string>();
 

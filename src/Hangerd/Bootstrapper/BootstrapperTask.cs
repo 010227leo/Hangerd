@@ -1,10 +1,10 @@
-﻿namespace Hangerd.Bootstrapper
-{
-	using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Unity;
 
+namespace Hangerd.Bootstrapper
+{
 	public abstract class BootstrapperTask : Disposable
 	{
-		protected IUnityContainer _container;
+		protected readonly IUnityContainer _container;
 
 		protected BootstrapperTask(IUnityContainer container)
 		{

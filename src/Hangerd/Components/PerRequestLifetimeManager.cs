@@ -1,10 +1,10 @@
-﻿namespace Hangerd.Components
-{
-	using Microsoft.Practices.Unity;
-	using System;
-	using System.Runtime.Remoting.Messaging;
-	using System.Web;
+﻿using Microsoft.Practices.Unity;
+using System;
+using System.Runtime.Remoting.Messaging;
+using System.Web;
 
+namespace Hangerd.Components
+{
 	internal class PerRequestLifetimeManager : LifetimeManager
 	{
 		private Guid _key;
@@ -24,9 +24,7 @@
 			{
 				//HttpContext avaiable ( ASP.NET ..)
 				if (HttpContext.Current.Items[_key.ToString()] != null)
-				{
 					result = HttpContext.Current.Items[_key.ToString()];
-				}
 			}
 			else
 			{
@@ -43,9 +41,7 @@
 			{
 				//HttpContext avaiable ( ASP.NET ..)
 				if (HttpContext.Current.Items.Contains(_key.ToString()) && HttpContext.Current.Items[_key.ToString()] != null)
-				{
 					HttpContext.Current.Items[_key.ToString()] = null;
-				}
 			}
 			else
 			{
@@ -60,9 +56,7 @@
 			{
 				//HttpContext avaiable ( ASP.NET ..)
 				if (HttpContext.Current.Items[_key.ToString()] == null)
-				{
 					HttpContext.Current.Items[_key.ToString()] = newValue;
-				}
 			}
 			else
 			{

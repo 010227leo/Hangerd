@@ -1,8 +1,8 @@
-﻿namespace Hangerd.Specification
-{
-	using System;
-	using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 
+namespace Hangerd.Specification
+{
 	/// <summary>
     /// Represent a Expression Specification
     /// </summary>

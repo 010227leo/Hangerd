@@ -1,10 +1,10 @@
-﻿namespace Hangerd.Test.Specification
-{
-	using Hangerd.Specification;
-	using NUnit.Framework;
-	using System.Collections.Generic;
-	using System.Linq;
+﻿using Hangerd.Specification;
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Linq;
 
+namespace Hangerd.Test.Specification
+{
 	public class SpecificationTests
 	{
 		private const string _entityName = "Test Entity Name";

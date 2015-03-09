@@ -1,18 +1,16 @@
-﻿namespace Hangerd.Utility
-{
-	using System;
-	using System.ComponentModel;
-	using System.Text;
-	using System.Text.RegularExpressions;
+﻿using System;
+using System.ComponentModel;
+using System.Text;
+using System.Text.RegularExpressions;
 
-	public class CommonTools
+namespace Hangerd.Utility
+{
+	public static class CommonTools
 	{
 		public static string CutString(string input, int limitLength, string suffix)
 		{
 			if (string.IsNullOrWhiteSpace(input))
-			{
 				return string.Empty;
-			}
 
 			var output = string.Empty;
 			var currentLength = 0;
@@ -27,10 +25,8 @@
 
 					return output;
 				}
-				else
-				{
-					output += ch;
-				}
+
+				output += ch;
 			}
 
 			return output;
@@ -39,9 +35,7 @@
 		public static string FilterHtml(string input)
 		{
 			if (string.IsNullOrWhiteSpace(input))
-			{
 				return string.Empty;
-			}
 
 			var output = input;
 
@@ -65,9 +59,7 @@
 			var field = value.GetType().GetField(value.ToString());
 
 			if (field == null)
-			{
 				return string.Empty;
-			}
 
 			var attributes = field.GetCustomAttributes(typeof(DescriptionAttribute), false);
 

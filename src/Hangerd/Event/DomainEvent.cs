@@ -1,9 +1,9 @@
-﻿namespace Hangerd.Event
-{
-	using Hangerd.Components;
-	using Hangerd.Entity;
-	using System;
+﻿using Hangerd.Components;
+using Hangerd.Entity;
+using System;
 
+namespace Hangerd.Event
+{
 	public abstract class DomainEvent : IDomainEvent
 	{
 		private readonly EntityBase _source;
@@ -35,11 +35,7 @@
 			var handlers = LocalServiceLocator.GetServices<IDomainEventHandler<TDomainEvent>>();
 
 			foreach (var handler in handlers)
-			{
-				//todo: async
-
 				handler.Handle(domainEvent);
-			}
 		}
 
 		#endregion

@@ -1,7 +1,7 @@
-﻿namespace Hangerd
-{
-	using System;
+﻿using System;
 
+namespace Hangerd
+{
 	public abstract class Disposable : IDisposable
 	{
 		private bool _disposed;
@@ -22,9 +22,7 @@
 		private void Dispose(bool disposing)
 		{
 			if (!_disposed && disposing)
-			{
 				InternalDispose();
-			}
 
 			_disposed = true;
 		}

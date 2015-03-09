@@ -1,7 +1,7 @@
-﻿namespace Hangerd.Mvc.Extensions
-{
-	using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
+namespace Hangerd.Mvc.Extensions
+{
 	public static class HtmlExtention
 	{
 		public static MvcHtmlString IsSelected(this HtmlHelper helper, bool isSelected)

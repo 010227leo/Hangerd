@@ -1,15 +1,15 @@
-﻿namespace Hangerd.Utility
-{
-	using Hangerd.Components;
-	using Hangerd.Extensions;
-	using System;
-	using System.Collections.Generic;
-	using System.IO;
-	using System.Linq;
-	using System.Reflection;
-	using System.Web;
-	using System.Web.Compilation;
+﻿using Hangerd.Components;
+using Hangerd.Extensions;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Web;
+using System.Web.Compilation;
 
+namespace Hangerd.Utility
+{
 	public class BuildManagerWrapper
 	{
 		private static readonly BuildManagerWrapper _current = new BuildManagerWrapper();

@@ -1,16 +1,14 @@
-﻿namespace Hangerd
-{
-	using Hangerd.Bootstrapper;
-	using Hangerd.Components;
-	using Microsoft.Practices.Unity;
-	using System.Runtime.CompilerServices;
+﻿using Hangerd.Bootstrapper;
+using Hangerd.Components;
+using Microsoft.Practices.Unity;
+using System.Runtime.CompilerServices;
 
-	public class HangerdFramework
+namespace Hangerd
+{
+	public static class HangerdFramework
 	{
 		private static readonly IUnityContainer _container = new UnityContainer();
 		private static BootstrapperManager _bootstrapperManager;
-	
-		private HangerdFramework() { }
 
 		public static IUnityContainer Container
 		{

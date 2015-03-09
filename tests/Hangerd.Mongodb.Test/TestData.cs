@@ -1,7 +1,7 @@
-﻿namespace Hangerd.Mongodb.Test
-{
-	using System;
+﻿using System;
 
+namespace Hangerd.Mongodb.Test
+{
 	public class TestData
 	{
 		public string Operator { get; set; }

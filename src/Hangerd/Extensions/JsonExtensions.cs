@@ -1,7 +1,7 @@
-﻿namespace Hangerd.Extensions
-{
-	using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
+namespace Hangerd.Extensions
+{
 	public static class JsonExtensions
 	{
 		public static string ObjectToJson(this object obj, Formatting formatting = Formatting.None)

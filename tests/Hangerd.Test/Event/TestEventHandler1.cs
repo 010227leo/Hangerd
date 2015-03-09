@@ -1,8 +1,8 @@
-﻿namespace Hangerd.Test.Event
-{
-	using Hangerd.Event;
-	using Hangerd.Test.Event.Bus;
+﻿using Hangerd.Event;
+using Hangerd.Test.Event.Bus;
 
+namespace Hangerd.Test.Event
+{
 	public class TestEventHandler1 : IEventHandler<TestEvent>
 	{
 		public void Handle(TestEvent @event)

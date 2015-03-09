@@ -1,8 +1,8 @@
-﻿namespace Hangerd.Test.Caching
-{
-	using Hangerd.Caching;
-	using System;
+﻿using Hangerd.Caching;
+using System;
 
+namespace Hangerd.Test.Caching
+{
 	public class MyCacheProvider : Disposable, ICacheProvider
 	{
 		public T Get<T>(string key) { return default(T); }

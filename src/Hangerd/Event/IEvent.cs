@@ -1,7 +1,7 @@
-﻿namespace Hangerd.Event
-{
-	using System;
+﻿using System;
 
+namespace Hangerd.Event
+{
 	public interface IEvent
 	{
 		Guid Id { get; set; }

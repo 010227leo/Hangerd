@@ -1,7 +1,7 @@
-﻿namespace Hangerd.Test
-{
-	using System;
+﻿using System;
 
+namespace Hangerd.Test
+{
 	public interface ITestService : IDisposable
 	{
 		string ServiceId { get; }

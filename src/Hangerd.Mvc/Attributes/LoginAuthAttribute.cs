@@ -1,10 +1,10 @@
-﻿namespace Hangerd.Mvc.Attributes
-{
-	using Hangerd.Mvc.Authentication;
-	using System.Web;
-	using System.Web.Mvc;
-	using System.Web.Routing;
+﻿using Hangerd.Mvc.Authentication;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
 
+namespace Hangerd.Mvc.Attributes
+{
 	public abstract class LoginAuthAttribute : AuthorizeAttribute
 	{
 		private readonly string _loginController;
@@ -34,18 +34,12 @@
 			if (!LoginAuthorizeCore(filterContext.HttpContext))
 			{
 				if (Ajax)
-				{
 					ResponseDefaultAjaxResult(filterContext);
-				}
 				else
-				{
 					RedirectToLoginPage(filterContext);
-				}
 			}
 			else
-			{
 				OnRolePrivilegeCheck(filterContext);
-			}
 		}
 
 		protected abstract void OnRolePrivilegeCheck(AuthorizationContext filterContext);
@@ -64,14 +58,10 @@
 			};
 
 			if (!string.IsNullOrWhiteSpace(_loginArea))
-			{
 				routeValue.Add("Area", _loginArea);
-			}
 
 			if (JumpBack)
-			{
 				routeValue.Add("returnUrl", filterContext.RequestContext.HttpContext.Request.RawUrl);
-			}
 
 			filterContext.Result = new RedirectToRouteResult(routeValue);
 		}

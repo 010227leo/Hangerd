@@ -1,8 +1,8 @@
-﻿namespace Hangerd.Mvc.Attributes
-{
-	using Hangerd.Components;
-	using System.Web.Mvc;
+﻿using Hangerd.Components;
+using System.Web.Mvc;
 
+namespace Hangerd.Mvc.Attributes
+{
 	public class ExceptionHandlerAttribute : HandleErrorAttribute
 	{
 		public override void OnException(ExceptionContext filterContext)

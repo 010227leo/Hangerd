@@ -1,7 +1,7 @@
-﻿namespace Hangerd.Caching
-{
-	using System;
+﻿using System;
 
+namespace Hangerd.Caching
+{
 	public interface ICacheProvider : IDisposable
 	{
 		T Get<T>(string key);

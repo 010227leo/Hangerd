@@ -1,11 +1,11 @@
-﻿namespace Hangerd.Mongodb.Imp
-{
-	using Hangerd.Components;
-	using Hangerd.MemoryQueue;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
+﻿using Hangerd.Components;
+using Hangerd.MemoryQueue;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
+namespace Hangerd.Mongodb.Imp
+{
 	public class MongodbInsertService : MongodbServiceBase, IMongodbInsertService
 	{
 		private readonly Dictionary<string, IMemoryQueueService<MongodbItem>> _submitDataMemoryQueueServices = new Dictionary<string, IMemoryQueueService<MongodbItem>>();
@@ -37,9 +37,7 @@
 				}
 
 				if (_submitDataMemoryQueueServices.ContainsKey(databaseName))
-				{
 					_submitDataMemoryQueueServices[databaseName].Enqueue(item);
-				}
 			}
 			catch (Exception ex)
 			{
@@ -50,24 +48,22 @@
 		private void InternalSubmitData(IList<MongodbItem> items)
 		{
 			if (items == null || items.Count == 0)
-			{
 				return;
-			}
 
 			var databaseName = items.First().DatabaseName;
 
 			try
 			{
-				if (CachedMongoServer != null)
+				if (CachedMongoServer == null) 
+					return;
+
+				var database = CachedMongoServer.GetDatabase(databaseName);
+
+				foreach (var item in items)
 				{
-					var database = CachedMongoServer.GetDatabase(databaseName);
+					var collection = database.GetCollection(item.TableName);
 
-					foreach (var item in items)
-					{
-						var collection = database.GetCollection(item.TableName);
-
-						collection.Insert(item.Data);
-					}
+					collection.Insert(item.Data);
 				}
 			}
 			catch (Exception ex)
@@ -79,9 +75,7 @@
 		protected override void InternalDispose()
 		{
 			foreach (var queue in _submitDataMemoryQueueServices.Values)
-			{
 				queue.Dispose();
-			}
 
 			base.InternalDispose();
 		}

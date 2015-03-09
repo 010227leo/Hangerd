@@ -1,9 +1,9 @@
-﻿namespace Hangerd.EntityFramework
-{
-	using Hangerd.Entity;
-	using Hangerd.Repository;
-	using System.Data.Entity;
+﻿using Hangerd.Entity;
+using Hangerd.Repository;
+using System.Data.Entity;
 
+namespace Hangerd.EntityFramework
+{
 	public interface IEfRepositoryContext : IRepositoryContext
 	{
 		DbSet<TEntity> CreateSet<TEntity>() where TEntity : EntityBase;

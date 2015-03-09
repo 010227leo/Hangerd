@@ -1,8 +1,8 @@
-﻿namespace Hangerd.MemoryQueue
-{
-	using System;
-	using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace Hangerd.MemoryQueue
+{
 	public interface IMemoryQueueService<T> : IDisposable
     {
 		void Init(MemoryQueueServiceConfiguration<T> configuration);

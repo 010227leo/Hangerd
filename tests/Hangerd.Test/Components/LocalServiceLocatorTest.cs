@@ -1,10 +1,9 @@
-﻿namespace Hangerd.Test.Components
-{
-	using Hangerd;
-	using Hangerd.Components;
-	using Hangerd.Extensions;
-	using NUnit.Framework;
+﻿using Hangerd.Components;
+using Hangerd.Extensions;
+using NUnit.Framework;
 
+namespace Hangerd.Test.Components
+{
 	public class LocalServiceLocatorTest : TestBase
 	{
 		[Test]

@@ -1,10 +1,10 @@
-﻿namespace Hangerd.Specification
-{
-	using System;
-	using System.Linq;
-	using System.Linq.Expressions;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 
-    /// <summary>
+namespace Hangerd.Specification
+{
+	/// <summary>
     /// Extension methods for adding AND and OR with parameters rebinder
     /// </summary>
     public static class ExpressionBuilder

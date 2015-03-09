@@ -1,11 +1,11 @@
-﻿namespace Hangerd.Utility
-{
-	using System;
-	using System.IO;
-	using System.Security.Cryptography;
-	using System.Text;
+﻿using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 
-	public class CryptoHelper
+namespace Hangerd.Utility
+{
+	public static class CryptoHelper
 	{
 		private const string _iv = "#kRz4rK^Z#kLMgQ^!ZHsY0u6";
 		private const string _key = "S()%s@z^";
@@ -59,9 +59,7 @@
 			var md5Builder = new StringBuilder();
 
 			foreach (var t in hash)
-			{
 				md5Builder.Append(t.ToString("X2"));
-			}
 
 			return md5Builder.ToString();
 		}
@@ -75,9 +73,7 @@
 			var sha1Builder = new StringBuilder();
 
 			foreach (var t in hash)
-			{
 				sha1Builder.Append(t.ToString("X2"));
-			}
 
 			return sha1Builder.ToString();
 		}

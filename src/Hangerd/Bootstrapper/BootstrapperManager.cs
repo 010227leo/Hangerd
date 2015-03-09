@@ -1,12 +1,12 @@
-﻿namespace Hangerd.Bootstrapper
-{
-	using Hangerd.Components;
-	using Hangerd.Extensions;
-	using Hangerd.Utility;
-	using Microsoft.Practices.Unity;
-	using System;
-	using System.Linq;
+﻿using Hangerd.Components;
+using Hangerd.Extensions;
+using Hangerd.Utility;
+using Microsoft.Practices.Unity;
+using System;
+using System.Linq;
 
+namespace Hangerd.Bootstrapper
+{
 	internal class BootstrapperManager : Disposable
 	{
 		private readonly IUnityContainer _container;

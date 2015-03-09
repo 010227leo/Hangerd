@@ -1,7 +1,7 @@
-﻿namespace Hangerd
-{
-	using System;
+﻿using System;
 
+namespace Hangerd
+{
 	public interface IUnitOfWork : IDisposable
 	{
 		void Commit();

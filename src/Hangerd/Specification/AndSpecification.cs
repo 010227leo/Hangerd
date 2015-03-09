@@ -1,9 +1,9 @@
-﻿namespace Hangerd.Specification
-{
-	using System;
-	using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 
-    /// <summary>
+namespace Hangerd.Specification
+{
+	/// <summary>
     /// A logic AND Specification
     /// </summary>
 	public sealed class AndSpecification<T> : CompositeSpecification<T>
@@ -23,14 +23,10 @@
 		public AndSpecification(ISpecification<T> leftSide, ISpecification<T> rightSide)
         {
 			if (leftSide == null)
-			{
 				throw new ArgumentNullException("leftSide");
-			}
 
 			if (rightSide == null)
-			{
 				throw new ArgumentNullException("rightSide");
-			}
 
             _leftSideSpecification = leftSide;
             _rightSideSpecification = rightSide;

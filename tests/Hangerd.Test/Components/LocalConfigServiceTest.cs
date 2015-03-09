@@ -1,8 +1,8 @@
-﻿namespace Hangerd.Test.Components
-{
-	using Hangerd.Components;
-	using NUnit.Framework;
+﻿using Hangerd.Components;
+using NUnit.Framework;
 
+namespace Hangerd.Test.Components
+{
 	public class LocalConfigServiceTest
 	{
 		public class TestConfig

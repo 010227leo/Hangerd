@@ -1,10 +1,10 @@
-﻿namespace Hangerd.Extensions
-{
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
+namespace Hangerd.Extensions
+{
 	public static class TypeExtensions
 	{
 		public static IEnumerable<Type> PublicTypes(this Assembly instance)

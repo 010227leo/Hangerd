@@ -1,8 +1,8 @@
-﻿namespace Hangerd.EntityFramework
-{
-	using Hangerd.Entity;
-	using System.Data.Entity.ModelConfiguration;
+﻿using Hangerd.Entity;
+using System.Data.Entity.ModelConfiguration;
 
+namespace Hangerd.EntityFramework
+{
 	public class EntityTypeConfigBase<TEntity> : EntityTypeConfiguration<TEntity>
 		where TEntity : EntityBase
 	{

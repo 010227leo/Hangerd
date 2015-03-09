@@ -1,8 +1,8 @@
-﻿namespace Hangerd.Specification
-{
-	using System.Collections.Generic;
-	using System.Linq.Expressions;
+﻿using System.Collections.Generic;
+using System.Linq.Expressions;
 
+namespace Hangerd.Specification
+{
 	/// <summary>
 	/// Helper for rebinder parameters without use Invoke method in expressions 
 	/// ( this methods is not supported in all linq query providers, 
@@ -36,9 +36,7 @@
 			ParameterExpression replacement;
 
 			if (_map.TryGetValue(p, out replacement))
-			{
 				p = replacement;
-			}
 
 			return base.VisitParameter(p);
 		}

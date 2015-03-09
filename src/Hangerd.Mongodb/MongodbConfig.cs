@@ -1,7 +1,7 @@
-﻿namespace Hangerd.Mongodb
-{
-	using Hangerd.Components;
+﻿using Hangerd.Components;
 
+namespace Hangerd.Mongodb
+{
 	public class MongodbConfig
 	{
 		public string MongodbServiceAddress { get; set; }

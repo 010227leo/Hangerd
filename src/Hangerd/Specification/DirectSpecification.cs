@@ -1,9 +1,9 @@
-﻿namespace Hangerd.Specification
-{
-	using System;
-	using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 
-    /// <summary>
+namespace Hangerd.Specification
+{
+	/// <summary>
     /// A Direct Specification is a simple implementation
     /// of specification that acquire this from a lambda expression
     /// in  constructor
@@ -24,9 +24,7 @@
 		public DirectSpecification(Expression<Func<T, bool>> matchingCriteria)
         {
 			if (matchingCriteria == null)
-			{
 				throw new ArgumentNullException("matchingCriteria");
-			}
 
             _matchingCriteria = matchingCriteria;
         }

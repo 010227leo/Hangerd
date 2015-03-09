@@ -1,7 +1,7 @@
-﻿namespace Hangerd.Utility.Generator
-{
-	using System;
+﻿using System;
 
+namespace Hangerd.Utility.Generator
+{
 	public class CodeGenerator
 	{
 		private static readonly char[] _mixedClear = { 
@@ -44,9 +44,7 @@
 		public static string Create(int length, CharacterType type = CharacterType.MixedClear)
 		{
 			if (length < 1 || length > 16)
-			{
 				throw new ArgumentOutOfRangeException("length");
-			}
 
 			char[] source;
 
@@ -73,9 +71,7 @@
 			var output = new char[length];
 
 			for (var i = 0; i < length; i++)
-			{
 				output[i] = source[sequence[i] % source.Length];
-			}
 
 			return new string(output);
 		}

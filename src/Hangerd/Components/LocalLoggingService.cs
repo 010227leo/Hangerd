@@ -1,11 +1,11 @@
-﻿namespace Hangerd.Components
-{
-	using System;
-	using System.IO;
-	using System.Text;
-	using System.Threading;
+﻿using System;
+using System.IO;
+using System.Text;
+using System.Threading;
 
-	public class LocalLoggingService
+namespace Hangerd.Components
+{
+	public static class LocalLoggingService
 	{
 		private const int _changePathInterval = 15*60*1000;
 		private static StreamWriter _streamWriter;
@@ -28,9 +28,7 @@
 		internal static void Close()
 		{
 			if (_streamWriter != null)
-			{
 				_streamWriter.Close();
-			}
 		}
 
 		private static void InitStreamWriter()
@@ -46,9 +44,7 @@
 			var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log");
 
 			if (!Directory.Exists(path))
-			{
 				Directory.CreateDirectory(path);
-			}
 
 			var file = string.Format("{0}.log", DateTime.Now.ToString("yyyyMMdd"));
 
@@ -78,9 +74,7 @@
 		public static void Exception(Exception exception)
 		{
 			if (exception == null)
-			{
 				return;
-			}
 
 			Exception(exception.Message);
 			Exception(exception.StackTrace);

@@ -1,14 +1,14 @@
-﻿namespace Hangerd.EntityFramework
-{
-	using Hangerd.Entity;
-	using Hangerd.Repository;
-	using Hangerd.Specification;
-	using System;
-	using System.Collections.Generic;
-	using System.Data.Entity;
-	using System.Linq;
-	using System.Linq.Expressions;
+﻿using Hangerd.Entity;
+using Hangerd.Repository;
+using Hangerd.Specification;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
 
+namespace Hangerd.EntityFramework
+{
 	public class EfRepository<TEntity> : IRepository<TEntity>
 		where TEntity : EntityBase
 	{
@@ -19,13 +19,9 @@
 			var repositoryContext = context as IEfRepositoryContext;
 
 			if (repositoryContext != null)
-			{
 				_context = repositoryContext;
-			}
 			else 
-			{
 				throw new ArgumentException("RepositoryContext is not IEFRepositoryContext");
-			}
 		}
 
 		private IDbSet<TEntity> GetSet()
@@ -35,13 +31,9 @@
 
 		public virtual TEntity Get(string id, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)
 		{
-			if (!string.IsNullOrWhiteSpace(id))
-			{
-				return GetAll(tracking, eagerLoadingProperties)
-					.FirstOrDefault(e => e.Id == id);
-			}
-
-			return null;
+			return string.IsNullOrWhiteSpace(id)
+				? null
+				: GetAll(tracking, eagerLoadingProperties).FirstOrDefault(e => e.Id == id);
 		}
 
 		public virtual TEntity Get(ISpecification<TEntity> spec, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)
@@ -55,9 +47,7 @@
 			var dbset = tracking ? GetSet() : GetSet().AsNoTracking();
 
 			if (eagerLoadingProperties != null && eagerLoadingProperties.Length > 0)
-			{
 				dbset = eagerLoadingProperties.Aggregate(dbset, (current, property) => current.Include(property));
-			}
 
 			return dbset;
 		}
@@ -73,32 +63,24 @@
 			GetSet().Add(entity);
 
 			if (recordModify)
-			{
 				RecordModifiedProperties(entity);
-			}
 		}
 
 		public virtual void Update(TEntity entity, bool recordModify)
 		{
 			if (entity == null)
-			{
 				return;
-			}
 
 			_context.SetModified(entity);
 
 			if (recordModify)
-			{
 				RecordModifiedProperties(entity);
-			}
 		}
 
 		public virtual void Delete(TEntity entity)
 		{
 			if (entity == null)
-			{
 				return;
-			}
 
 			_context.Attach(entity);
 
@@ -110,9 +92,7 @@
 			var dbContext = _context as DbContext;
 
 			if (dbContext == null)
-			{
 				return;
-			}
 
 			entity.ModifiedPropertiesRecords.Clear();
 
@@ -127,12 +107,12 @@
 						var recordModifyAttribute = entityType.GetProperty(propertyName)
 							.GetCustomAttributes(false).OfType<RecordModifyAttribute>().SingleOrDefault();
 
-						if (recordModifyAttribute != null)
-						{
-							var property = dbEntityEntry.Property(propertyName);
+						if (recordModifyAttribute == null) 
+							continue;
 
-							entity.RecordModifiedProperty(propertyName, null, property.CurrentValue);
-						}
+						var property = dbEntityEntry.Property(propertyName);
+
+						entity.RecordModifiedProperty(propertyName, null, property.CurrentValue);
 					}
 					break;
 				case EntityState.Modified:
@@ -141,18 +121,16 @@
 						var recordModifyAttribute = entityType.GetProperty(propertyName)
 							.GetCustomAttributes(false).OfType<RecordModifyAttribute>().SingleOrDefault();
 
-						if (recordModifyAttribute != null)
-						{
-							var property = dbEntityEntry.Property(propertyName);
+						if (recordModifyAttribute == null) 
+							continue;
 
-							if ((property.OriginalValue == null && property.CurrentValue == null)
-							    || (property.OriginalValue != null && property.OriginalValue.Equals(property.CurrentValue)))
-							{
-								continue;
-							}
+						var property = dbEntityEntry.Property(propertyName);
 
-							entity.RecordModifiedProperty(propertyName, property.OriginalValue, property.CurrentValue);
-						}
+						if ((property.OriginalValue == null && property.CurrentValue == null)
+						    || (property.OriginalValue != null && property.OriginalValue.Equals(property.CurrentValue)))
+							continue;
+
+						entity.RecordModifiedProperty(propertyName, property.OriginalValue, property.CurrentValue);
 					}
 					break;
 			}

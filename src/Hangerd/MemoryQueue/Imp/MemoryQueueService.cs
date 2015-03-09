@@ -1,11 +1,11 @@
-﻿namespace Hangerd.MemoryQueue.Imp
-{
-	using Hangerd.Components;
-	using Hangerd.Extensions;
-	using System;
-	using System.Collections.Generic;
-	using System.Threading;
+﻿using Hangerd.Components;
+using Hangerd.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Threading;
 
+namespace Hangerd.MemoryQueue.Imp
+{
 	public class MemoryQueueService<T> : Disposable, IMemoryQueueService<T>
 	{
 		private readonly Queue<T> _memoryQueue = new Queue<T>();
@@ -24,7 +24,7 @@
 
 			InternalInit();
 
-			LocalLoggingService.Info("Init MemoryQueue '{0}'", configuration.MemoryQueueName);
+			LocalLoggingService.Info("Initialized memoryQueue '{0}'", configuration.MemoryQueueName);
 		}
 
 		public void Enqueue(T item)
@@ -56,20 +56,20 @@
 		{
 			lock (_memoryQueue)
 			{
-				if (_consumeThreads.Count == 0)
+				if (_consumeThreads.Count != 0) 
+					return;
+
+				for (var i = 0; i < _configuration.ConsumeThreadCount; i++)
 				{
-					for (var i = 0; i < _configuration.ConsumeThreadCount; i++)
+					var thread = new Thread(Consume)
 					{
-						var thread = new Thread(Consume)
-						{
-							Name = string.Format("{0}_{1}_{2}", "Hanger.MemoryQueue", _configuration.MemoryQueueName, i),
-							IsBackground = true,
-						};
+						Name = string.Format("{0}_{1}_{2}", "Hanger.MemoryQueue", _configuration.MemoryQueueName, i),
+						IsBackground = true,
+					};
 
-						thread.Start();
+					thread.Start();
 
-						_consumeThreads.Add(thread);
-					}
+					_consumeThreads.Add(thread);
 				}
 			}
 		}
@@ -88,9 +88,7 @@
 						var consumeCount = Math.Min(_memoryQueue.Count, _configuration.ConsumeItemCountInOneBatch);
 
 						for (var i = 0; i < consumeCount; i++)
-						{
 							consumeItems.Add(_memoryQueue.Dequeue());
-						}
 					}
 
 					if (consumeItems.Count > 0)

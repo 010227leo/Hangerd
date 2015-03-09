@@ -1,9 +1,8 @@
-﻿
+﻿using Hangerd.Entity;
+using Hangerd.Event;
+
 namespace Hangerd.Test.Event
 {
-	using Hangerd.Entity;
-	using Hangerd.Event;
-
 	public class TestEvent : DomainEvent
 	{
 		public TestEvent() { }

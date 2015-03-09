@@ -1,7 +1,7 @@
-﻿namespace Hangerd
-{
-	using System;
+﻿using System;
 
+namespace Hangerd
+{
 	public class HangerdException: Exception
     {
         public HangerdException() { }

@@ -1,10 +1,10 @@
-﻿namespace Hangerd.Test.MemoryQueue
-{
-	using Hangerd.Components;
-	using Hangerd.MemoryQueue;
-	using NUnit.Framework;
-	using System.Threading;
+﻿using Hangerd.Components;
+using Hangerd.MemoryQueue;
+using NUnit.Framework;
+using System.Threading;
 
+namespace Hangerd.Test.MemoryQueue
+{
 	public class MemoryQueueServiceTest : TestBase
 	{
 		[Test]
@@ -17,9 +17,7 @@
 			const int itemCount = 10;
 
 			for (var i = 0; i < itemCount; i++)
-			{
 				testQueueService.Enqueue(string.Format("test_{0}", i));
-			}
 
 			Thread.Sleep(1000);
 
@@ -39,14 +37,10 @@
 			const int itemCount2 = 20;
 
 			for (var i = 0; i < itemCount1; i++)
-			{
 				testQueueService1.Enqueue(string.Format("test_{0}", i));
-			}
 
 			for (var i = 0; i < itemCount2; i++)
-			{
 				testQueueService2.Enqueue(i);
-			}
 
 			Thread.Sleep(1000);
 

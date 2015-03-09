@@ -1,7 +1,7 @@
-﻿namespace Hangerd.Test
-{
-	using NUnit.Framework;
+﻿using NUnit.Framework;
 
+namespace Hangerd.Test
+{
 	public class TestBase
 	{
 		[SetUp]

@@ -1,17 +1,18 @@
-﻿namespace Hangerd.Mvc
-{
-	using Hangerd.Bootstrapper;
-	using Hangerd.Extensions;
-	using Hangerd.Mvc.Attributes;
-	using Hangerd.Utility;
-	using Microsoft.Practices.Unity;
-	using System.Linq;
-	using System.Web;
-	using System.Web.Mvc;
+﻿using Hangerd.Bootstrapper;
+using Hangerd.Extensions;
+using Hangerd.Mvc.Attributes;
+using Hangerd.Utility;
+using Microsoft.Practices.Unity;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 
+namespace Hangerd.Mvc
+{
 	public class RegisterServiceTask : RegisterServiceBootstrapperTask
 	{
-		public RegisterServiceTask(IUnityContainer container) : base(container) { }
+		public RegisterServiceTask(IUnityContainer container) : base(container) 
+		{ }
 
 		public override int Order
 		{
@@ -21,9 +22,7 @@
 		public override void Execute()
 		{
 			if (HttpContext.Current == null)
-			{
 				return;
-			}
 
 			RegisterControllers();
 

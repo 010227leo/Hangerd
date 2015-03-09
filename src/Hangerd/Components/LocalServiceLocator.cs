@@ -1,10 +1,10 @@
-﻿namespace Hangerd.Components
-{
-	using Microsoft.Practices.Unity;
-	using System;
-	using System.Collections.Generic;
+﻿using Microsoft.Practices.Unity;
+using System;
+using System.Collections.Generic;
 
-	public class LocalServiceLocator
+namespace Hangerd.Components
+{
+	public static class LocalServiceLocator
 	{
 		public static T GetService<T>()
 		{
