@@ -10,17 +10,10 @@ namespace Hangerd.Mvc.Attributes
 		private readonly string _loginController;
 		private readonly string _loginAction;
 		private readonly string _loginArea;
-		private string _defaultAjaxResult = string.Empty;
 
 		public bool Ajax { get; set; }
-
 		public bool JumpBack { get; set; }
-
-		public string DefaultAjaxResult
-		{
-			get { return _defaultAjaxResult; }
-			set { _defaultAjaxResult = value; }
-		}
+		public string DefaultAjaxResult { get; set; }
 
 		protected LoginAuthAttribute(string loginAction, string loginController, string loginArea = null)
 		{
@@ -49,15 +42,15 @@ namespace Hangerd.Mvc.Attributes
 			return LoginHelper.IsLogin();
 		}
 
-		protected void RedirectToLoginPage(AuthorizationContext filterContext)
+		protected virtual void RedirectToLoginPage(AuthorizationContext filterContext)
 		{
-			var routeValue = new RouteValueDictionary 
-			{ 
-				{ "Controller", _loginController }, 
-				{ "Action", _loginAction }
+			var routeValue = new RouteValueDictionary
+			{
+				{"Controller", _loginController},
+				{"Action", _loginAction}
 			};
 
-			if (!string.IsNullOrWhiteSpace(_loginArea))
+			if (_loginArea != null)
 				routeValue.Add("Area", _loginArea);
 
 			if (JumpBack)
@@ -66,14 +59,14 @@ namespace Hangerd.Mvc.Attributes
 			filterContext.Result = new RedirectToRouteResult(routeValue);
 		}
 
-		protected void ResponseDefaultAjaxResult(AuthorizationContext filterContext)
+		protected virtual void ResponseDefaultAjaxResult(AuthorizationContext filterContext)
 		{
-			filterContext.Result = new ContentResult { Content = DefaultAjaxResult };
+			filterContext.Result = new ContentResult {Content = DefaultAjaxResult ?? string.Empty};
 		}
 
 		protected void ResponseViewResult(AuthorizationContext filterContext, string viewName)
 		{
-			filterContext.Result = new ViewResult { ViewName = viewName };
+			filterContext.Result = new ViewResult {ViewName = viewName};
 		}
 	}
 }
