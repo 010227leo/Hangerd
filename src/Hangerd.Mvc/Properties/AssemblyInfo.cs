@@ -2,11 +2,11 @@
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Hangerd.Mvc")]
-[assembly: AssemblyDescription("Hangerd.Mvc")]
+[assembly: AssemblyDescription("Simple and useful")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("010227leo@gmail.com")]
+[assembly: AssemblyCompany("leo010227@outlook.com")]
 [assembly: AssemblyProduct("Hangerd.Mvc")]
-[assembly: AssemblyCopyright("Copyright © l3oz 2014")]
+[assembly: AssemblyCopyright("Copyright © l3oz 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

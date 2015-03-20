@@ -7,8 +7,9 @@ namespace Hangerd.Mongodb
 {
 	public class RegisterServiceTask : RegisterServiceBootstrapperTask
 	{
-		public RegisterServiceTask(IUnityContainer container) : base(container) 
-		{ }
+		public RegisterServiceTask(IUnityContainer container) : base(container)
+		{
+		}
 
 		public override int Order
 		{

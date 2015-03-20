@@ -2,11 +2,11 @@
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Hangerd.Mongodb")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Simple and useful")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("leo010227@outlook.com")]
 [assembly: AssemblyProduct("Hangerd.Mongodb")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2014")]
+[assembly: AssemblyCopyright("Copyright © l3oz 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
