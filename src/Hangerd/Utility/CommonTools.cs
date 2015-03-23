@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Data;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -54,9 +55,14 @@ namespace Hangerd.Utility
 			return output;
 		}
 
-		public static string GetEnumDescription(Enum value)
+		public static string GetEnumDescription(object value)
 		{
-			var field = value.GetType().GetField(value.ToString());
+			var enumType = value.GetType();
+
+			if (!enumType.IsEnum)
+				return string.Empty;
+
+			var field = enumType.GetField(value.ToString());
 
 			if (field == null)
 				return string.Empty;
@@ -64,6 +70,17 @@ namespace Hangerd.Utility
 			var attributes = field.GetCustomAttributes(typeof(DescriptionAttribute), false);
 
 			return attributes.Length > 0 ? ((DescriptionAttribute)attributes[0]).Description : string.Empty;
+		}
+
+		public static void ForEachEnum(Type enumType, Action<object> action)
+		{
+			if (!enumType.IsEnum)
+				return;
+
+			var values = Enum.GetValues(enumType);
+
+			foreach (var value in values)
+				action(value);
 		}
 	}
 }

@@ -5,20 +5,35 @@ namespace Hangerd.Test.Utility
 {
 	public class CommonToolsTest
 	{
-		enum TestEnum
+		private enum TestEnum
 		{
-			[System.ComponentModel.Description("FirstDayOfWeek")]
-			Sunday
+			[System.ComponentModel.Description("Enum1")] Enum1,
+			[System.ComponentModel.Description("Enum2")] Enum2,
+			[System.ComponentModel.Description("Enum3")] Enum3
 		}
 
 		[Test]
 		public void GetDescriptionTest()
 		{
-			const TestEnum sunday = TestEnum.Sunday;
 
-			var description = CommonTools.GetEnumDescription(sunday);
+			const TestEnum testEnum = TestEnum.Enum3;
 
-			Assert.AreEqual("FirstDayOfWeek", description);
+			var description = CommonTools.GetEnumDescription(testEnum);
+
+			Assert.AreEqual("Enum3", description);
+		}
+
+		[Test]
+		public void ForEachEnumTest()
+		{
+			var enumCount = 0;
+
+			CommonTools.ForEachEnum(typeof(TestEnum), value =>
+			{
+				enumCount++;
+			});
+
+			Assert.AreEqual(3, enumCount);
 		}
 
 		[Test]
