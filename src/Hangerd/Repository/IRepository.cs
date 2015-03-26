@@ -18,9 +18,9 @@ namespace Hangerd.Repository
 
 		IQueryable<TEntity> GetAll(ISpecification<TEntity> spec, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties);
 
-		void Add(TEntity entity, bool recordModify);
+		void Add(TEntity entity, bool recordModify = false);
 
-		void Update(TEntity entity, bool recordModify);
+		void Update(TEntity entity, bool recordModify = false);
 
 		void Delete(TEntity entity);
 

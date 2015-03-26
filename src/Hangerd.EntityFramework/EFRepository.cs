@@ -58,7 +58,7 @@ namespace Hangerd.EntityFramework
 				.Where(spec.SatisfiedBy());
 		}
 
-		public virtual void Add(TEntity entity, bool recordModify)
+		public virtual void Add(TEntity entity, bool recordModify = false)
 		{
 			GetSet().Add(entity);
 
@@ -66,7 +66,7 @@ namespace Hangerd.EntityFramework
 				RecordModifiedProperties(entity);
 		}
 
-		public virtual void Update(TEntity entity, bool recordModify)
+		public virtual void Update(TEntity entity, bool recordModify = false)
 		{
 			if (entity == null)
 				return;

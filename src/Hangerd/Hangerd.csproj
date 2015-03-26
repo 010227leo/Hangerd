@@ -73,6 +73,7 @@
     <Compile Include="Entity\IValidatable.cs" />
     <Compile Include="Entity\ModifiedProperty.cs" />
     <Compile Include="Entity\RecordModifyAttribute.cs" />
+    <Compile Include="Entity\ValueObjectBase.cs" />
     <Compile Include="Event\DomainEvent.cs" />
     <Compile Include="Event\Bus\DefaultEventBus.cs" />
     <Compile Include="Event\IDomainEvent.cs" />
