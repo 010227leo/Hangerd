@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 namespace Hangerd.Entity
 {
+	[Serializable]
 	public abstract class EntityBase
 	{
 		private readonly Dictionary<string, ModifiedProperty> _modifiedPropertitiesRecords = new Dictionary<string, ModifiedProperty>();
-		private int? _requestedHashCode;
 
 		public string Id { get; private set; }
 
@@ -61,10 +61,7 @@ namespace Hangerd.Entity
 			if (IsTransient())
 				return base.GetHashCode();
 
-			if (!_requestedHashCode.HasValue)
-				_requestedHashCode = Id.GetHashCode() ^ 31;
-
-			return _requestedHashCode.Value;
+			return Id.GetHashCode() ^ 31;
 		}
 
 		public static bool operator ==(EntityBase left, EntityBase right)

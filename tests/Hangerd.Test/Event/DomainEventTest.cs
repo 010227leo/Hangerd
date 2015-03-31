@@ -1,5 +1,6 @@
 ﻿using Hangerd.Event;
 using Hangerd.Extensions;
+using Hangerd.Test.Entity;
 using NUnit.Framework;
 
 namespace Hangerd.Test.Event
