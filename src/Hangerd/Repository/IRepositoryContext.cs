@@ -1,4 +1,6 @@
 ﻿namespace Hangerd.Repository
 {
-	public interface IRepositoryContext : IUnitOfWork { }
+	public interface IRepositoryContext : IUnitOfWork
+	{
+	}
 }

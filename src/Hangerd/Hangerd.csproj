@@ -92,7 +92,6 @@
     <Compile Include="HangerdResult.cs" />
     <Compile Include="RegisterServiceTask.cs" />
     <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Repository\RepositoryFactory.cs" />
     <Compile Include="Specification\AndSpecification.cs" />
     <Compile Include="Specification\CompositeSpecification.cs" />
     <Compile Include="Specification\DirectSpecification.cs" />

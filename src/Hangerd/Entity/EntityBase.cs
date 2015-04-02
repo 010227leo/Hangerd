@@ -9,7 +9,7 @@ namespace Hangerd.Entity
 	{
 		private readonly Dictionary<string, ModifiedProperty> _modifiedPropertitiesRecords = new Dictionary<string, ModifiedProperty>();
 
-		public string Id { get; private set; }
+		public string Id { get; protected set; }
 
 		public DateTime LastModified { get; set; }
 
