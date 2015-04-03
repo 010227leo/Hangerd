@@ -2,11 +2,11 @@
 <package> 
   <metadata> 
     <id>Hangerd</id> 
-    <version>1.0.8</version> 
+    <version>1.0.9</version> 
     <title>Hangerd</title> 
     <authors>l3oz</authors> 
     <projectUrl>https://github.com/010227leo/Hangerd</projectUrl> 
-    <description>Hangerd v1.0.8</description>
+    <description>Hangerd v1.0.9</description>
 		<dependencies>
 			<dependency id="Unity" version="3.5.1404.0" />
 			<dependency id="Newtonsoft.Json" version="6.0.1" />

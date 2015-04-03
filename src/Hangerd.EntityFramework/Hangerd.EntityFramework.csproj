@@ -64,6 +64,7 @@
     <Compile Include="EfRepository.cs" />
     <Compile Include="EfRepositoryContext.cs" />
     <Compile Include="IEfRepositoryContext.cs" />
+    <Compile Include="EfRepositoryFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hangerd\Hangerd.csproj">
