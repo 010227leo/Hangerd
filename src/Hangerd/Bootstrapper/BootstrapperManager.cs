@@ -34,7 +34,7 @@ namespace Hangerd.Bootstrapper
 				}
 				catch (Exception ex)
 				{
-					LocalLoggingService.Exception("Bootstrapper execute error '{0}'，Message：{1}", task.GetType().FullName, ex.ToString());
+					LocalLoggingService.Exception("Bootstrapper execute error '{0}'，Message:{1}", task.GetType().FullName, ex.ToString());
 				}
 			});
 		}
@@ -51,7 +51,7 @@ namespace Hangerd.Bootstrapper
 				}
 				catch (Exception ex)
 				{
-					LocalLoggingService.Exception("Bootstrapper dispose error '{0}'，Message：{1}", task.GetType().FullName, ex.ToString());
+					LocalLoggingService.Exception("Bootstrapper dispose error '{0}'，Message:{1}", task.GetType().FullName, ex.ToString());
 				}
 			});
 		}

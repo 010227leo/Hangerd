@@ -7,13 +7,13 @@ namespace Hangerd.Utility
 {
 	public static class CryptoHelper
 	{
-		private const string _iv = "#kRz4rK^Z#kLMgQ^!ZHsY0u6";
-		private const string _key = "S()%s@z^";
+		private const string Iv = "#kRz4rK^Z#kLMgQ^!ZHsY0u6";
+		private const string Key = "S()%s@z^";
 
 		public static string Encrypt(string input)
 		{
-			var btKey = Encoding.Default.GetBytes(_key);
-			var btIv = Encoding.Default.GetBytes(_iv);
+			var btKey = Encoding.Default.GetBytes(Key);
+			var btIv = Encoding.Default.GetBytes(Iv);
 			var des = new DESCryptoServiceProvider();
 
 			using (var ms = new MemoryStream())
@@ -32,8 +32,8 @@ namespace Hangerd.Utility
 
 		public static string Decrypt(string input)
 		{
-			var btKey = Encoding.Default.GetBytes(_key);
-			var btIv = Encoding.Default.GetBytes(_iv);
+			var btKey = Encoding.Default.GetBytes(Key);
+			var btIv = Encoding.Default.GetBytes(Iv);
 			var des = new DESCryptoServiceProvider();
 
 			using (var ms = new MemoryStream())

@@ -5,11 +5,11 @@ namespace Hangerd.Caching
 {
 	public static class CacheManager
 	{
-		private static readonly Lazy<ICacheProvider> _cacheProvider = new Lazy<ICacheProvider>(LocalServiceLocator.GetService<ICacheProvider>);
+		private static readonly Lazy<ICacheProvider> Provider = new Lazy<ICacheProvider>(LocalServiceLocator.GetService<ICacheProvider>);
 
 		private static ICacheProvider CacheProvider
 		{
-			get { return _cacheProvider.Value; }
+			get { return Provider.Value; }
 		}
 
 		public static TEntity Get<TEntity>(bool fromCache, string key, TimeSpan cacheTime, Func<TEntity> getItem)

@@ -5,41 +5,34 @@ namespace Hangerd.MemoryQueue
 {
 	public class MemoryQueueServiceConfiguration<T>
 	{
+		private int _consumeThreadCount;
+		private int _consumeItemCountInOneBatch;
+
 		public string MemoryQueueName { get; set; }
 
 		public Action<IList<T>> ConsumeAction { get; set; }
 
 		public int ConsumeIntervalMilliseconds { get; set; }
 
-		private int _consumeThreadCount;
-
 		public int ConsumeThreadCount
 		{
-			get
-			{
-				return _consumeThreadCount;
-			}
+			get { return _consumeThreadCount; }
 			set
 			{
 				if (value <= 0)
-					throw new ArgumentException("Invalid argument!", "ConsumeThreadCount");
+					throw new Exception("ConsumeThreadCount can not less than 0.");
 
 				_consumeThreadCount = value;
 			}
 		}
 
-		private int _consumeItemCountInOneBatch;
-
 		public int ConsumeItemCountInOneBatch
 		{
-			get
-			{
-				return _consumeItemCountInOneBatch;
-			}
+			get { return _consumeItemCountInOneBatch; }
 			set
 			{
 				if (value <= 0)
-					throw new ArgumentException("Invalid argument!", "ConsumeItemCountInOneBatch");
+					throw new Exception("ConsumeItemCountInOneBatch can not less than 0.");
 
 				_consumeItemCountInOneBatch = value;
 			}

@@ -13,7 +13,7 @@ namespace Hangerd.Event.Bus
 
 		static DefaultEventBus()
 		{
-			var concreteTypes = BuildManagerWrapper.Current.ConcreteTypes;
+			var concreteTypes = BuildManagerWrapper.Current.ConcreteTypes.ToList();
 			var eventTypes = concreteTypes.Where(t => typeof (IEvent).IsAssignableFrom(t));
 
 			foreach (var eventType in eventTypes)
@@ -23,10 +23,8 @@ namespace Hangerd.Event.Bus
 				var handlerTypes = concreteTypes
 					.Where(t => genericHandlerType.IsAssignableFrom(t));
 
-				foreach (var handlerType in handlerTypes)
+				foreach (var handler in handlerTypes.Select(Activator.CreateInstance))
 				{
-					var handler = Activator.CreateInstance(handlerType);
-
 					if (_handlers.ContainsKey(eventType))
 					{
 						var registeredHandlers = _handlers[eventType];
@@ -38,12 +36,12 @@ namespace Hangerd.Event.Bus
 						}
 						else
 						{
-							_handlers.Add(eventType, new List<object> {handler});
+							_handlers.Add(eventType, new List<object> { handler });
 						}
 					}
 					else
 					{
-						_handlers.Add(eventType, new List<object> {handler});
+						_handlers.Add(eventType, new List<object> { handler });
 					}
 				}
 			}

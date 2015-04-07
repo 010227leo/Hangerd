@@ -17,7 +17,8 @@ namespace Hangerd.Test.Components
 		{
 			var config = LocalConfigService.GetConfig(new TestConfig
 			{
-				Key = "010227"
+				Key = "010227",
+				CacheMinutes = 27
 			});
 
 			Assert.AreEqual("010227", config.Key);

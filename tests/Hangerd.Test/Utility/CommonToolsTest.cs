@@ -7,20 +7,18 @@ namespace Hangerd.Test.Utility
 	{
 		private enum TestEnum
 		{
-			[System.ComponentModel.Description("Enum1")] Enum1,
-			[System.ComponentModel.Description("Enum2")] Enum2,
-			[System.ComponentModel.Description("Enum3")] Enum3
+			[System.ComponentModel.Description("Item1")] Item1
 		}
 
 		[Test]
 		public void GetDescriptionTest()
 		{
 
-			const TestEnum testEnum = TestEnum.Enum3;
+			const TestEnum testEnum = TestEnum.Item1;
 
 			var description = CommonTools.GetEnumDescription(testEnum);
 
-			Assert.AreEqual("Enum3", description);
+			Assert.AreEqual("Item1", description);
 		}
 
 		[Test]
@@ -33,7 +31,7 @@ namespace Hangerd.Test.Utility
 				enumCount++;
 			});
 
-			Assert.AreEqual(3, enumCount);
+			Assert.AreEqual(1, enumCount);
 		}
 
 		[Test]

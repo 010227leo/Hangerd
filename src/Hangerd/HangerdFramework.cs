@@ -35,7 +35,7 @@ namespace Hangerd
 			_bootstrapperManager.Dispose();
 
 			LocalLoggingService.Info("Hangerd dispose complete!");
-			LocalLoggingService.Close();
+			LocalLoggingService.Dispose();
 		}
 	}
 }

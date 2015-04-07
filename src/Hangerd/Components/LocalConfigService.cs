@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -9,13 +9,12 @@ namespace Hangerd.Components
 {
 	public static class LocalConfigService
 	{
-		private static readonly string _localConfigDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Config");
-		private static readonly Dictionary<string, object> _configCache = new Dictionary<string, object>();
-		private static readonly object _locker = new object();
+		private static readonly string _localConfigDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config");
+		private static readonly ConcurrentDictionary<string, object> _configCache = new ConcurrentDictionary<string, object>();
 
 		public static T GetConfig<T>(T defaultValue)
 		{
-			var fileName = string.Format("{0}.config", typeof(T).Name);
+			var fileName = string.Format("{0}.config", typeof (T).Name);
 
 			return GetConfig(fileName, defaultValue);
 		}
@@ -27,51 +26,45 @@ namespace Hangerd.Components
 			var fileFullName = GetConfigFileFullName(fileName);
 
 			if (_configCache.TryGetValue(fileFullName, out instance))
-				return (T)instance;
+				return (T) instance;
 
-			lock (_locker)
+			if (!File.Exists(fileFullName))
 			{
-				if (_configCache.TryGetValue(fileFullName, out instance))
-					return (T)instance;
+				TryCreateConfig(fileName, defaultValue);
 
-				if (!File.Exists(fileFullName))
-				{
-					TryCreateConfig(fileName, defaultValue);
+				return defaultValue;
+			}
 
-					return defaultValue;
-				}
+			var doc = new XmlDocument();
 
-				var doc = new XmlDocument();
+			try
+			{
+				doc.Load(fileFullName);
+			}
+			catch (Exception ex)
+			{
+				LocalLoggingService.Exception("Failed to load config file {0}:{1}", fileFullName, ex.Message);
 
+				return defaultValue;
+			}
+
+			var xmlSerializer = new XmlSerializer(typeof (T));
+
+			using (var sr = new StringReader(doc.OuterXml))
+			{
 				try
 				{
-					doc.Load(fileFullName);
+					instance = (T) xmlSerializer.Deserialize(sr);
+
+					_configCache.TryAdd(fileFullName, instance);
+
+					return (T) instance;
 				}
 				catch (Exception ex)
 				{
-					LocalLoggingService.Exception("LocalConfigService error: failed to load config file {0}：{1}", fileFullName, ex.Message);
+					LocalLoggingService.Exception("Failed to deserialize type {0}:{1}", typeof (T).Name, ex.Message);
 
 					return defaultValue;
-				}
-
-				var xmlSerializer = new XmlSerializer(typeof(T));
-
-				using (var sr = new StringReader(doc.OuterXml))
-				{
-					try
-					{
-						instance = (T)xmlSerializer.Deserialize(sr);
-
-						_configCache.Add(fileFullName, instance);
-
-						return (T)instance;
-					}
-					catch (Exception ex)
-					{
-						LocalLoggingService.Exception("LocalConfigService error: failed to deserialize type {0} : {1}", typeof(T).Name, ex.Message);
-
-						return defaultValue;
-					}
 				}
 			}
 		}
@@ -95,7 +88,7 @@ namespace Hangerd.Components
 				Indent = true
 			};
 
-			var xs = new XmlSerializer(typeof(T), (string)null);
+			var xs = new XmlSerializer(typeof (T), (string) null);
 
 			using (var fs = new FileStream(fileFullName, FileMode.Create))
 			{
@@ -107,7 +100,7 @@ namespace Hangerd.Components
 					}
 					catch (Exception ex)
 					{
-						LocalLoggingService.Exception("LocalConfigService error: failed to serialize type {0} : {1}", typeof(T).Name, ex.Message);
+						LocalLoggingService.Exception("Failed to serialize type {0}:{1}", typeof (T).Name, ex.Message);
 					}
 				}
 			}
@@ -126,15 +119,15 @@ namespace Hangerd.Components
 			}
 			catch (Exception ex)
 			{
-				LocalLoggingService.Exception("LocalConfigService error: failed to create directory {0}：{1}", _localConfigDirectory, ex.Message);
+				LocalLoggingService.Exception("Failed to create directory {0}:{1}", _localConfigDirectory, ex.Message);
 
 				return false;
 			}
 		}
 
-		private static string GetConfigFileFullName(string fielName)
+		private static string GetConfigFileFullName(string fileName)
 		{
-			return Path.Combine(_localConfigDirectory, fielName);
+			return Path.Combine(_localConfigDirectory, fileName);
 		}
 	}
 }

@@ -5,43 +5,54 @@ using System.Threading;
 
 namespace Hangerd.Components
 {
-	public static class LocalLoggingService
+	public class LocalLoggingService
 	{
-		private const int _changePathInterval = 15*60*1000;
-		private static StreamWriter _streamWriter;
+		private const int ChangePathInterval = 15 * 60 * 1000;
 		private static readonly object _locker = new object();
+		private static Timer _timer;
+		private static StreamWriter _streamWriter;
 
 		internal static void Init()
 		{
-			new Timer(state =>
+			_timer = new Timer(state =>
 			{
-				lock (_locker)
-				{
-					Close();
-					InitStreamWriter();
-				}
-			}, null, _changePathInterval, _changePathInterval);
+				CloseStreamWriter();
+				InitStreamWriter();
+			}, null, ChangePathInterval, ChangePathInterval);
 
 			InitStreamWriter();
 		}
 
-		internal static void Close()
+		internal static void Dispose()
 		{
-			if (_streamWriter != null)
-				_streamWriter.Close();
+			CloseStreamWriter();
+
+			_timer.Dispose();
+		}
+
+		private static void CloseStreamWriter()
+		{
+			lock (_locker)
+			{
+				if (_streamWriter != null)
+					_streamWriter.Close();
+			}
 		}
 
 		private static void InitStreamWriter()
 		{
-			_streamWriter = new StreamWriter(GetLogFileName(), true, Encoding.UTF8, 1024)
+			lock (_locker)
 			{
-				AutoFlush = true
-			};
+				_streamWriter = new StreamWriter(GetLogFileName(), true, Encoding.UTF8, 1024)
+				{
+					AutoFlush = true
+				};
+			}
 		}
 
 		private static string GetLogFileName()
 		{
-			var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log");
+			var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log");
 
 			if (!Directory.Exists(path))
 				Directory.CreateDirectory(path);
@@ -104,6 +115,9 @@ namespace Hangerd.Components
 		{
 			lock (_locker)
 			{
+				if (_streamWriter == null)
+					throw new Exception("StreamWriter has not init.");
+
 				var log = string.Format("[{0}] @{1}: - {2}", logType, DateTime.Now.ToString("HH:mm:ss.ffff"), message);
 
 				_streamWriter.WriteLine(log);
@@ -116,9 +130,7 @@ namespace Hangerd.Components
 	public enum LogLevel
 	{
 		Info,
-
 		Debug,
-
 		Exception
 	}
 }

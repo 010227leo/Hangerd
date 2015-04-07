@@ -6,7 +6,7 @@ namespace Hangerd.Caching
 {
 	public class DefaultCacheProvider : Disposable, ICacheProvider
 	{
-		private static readonly ObjectCache _cache = MemoryCache.Default;
+		private readonly ObjectCache _cache = MemoryCache.Default;
 
 		public T Get<T>(string key)
 		{
