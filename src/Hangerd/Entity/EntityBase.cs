@@ -1,6 +1,6 @@
-﻿using Hangerd.Utility.Generator;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Hangerd.Utility.Generator;
 
 namespace Hangerd.Entity
 {

@@ -11,14 +11,12 @@ namespace Hangerd.Test.Components
 		{
 			HangerdFramework.Container.RegisterTypeAsPerRequest<ITestService, TestService>();
 
-			var testService1 = LocalServiceLocator.GetService<ITestService>();
+			var service1 = LocalServiceLocator.GetService<ITestService>();
+			var service2 = LocalServiceLocator.GetService<ITestService>();
 
-			Assert.IsNotNull(testService1);
-
-			var testService2 = LocalServiceLocator.GetService<ITestService>();
-
-			Assert.IsNotNull(testService2);
-			Assert.AreEqual(testService1.ServiceId, testService2.ServiceId);
+			Assert.IsNotNull(service1);
+			Assert.IsNotNull(service2);
+			Assert.AreEqual(service1, service2);
 		}
 	}
 }

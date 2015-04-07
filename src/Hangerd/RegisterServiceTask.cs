@@ -21,8 +21,9 @@ namespace Hangerd
 
 		public override void Execute()
 		{
-			_container.RegisterTypeAsSingleton<ICacheProvider, DefaultCacheProvider>();
-			_container.RegisterTypeAsPerRequest<IEventBus, DefaultEventBus>();
+			_container.RegisterTypeAsSingleton<ICacheProvider, MemoryCacheProvider>();
+			_container.RegisterTypeAsSingleton<IEventDispatcher, EventDispatcher>();
+			_container.RegisterTypeAsPerRequest<IEventBus, DirectEventBus>();
 			_container.RegisterType(typeof (IMemoryQueueService<>), typeof (MemoryQueueService<>));
 		}
 

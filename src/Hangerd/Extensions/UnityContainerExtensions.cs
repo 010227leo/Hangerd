@@ -1,7 +1,7 @@
-﻿using Hangerd.Components;
-using Microsoft.Practices.Unity;
-using System;
+﻿using System;
 using System.Linq;
+using Hangerd.Components;
+using Microsoft.Practices.Unity;
 
 namespace Hangerd.Extensions
 {

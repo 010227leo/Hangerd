@@ -1,6 +1,6 @@
-﻿using Microsoft.Practices.Unity;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Microsoft.Practices.Unity;
 
 namespace Hangerd.Components
 {

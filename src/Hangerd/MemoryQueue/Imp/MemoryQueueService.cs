@@ -1,8 +1,8 @@
-﻿using Hangerd.Components;
-using Hangerd.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using Hangerd.Components;
+using Hangerd.Extensions;
 
 namespace Hangerd.MemoryQueue.Imp
 {

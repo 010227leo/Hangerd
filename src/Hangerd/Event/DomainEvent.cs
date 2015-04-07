@@ -1,6 +1,6 @@
-﻿using Hangerd.Components;
+﻿using System;
+using Hangerd.Components;
 using Hangerd.Entity;
-using System;
 
 namespace Hangerd.Event
 {

@@ -1,10 +1,10 @@
-﻿using Hangerd.Extensions;
-using System;
+﻿using System;
 using System.Runtime.Caching;
+using Hangerd.Extensions;
 
 namespace Hangerd.Caching
 {
-	public class DefaultCacheProvider : Disposable, ICacheProvider
+	public class MemoryCacheProvider : Disposable, ICacheProvider
 	{
 		private readonly ObjectCache _cache = MemoryCache.Default;
 

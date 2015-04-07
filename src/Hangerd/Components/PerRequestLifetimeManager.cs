@@ -1,7 +1,7 @@
-﻿using Microsoft.Practices.Unity;
-using System;
+﻿using System;
 using System.Runtime.Remoting.Messaging;
 using System.Web;
+using Microsoft.Practices.Unity;
 
 namespace Hangerd.Components
 {

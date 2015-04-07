@@ -1,7 +1,7 @@
-﻿using Hangerd.Bootstrapper;
+﻿using System.Runtime.CompilerServices;
+using Hangerd.Bootstrapper;
 using Hangerd.Components;
 using Microsoft.Practices.Unity;
-using System.Runtime.CompilerServices;
 
 namespace Hangerd
 {

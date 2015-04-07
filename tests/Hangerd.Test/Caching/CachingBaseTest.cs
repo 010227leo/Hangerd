@@ -65,16 +65,5 @@ namespace Hangerd.Test.Caching
 			Assert.AreEqual("value", value);
 			Assert.IsNull(value1);
 		}
-
-		[Test]
-		public void CustomerCacheProviderTest()
-		{
-			HangerdFramework.Container.RegisterTypeAsSingleton<ICacheProvider, MyCacheProvider>();
-
-			var myCacheProvider = LocalServiceLocator.GetService<ICacheProvider>();
-
-			Assert.IsNotNull(myCacheProvider);
-			Assert.AreEqual(typeof(MyCacheProvider), myCacheProvider.GetType());
-		}
 	}
 }

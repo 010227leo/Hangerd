@@ -63,7 +63,7 @@
     <Compile Include="Bootstrapper\RegisterServiceBootstrapperTask.cs" />
     <Compile Include="Caching\CacheManager.cs" />
     <Compile Include="Caching\ICacheProvider.cs" />
-    <Compile Include="Caching\DefaultCacheProvider.cs" />
+    <Compile Include="Caching\MemoryCacheProvider.cs" />
     <Compile Include="Components\LocalConfigService.cs" />
     <Compile Include="Components\LocalLoggingService.cs" />
     <Compile Include="Components\LocalServiceLocator.cs" />
@@ -74,8 +74,10 @@
     <Compile Include="Entity\ModifiedProperty.cs" />
     <Compile Include="Entity\RecordModifyAttribute.cs" />
     <Compile Include="Entity\ValueObjectBase.cs" />
+    <Compile Include="Event\Bus\IEventDispatcher.cs" />
+    <Compile Include="Event\Bus\EventDispatcher.cs" />
     <Compile Include="Event\DomainEvent.cs" />
-    <Compile Include="Event\Bus\DefaultEventBus.cs" />
+    <Compile Include="Event\Bus\DirectEventBus.cs" />
     <Compile Include="Event\IDomainEvent.cs" />
     <Compile Include="Event\IEvent.cs" />
     <Compile Include="Event\IEventHandler.cs" />
