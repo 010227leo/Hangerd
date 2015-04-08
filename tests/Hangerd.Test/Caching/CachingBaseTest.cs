@@ -1,9 +1,7 @@
-﻿using Hangerd.Caching;
-using Hangerd.Components;
-using Hangerd.Extensions;
-using NUnit.Framework;
-using System;
+﻿using System;
 using System.Threading;
+using Hangerd.Caching;
+using NUnit.Framework;
 
 namespace Hangerd.Test.Caching
 {

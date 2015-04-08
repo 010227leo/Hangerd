@@ -35,19 +35,6 @@ namespace Hangerd.Test.Caching
 
 			Assert.IsNotNull(customerCacheProvider);
 			Assert.AreEqual(typeof (CustomerCacheProvider), customerCacheProvider.GetType());
-
-			try
-			{
-				const string key = "CustomerCacheProviderTest.Key";
-
-				CacheManager.SetOrUpdate(key, string.Empty, TimeSpan.FromDays(1));
-
-				Assert.Fail("Method should be not implemented.");
-			}
-			catch (NotImplementedException ex)
-			{
-				Assert.Pass(ex.Message);
-			}
 		}
 	}
 }
