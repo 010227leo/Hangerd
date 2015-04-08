@@ -6,7 +6,7 @@ using Hangerd.Utility;
 
 namespace Hangerd.Event.Bus
 {
-	public class EventDispatcher : IEventDispatcher
+	public class EventDispatcher : Disposable, IEventDispatcher
 	{
 		private readonly Dictionary<Type, Dictionary<Type, object>> _handlers =
 			new Dictionary<Type, Dictionary<Type, object>>();
@@ -37,7 +37,7 @@ namespace Hangerd.Event.Bus
 			where TEvent : class, IEvent
 			where TEventHandler : IEventHandler<TEvent>
 		{
-			var handler = Activator.CreateInstance(typeof(TEventHandler));
+			var handler = Activator.CreateInstance(typeof (TEventHandler));
 
 			RegisterHandler(typeof (TEvent), handler);
 		}
@@ -86,6 +86,11 @@ namespace Hangerd.Event.Bus
 						eventHandler.GetType().FullName, ex.Message);
 				}
 			}
+		}
+
+		protected override void InternalDispose()
+		{
+			Clear();
 		}
 	}
 }

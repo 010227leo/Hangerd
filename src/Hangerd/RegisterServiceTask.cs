@@ -30,6 +30,7 @@ namespace Hangerd
 		protected override void InternalDispose()
 		{
 			_container.Resolve<ICacheProvider>().Dispose();
+			_container.Resolve<IEventDispatcher>().Dispose();
 		}
 	}
 }
