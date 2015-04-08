@@ -1,24 +1,36 @@
-﻿using Hangerd.Utility;
+﻿using System;
+using Hangerd.Utility;
 using NUnit.Framework;
 
 namespace Hangerd.Test.Utility
 {
 	public class CommonToolsTest
 	{
+		[Flags]
 		private enum TestEnum
 		{
-			[System.ComponentModel.Description("Item1")] Item1
+			[System.ComponentModel.Description("Item1")] Item1 = 1,
+			[System.ComponentModel.Description("Item2")] Item2 = 2
 		}
 
 		[Test]
-		public void GetDescriptionTest()
+		public void GetEnumDescriptionTest()
 		{
-
 			const TestEnum testEnum = TestEnum.Item1;
 
 			var description = CommonTools.GetEnumDescription(testEnum);
 
 			Assert.AreEqual("Item1", description);
+		}
+
+		[Test]
+		public void GetMultipleEnumDescriptionTest()
+		{
+			const TestEnum testEnum = TestEnum.Item1 | TestEnum.Item2;
+
+			var description = CommonTools.GetEnumDescription(testEnum, '|');
+
+			Assert.AreEqual("Item1|Item2", description);
 		}
 
 		[Test]
@@ -31,7 +43,7 @@ namespace Hangerd.Test.Utility
 				enumCount++;
 			});
 
-			Assert.AreEqual(1, enumCount);
+			Assert.AreEqual(2, enumCount);
 		}
 
 		[Test]

@@ -54,21 +54,41 @@ namespace Hangerd.Utility
 			return output;
 		}
 
-		public static string GetEnumDescription(object value)
+		public static string GetEnumDescription(object value, char separator = ',')
 		{
 			var enumType = value.GetType();
 
 			if (!enumType.IsEnum)
 				return string.Empty;
 
+			var flagAttributes = enumType.GetCustomAttributes(typeof (FlagsAttribute), false);
+
+			if (flagAttributes.Length == 0)
+				return GetDescription(enumType, value);
+
+			//FlagsAttribute
+			var fields = enumType.GetEnumValues();
+			var descriptionBuilder = new StringBuilder();
+
+			foreach (var field in fields)
+			{
+				if (((int) value & (int) field) == (int) field)
+					descriptionBuilder.AppendFormat("{0}{1}", GetDescription(enumType, field), separator);
+			}
+
+			return descriptionBuilder.ToString().TrimEnd(separator);
+		}
+
+		private static string GetDescription(Type enumType, object value)
+		{
 			var field = enumType.GetField(value.ToString());
 
 			if (field == null)
 				return string.Empty;
 
-			var attributes = field.GetCustomAttributes(typeof(DescriptionAttribute), false);
+			var attributes = field.GetCustomAttributes(typeof (DescriptionAttribute), false);
 
-			return attributes.Length > 0 ? ((DescriptionAttribute)attributes[0]).Description : string.Empty;
+			return attributes.Length > 0 ? ((DescriptionAttribute) attributes[0]).Description : string.Empty;
 		}
 
 		public static void ForEachEnum(Type enumType, Action<object> action)
