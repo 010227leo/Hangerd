@@ -119,7 +119,9 @@
     <Compile Include="Utility\LambdaComparer.cs" />
     <Compile Include="Components\PerRequestLifetimeManager.cs" />
     <Compile Include="Utility\CommonTools.cs" />
-    <Compile Include="Utility\ValidationHelper.cs" />
+    <Compile Include="Validation\InputValidator.cs" />
+    <Compile Include="Validation\Requires.cs" />
+    <Compile Include="Validation\ValidatedNotNullAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Hangerd.nuspec" />

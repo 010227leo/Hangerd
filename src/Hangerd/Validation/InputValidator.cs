@@ -1,8 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Hangerd.Utility
+namespace Hangerd.Validation
 {
-	public static class ValidationHelper
+	public static class InputValidator
 	{
 		public static bool IsIdentityNumber(string input)
 		{

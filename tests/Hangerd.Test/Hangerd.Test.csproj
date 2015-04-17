@@ -71,7 +71,8 @@
     <Compile Include="TestService.cs" />
     <Compile Include="Utility\CryptoHelperTest.cs" />
     <Compile Include="Utility\CommonToolsTest.cs" />
-    <Compile Include="Utility\ValidationHelperTest.cs" />
+    <Compile Include="Validation\RequiresTest.cs" />
+    <Compile Include="Validation\InputValidatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Hangerd\Hangerd.csproj">
