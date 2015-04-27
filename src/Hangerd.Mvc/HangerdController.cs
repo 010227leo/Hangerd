@@ -20,6 +20,16 @@ namespace Hangerd.Mvc
 			return Content(string.Format("<script type='text/javascript'>{0}</script>", script));
 		}
 
+		protected ContentResult OperationJsonResult(HangerdResult<bool> result)
+		{
+			return OperationJsonResult(result.Value, result.Message);
+		}
+
+		protected ContentResult OperationJsonResult(bool success, string message)
+		{
+			return JsonContent(new { Success = success, Message = message });
+		}
+
 		protected ContentResult JsonContent(object obj)
 		{
 			var json = obj == null ? "null" : obj.ObjectToJson();
