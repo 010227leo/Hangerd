@@ -1,7 +1,7 @@
-﻿using Hangerd.Extensions;
-using System.Text;
+﻿using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Hangerd.Extensions;
 
 namespace Hangerd.Mvc
 {

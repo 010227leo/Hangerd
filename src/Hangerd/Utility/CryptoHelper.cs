@@ -53,9 +53,7 @@ namespace Hangerd.Utility
 		public static string GetMd5(string input)
 		{
 			var md5 = MD5.Create();
-			var inputBytes = Encoding.ASCII.GetBytes(input);
-			var hash = md5.ComputeHash(inputBytes);
-
+			var hash = md5.ComputeHash(Encoding.ASCII.GetBytes(input));
 			var md5Builder = new StringBuilder();
 
 			foreach (var t in hash)
@@ -67,9 +65,7 @@ namespace Hangerd.Utility
 		public static string GetSha1(string input)
 		{
 			var sha1 = SHA1.Create();
-			var inputBytes = Encoding.ASCII.GetBytes(input);
-			var hash = sha1.ComputeHash(inputBytes);
-
+			var hash = sha1.ComputeHash(Encoding.ASCII.GetBytes(input));
 			var sha1Builder = new StringBuilder();
 
 			foreach (var t in hash)

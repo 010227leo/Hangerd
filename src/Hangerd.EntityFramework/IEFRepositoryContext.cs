@@ -1,6 +1,6 @@
-﻿using Hangerd.Entity;
+﻿using System.Data.Entity;
+using Hangerd.Entity;
 using Hangerd.Repository;
-using System.Data.Entity;
 
 namespace Hangerd.EntityFramework
 {

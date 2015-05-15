@@ -12,11 +12,7 @@ namespace Hangerd.Specification
 
 		public override Expression<Func<T, bool>> SatisfiedBy()
 		{
-			const bool result = true;
-
-			Expression<Func<T, bool>> trueExpression = t => result;
-
-			return trueExpression;
+			return t => true;
 		}
 
 		#endregion

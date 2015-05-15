@@ -1,8 +1,8 @@
-﻿using Hangerd.Components;
-using Hangerd.MemoryQueue;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hangerd.Components;
+using Hangerd.MemoryQueue;
 
 namespace Hangerd.Mongodb.Imp
 {

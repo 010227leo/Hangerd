@@ -1,7 +1,7 @@
-﻿using Hangerd.Mvc.Authentication;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Hangerd.Mvc.Authentication;
 
 namespace Hangerd.Mvc.Attributes
 {
@@ -12,7 +12,9 @@ namespace Hangerd.Mvc.Attributes
 		private readonly string _loginArea;
 
 		public bool Ajax { get; set; }
+
 		public bool JumpBack { get; set; }
+
 		public string DefaultAjaxResult { get; set; }
 
 		protected LoginAuthAttribute(string loginAction, string loginController, string loginArea = null)

@@ -1,8 +1,8 @@
-﻿using Hangerd.Specification;
-using NUnit.Framework;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Hangerd.Specification;
 using Hangerd.Test.Entity;
+using NUnit.Framework;
 
 namespace Hangerd.Test.Specification
 {

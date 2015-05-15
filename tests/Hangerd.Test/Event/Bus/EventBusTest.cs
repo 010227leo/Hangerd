@@ -1,8 +1,8 @@
-﻿using Hangerd.Components;
+﻿using System.Collections.Generic;
+using Hangerd.Components;
+using Hangerd.Event;
 using Hangerd.Event.Bus;
 using NUnit.Framework;
-using System.Collections.Generic;
-using Hangerd.Event;
 
 namespace Hangerd.Test.Event.Bus
 {

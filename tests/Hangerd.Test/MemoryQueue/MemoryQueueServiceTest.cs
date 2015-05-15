@@ -1,7 +1,7 @@
-﻿using Hangerd.Components;
+﻿using System.Threading;
+using Hangerd.Components;
 using Hangerd.MemoryQueue;
 using NUnit.Framework;
-using System.Threading;
 
 namespace Hangerd.Test.MemoryQueue
 {

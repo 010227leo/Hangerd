@@ -21,16 +21,9 @@ namespace Hangerd.Mvc.Authentication
 			if (HttpContext.Current == null)
 				return;
 
-			var ticket = new FormsAuthenticationTicket(
-				1,
-				userId,
-				DateTime.Now,
-				expiration,
-				true,
-				userData,
-				FormsAuthentication.FormsCookiePath);
-
-			var encTicket = FormsAuthentication.Encrypt(ticket);
+			var encTicket = FormsAuthentication.Encrypt(
+				new FormsAuthenticationTicket(
+					1, userId, DateTime.Now, expiration, true, userData, FormsAuthentication.FormsCookiePath));
 
 			HttpContext.Current.Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
 		}

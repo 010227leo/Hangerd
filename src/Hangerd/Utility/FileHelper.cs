@@ -102,9 +102,7 @@ namespace Hangerd.Utility
 			graphics.SmoothingMode = SmoothingMode.HighQuality;
 			graphics.Clear(Color.Transparent);
 			graphics.DrawImage(originalImage, 
-				new Rectangle(0, 0, towidth, toheight), 
-				new Rectangle(x, y, ow, oh),
-				GraphicsUnit.Pixel);
+				new Rectangle(0, 0, towidth, toheight), new Rectangle(x, y, ow, oh), GraphicsUnit.Pixel);
 
 			try
 			{
