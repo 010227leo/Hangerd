@@ -1,76 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Hangerd.Utility.Generator
 {
 	public class CodeGenerator
 	{
-		private static readonly Dictionary<CharacterType, char[]> CodeSet = new Dictionary<CharacterType, char[]>
+		private static readonly Dictionary<CharacterType, string> CodeSet = new Dictionary<CharacterType, string>
 		{
-			{
-				CharacterType.MixedClear, new[]
-				{
-					'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-					'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V',
-					'W', 'X', 'Y', 'Z', '2', '3', '4', '5', '6', '7',
-					'8', '9'
-				}
-			},
-			{
-				CharacterType.MixedAll, new[]
-				{
-					'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-					'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-					'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D',
-					'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-					'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
-					'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7',
-					'8', '9',
-				}
-			},
-			{
-				CharacterType.LettersUpper, new[]
-				{
-					'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-					'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
-					'U', 'V', 'W', 'X', 'Y', 'Z'
-				}
-			},
-			{
-				CharacterType.LettersLower, new[]
-				{
-					'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-					'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-					'u', 'v', 'w', 'x', 'y', 'z'
-				}
-			},
-			{
-				CharacterType.Number, new[]
-				{
-					'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
-				}
-			}
+			{ CharacterType.MixedClear, "ABCDEFGHIJKLMNPQRSTVWXYZ23456789" },
+			{ CharacterType.MixedAll, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" },
+			{ CharacterType.LettersUpper, "ABCDEFGHIJKLMNOPQRSTUVWXYZ" },
+			{ CharacterType.LettersLower, "abcdefghijklmnopqrstuvwxyz" },
+			{ CharacterType.Number, "0123456789" }
 		};
 
 		public static string Create(int length, CharacterType type = CharacterType.MixedClear)
 		{
-			var source = CodeSet[type];
-			var sequence = Guid.NewGuid().ToByteArray();
-			var output = new char[length];
-			var first16 = Math.Min(16, length);
+			return Create(length, CodeSet[type]);
+		}
 
-			for (var i = 0; i < first16; i++)
-				output[i] = source[sequence[i] % source.Length];
+		public static string Create(int length, string source)
+		{
+			if (string.IsNullOrWhiteSpace(source))
+				throw new ArgumentNullException("source");
 
-			if (length > 16)
+			var output = new StringBuilder(length);
+
+			for (var i = 0; i * 16 < length; i++)
 			{
-				var random = new Random(Guid.NewGuid().GetHashCode());
+				var sequence = Guid.NewGuid().ToByteArray();
+				var partLength = Math.Min(16, length - i * 16);
 
-				for (var i = 16; i < length; i++)
-					output[i] = source[random.Next(source.Length)];
+				for (var j = 0; j < partLength; j++)
+					output.Append(source[sequence[j] % source.Length]);
 			}
 
-			return new string(output);
+			return output.ToString();
 		}
 	}
 
