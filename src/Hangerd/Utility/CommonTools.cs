@@ -39,17 +39,17 @@ namespace Hangerd.Utility
 
 			var output = input;
 
-			output = Regex.Replace(output, @"<script[^>]*?>.*?</script>", string.Empty, RegexOptions.IgnoreCase);
-			output = Regex.Replace(output, @"<(.[^>]*)>", string.Empty, RegexOptions.IgnoreCase);
-			output = Regex.Replace(output, @"([\r\n])[\s]+", string.Empty, RegexOptions.IgnoreCase);
-			output = Regex.Replace(output, @"–>", string.Empty, RegexOptions.IgnoreCase);
-			output = Regex.Replace(output, @"<!–.*", string.Empty, RegexOptions.IgnoreCase);
 			output = Regex.Replace(output, @"&(quot|#34);", "\"", RegexOptions.IgnoreCase);
 			output = Regex.Replace(output, @"&(amp|#38);", "&", RegexOptions.IgnoreCase);
 			output = Regex.Replace(output, @"&(lt|#60);", "<", RegexOptions.IgnoreCase);
 			output = Regex.Replace(output, @"&(gt|#62);", ">", RegexOptions.IgnoreCase);
 			output = Regex.Replace(output, @"&(nbsp|#160);", " ", RegexOptions.IgnoreCase);
 			output = Regex.Replace(output, @"&#(\d+);", string.Empty, RegexOptions.IgnoreCase);
+			output = Regex.Replace(output, @"([\r\n])[\s]+", string.Empty, RegexOptions.IgnoreCase);
+			output = Regex.Replace(output, @"<script[^>]*?>.*?</script>", string.Empty, RegexOptions.IgnoreCase);
+			output = Regex.Replace(output, @"<(.[^>]*)>", string.Empty, RegexOptions.IgnoreCase);
+			output = Regex.Replace(output, @"–>", string.Empty, RegexOptions.IgnoreCase);
+			output = Regex.Replace(output, @"<!–.*", string.Empty, RegexOptions.IgnoreCase);
 
 			return output;
 		}

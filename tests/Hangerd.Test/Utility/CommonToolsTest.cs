@@ -57,7 +57,17 @@ namespace Hangerd.Test.Utility
 		[Test]
 		public void FilterHtmlTest()
 		{
-			const string input = @"<html><header><script>alert('test');</script></header><body>hello world!</body></html>";
+			const string input = 
+@"<html>
+	<header>
+		<script>
+			alert('test');
+		</script>
+	</header>
+	<body>
+		hello world!
+	</body>
+</html>";
 
 			Assert.AreEqual("hello world!", CommonTools.FilterHtml(input));
 		}
