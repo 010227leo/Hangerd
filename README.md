@@ -1,5 +1,7 @@
 # Hangerd
 
+[![Join the chat at https://gitter.im/010227leo/Hangerd](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/010227leo/Hangerd?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build status](https://ci.appveyor.com/api/projects/status/6lq99cxneooqhhk1/branch/master?svg=true)](https://ci.appveyor.com/project/010227leo/hangerd/branch/master)
 
 A lightweight and efficient .NET based application development framework. It provides the fundamental libraries and tools for practicing and implementing Domain-Driven Design.
