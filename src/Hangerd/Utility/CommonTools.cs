@@ -48,8 +48,6 @@ namespace Hangerd.Utility
 			output = Regex.Replace(output, @"([\r\n])[\s]+", string.Empty, RegexOptions.IgnoreCase);
 			output = Regex.Replace(output, @"<script[^>]*?>.*?</script>", string.Empty, RegexOptions.IgnoreCase);
 			output = Regex.Replace(output, @"<(.[^>]*)>", string.Empty, RegexOptions.IgnoreCase);
-			output = Regex.Replace(output, @"–>", string.Empty, RegexOptions.IgnoreCase);
-			output = Regex.Replace(output, @"<!–.*", string.Empty, RegexOptions.IgnoreCase);
 
 			return output;
 		}
