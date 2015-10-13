@@ -60,12 +60,13 @@ namespace Hangerd.Test.Utility
 			const string input =
 @"<html>
 	<header>
-		<script>
+		<script type=""text/javascript"">
 			alert('test');
 		</script>
 	</header>
 	<body>
 		<h1>hello world!</h1>
+		<br />
 	</body>
 </html>";
 
