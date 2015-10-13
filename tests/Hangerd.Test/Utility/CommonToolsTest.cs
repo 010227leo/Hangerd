@@ -57,7 +57,7 @@ namespace Hangerd.Test.Utility
 		[Test]
 		public void FilterHtmlTest()
 		{
-			const string input = 
+			const string input =
 @"<html>
 	<header>
 		<script>
@@ -65,7 +65,7 @@ namespace Hangerd.Test.Utility
 		</script>
 	</header>
 	<body>
-		hello world!
+		<h1>hello world!</h1>
 	</body>
 </html>";
 
