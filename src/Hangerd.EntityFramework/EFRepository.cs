@@ -13,6 +13,7 @@ namespace Hangerd.EntityFramework
 		where TEntity : EntityBase
 	{
 		private readonly IEfRepositoryContext _context;
+		private readonly IDbSet<TEntity> _dbSet;
 
 		public EfRepository(IRepositoryContext context)
 		{
@@ -22,11 +23,8 @@ namespace Hangerd.EntityFramework
 				_context = repositoryContext;
 			else 
 				throw new ArgumentException("RepositoryContext is not IEFRepositoryContext");
-		}
 
-		private IDbSet<TEntity> GetSet()
-		{
-			return _context.CreateSet<TEntity>();
+			_dbSet = _context.CreateSet<TEntity>();
 		}
 
 		public virtual TEntity Get(string id, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)
@@ -44,7 +42,7 @@ namespace Hangerd.EntityFramework
 
 		public virtual IQueryable<TEntity> GetAll(bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)
 		{
-			var dbset = tracking ? GetSet() : GetSet().AsNoTracking();
+			var dbset = tracking ? _dbSet : _dbSet.AsNoTracking();
 
 			if (eagerLoadingProperties != null && eagerLoadingProperties.Length > 0)
 				dbset = eagerLoadingProperties.Aggregate(dbset, (current, property) => current.Include(property));
@@ -60,7 +58,7 @@ namespace Hangerd.EntityFramework
 
 		public virtual void Add(TEntity entity, bool recordModify = false)
 		{
-			GetSet().Add(entity);
+			_dbSet.Add(entity);
 
 			if (recordModify)
 				RecordModifiedProperties(entity);
@@ -84,7 +82,7 @@ namespace Hangerd.EntityFramework
 
 			_context.Attach(entity);
 
-			GetSet().Remove(entity);
+			_dbSet.Remove(entity);
 		}
 
 		private void RecordModifiedProperties(TEntity entity)
