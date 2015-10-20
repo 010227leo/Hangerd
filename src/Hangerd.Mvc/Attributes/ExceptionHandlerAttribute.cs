@@ -46,7 +46,7 @@ namespace Hangerd.Mvc.Attributes
 		{
 			var result = ViewEngines.Engines.FindView(filterContext, name, null);
 
-			return (result.View != null);
+			return result.View != null;
 		}
 	}
 }
