@@ -129,7 +129,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>IF NOT "$(ConfigurationName)"=="Release" EXIT /B 0 
+    <PostBuildEvent>$(SolutionDir)tools\CodeCounter.exe $(SolutionDir)
+
+IF NOT "$(ConfigurationName)"=="Release" EXIT /B 0 
 IF NOT EXIST $(SolutionDir)build\ReleasePackages MD $(SolutionDir)build\ReleasePackages 
 $(SolutionDir).nuget\NuGet.exe Pack $(ProjectDir)Hangerd.nuspec -o $(SolutionDir)build\ReleasePackages\</PostBuildEvent>
   </PropertyGroup>
