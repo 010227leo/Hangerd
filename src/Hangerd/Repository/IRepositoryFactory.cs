@@ -2,6 +2,6 @@
 {
 	public interface IRepositoryFactory
 	{
-		TRepository CreateRepository<TRepository>();
+		TRepository CreateRepository<TRepository>(IRepositoryContext context);
 	}
 }
