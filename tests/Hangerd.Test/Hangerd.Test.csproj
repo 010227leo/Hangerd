@@ -68,7 +68,6 @@
     <Compile Include="Entity\SampleEntity.cs" />
     <Compile Include="Specification\SpecificationTest.cs" />
     <Compile Include="TestBase.cs" />
-    <Compile Include="TestService.cs" />
     <Compile Include="Utility\CryptoHelperTest.cs" />
     <Compile Include="Utility\CommonToolsTest.cs" />
     <Compile Include="Utility\Generator\CodeGeneratorTest.cs" />

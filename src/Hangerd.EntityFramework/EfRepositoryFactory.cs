@@ -1,14 +1,13 @@
-﻿using Hangerd.Entity;
+﻿using Hangerd.Components;
 using Hangerd.Repository;
 
 namespace Hangerd.EntityFramework
 {
 	public class EfRepositoryFactory : IRepositoryFactory
 	{
-		public virtual IRepository<TEntity> CreateRepository<TEntity>(IRepositoryContext context)
-			where TEntity : EntityBase
+		public TRepository CreateRepository<TRepository>()
 		{
-			return new EfRepository<TEntity>(context);
+			return LocalServiceLocator.GetService<TRepository>();
 		}
 	}
 }
