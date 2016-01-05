@@ -32,14 +32,6 @@ namespace Hangerd.Event.Bus
 			}
 		}
 
-		public void Rollback()
-		{
-			lock (_queueLock)
-			{
-				_eventQueue.Clear();
-			}
-		}
-
 		#endregion
 	}
 }

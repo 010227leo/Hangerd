@@ -15,13 +15,6 @@ namespace Hangerd.EntityFramework
 			SaveChanges();
 		}
 
-		public void Rollback()
-		{
-			ChangeTracker.Entries()
-				.ToList()
-				.ForEach(entry => entry.State = EntityState.Unchanged);
-		}
-
 		#endregion
 
 		#region IEfRepositoryContext

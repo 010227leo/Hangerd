@@ -9,20 +9,20 @@ using Hangerd.Uow;
 
 namespace Hangerd.EntityFramework
 {
-	public abstract class EfRepositoryBase<TContext, TEntity> : RepositoryBase<TEntity>
-		where TContext : class, IRepositoryContext
+	public abstract class EfRepositoryBase<TDbContext, TEntity> : RepositoryBase<TEntity>
+		where TDbContext : class, IRepositoryContext
 		where TEntity : EntityBase
 	{
 		private readonly ICurrentUowProvider _contextProvider;
 
-		private IEfRepositoryContext EfRepositoryContext
+		private IEfRepositoryContext DbContext
 		{
-			get { return _contextProvider.GetCurrent<TContext>() as IEfRepositoryContext; }
+			get { return _contextProvider.GetCurrent<TDbContext>() as IEfRepositoryContext; }
 		}
 
 		private IDbSet<TEntity> DbSet
 		{
-			get { return EfRepositoryContext.CreateSet<TEntity>(); }
+			get { return DbContext.CreateSet<TEntity>(); }
 		}
 
 		protected EfRepositoryBase(ICurrentUowProvider contextProvider)
@@ -50,7 +50,7 @@ namespace Hangerd.EntityFramework
 			if (entity == null)
 				return;
 
-			EfRepositoryContext.SetModified(entity);
+			DbContext.SetModified(entity);
 		}
 
 		public override void Delete(TEntity entity)
@@ -58,7 +58,7 @@ namespace Hangerd.EntityFramework
 			if (entity == null)
 				return;
 
-			EfRepositoryContext.Attach(entity);
+			DbContext.Attach(entity);
 
 			DbSet.Remove(entity);
 		}
@@ -67,14 +67,14 @@ namespace Hangerd.EntityFramework
 
 		public override IEnumerable<TEntity> ExecuteQuery(string sqlQuery, params object[] parameters)
 		{
-			var dbContext = EfRepositoryContext as DbContext;
+			var dbContext = DbContext as DbContext;
 
 			return dbContext != null ? dbContext.Database.SqlQuery<TEntity>(sqlQuery, parameters) : null;
 		}
 
 		public override int ExecuteCommand(string sqlCommand, params object[] parameters)
 		{
-			var dbContext = EfRepositoryContext as DbContext;
+			var dbContext = DbContext as DbContext;
 
 			return dbContext != null ? dbContext.Database.ExecuteSqlCommand(sqlCommand, parameters) : 0;
 		}
