@@ -2,6 +2,7 @@
 using Hangerd.Components;
 using Hangerd.Event;
 using Hangerd.Event.Bus;
+using Hangerd.Uow;
 using NUnit.Framework;
 
 namespace Hangerd.Test.Event.Bus
@@ -13,27 +14,28 @@ namespace Hangerd.Test.Event.Bus
 		[Test]
 		public void PublishAndCommitTest()
 		{
-			var bus = LocalServiceLocator.GetService<IEventBus>();
+			using (var bus = UnitOfWorkManager.Begin<IEventBus>())
+			{
+				if (bus == null)
+					Assert.Fail("EventBus is null");
 
-			if (bus == null)
-				Assert.Fail("EventBus is null");
+				var dispatcher = LocalServiceLocator.GetService<IEventDispatcher>();
 
-			var dispatcher = LocalServiceLocator.GetService<IEventDispatcher>();
+				if (dispatcher == null)
+					Assert.Fail("EventDispatcher is null");
 
-			if (dispatcher == null)
-				Assert.Fail("EventDispatcher is null");
+				//dispatcher.AutoRegister();
 
-			//dispatcher.AutoRegister();
+				dispatcher.Register<TestEvent, TestEventHandler1>();
+				dispatcher.Register<TestEvent, TestEventHandler2>();
 
-			dispatcher.Register<TestEvent, TestEventHandler1>();
-			dispatcher.Register<TestEvent, TestEventHandler2>();
+				EventHandledResults = new List<string>();
 
-			EventHandledResults = new List<string>();
+				bus.Publish(new TestEvent());
+				bus.Commit();
 
-			bus.Publish(new TestEvent());
-			bus.Commit();
-
-			Assert.AreEqual(2, EventHandledResults.Count);
+				Assert.AreEqual(2, EventHandledResults.Count);
+			}
 		}
 	}
 

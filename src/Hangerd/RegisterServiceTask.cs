@@ -4,6 +4,7 @@ using Hangerd.Event.Bus;
 using Hangerd.Extensions;
 using Hangerd.MemoryQueue;
 using Hangerd.MemoryQueue.Imp;
+using Hangerd.Uow;
 using Microsoft.Practices.Unity;
 
 namespace Hangerd
@@ -23,7 +24,8 @@ namespace Hangerd
 		{
 			_container.RegisterTypeAsSingleton<ICacheProvider, MemoryCacheProvider>();
 			_container.RegisterTypeAsSingleton<IEventDispatcher, EventDispatcher>();
-			_container.RegisterTypeAsPerRequest<IEventBus, DirectEventBus>();
+			_container.RegisterTypeAsSingleton<ICurrentUowProvider, CallContextCurrentUowProvider>();
+			_container.RegisterTypeAsPerResolve<IEventBus, DirectEventBus>();
 			_container.RegisterType(typeof (IMemoryQueueService<>), typeof (MemoryQueueService<>));
 		}
 

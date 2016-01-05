@@ -3,46 +3,36 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using Hangerd.Entity;
-using Hangerd.Repository;
-using Hangerd.Specification;
+using Hangerd.Domain.Entity;
+using Hangerd.Domain.Repository;
+using Hangerd.Uow;
 
 namespace Hangerd.EntityFramework
 {
-	public class EfRepository<TEntity> : IRepository<TEntity>
+	public class EfRepository<TContext, TEntity> : RepositoryBase<TContext, TEntity>
+		where TContext : class, IRepositoryContext
 		where TEntity : EntityBase
 	{
-		private readonly IEfRepositoryContext _context;
-		private readonly IDbSet<TEntity> _dbSet;
+		private readonly ICurrentUowProvider _contextProvider;
 
-		public EfRepository(IRepositoryContext context)
+		private IEfRepositoryContext EfRepositoryContext
 		{
-			var repositoryContext = context as IEfRepositoryContext;
-
-			if (repositoryContext != null)
-				_context = repositoryContext;
-			else 
-				throw new ArgumentException("RepositoryContext is not IEFRepositoryContext");
-
-			_dbSet = _context.CreateSet<TEntity>();
+			get { return _contextProvider.GetCurrent<TContext>() as IEfRepositoryContext; }
 		}
 
-		public virtual TEntity Get(string id, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)
+		private IDbSet<TEntity> DbSet
 		{
-			return string.IsNullOrWhiteSpace(id)
-				? null
-				: GetAll(tracking, eagerLoadingProperties).FirstOrDefault(e => e.Id == id);
+			get { return EfRepositoryContext.CreateSet<TEntity>(); }
 		}
 
-		public virtual TEntity Get(ISpecification<TEntity> spec, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)
+		public EfRepository(ICurrentUowProvider contextProvider)
 		{
-			return GetAll(tracking, eagerLoadingProperties)
-				.FirstOrDefault(spec.SatisfiedBy());
+			_contextProvider = contextProvider;
 		}
 
-		public virtual IQueryable<TEntity> GetAll(bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)
+		public override IQueryable<TEntity> GetAll(bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)
 		{
-			var dbset = tracking ? _dbSet : _dbSet.AsNoTracking();
+			var dbset = tracking ? DbSet : DbSet.AsNoTracking();
 
 			if (eagerLoadingProperties != null && eagerLoadingProperties.Length > 0)
 				dbset = eagerLoadingProperties.Aggregate(dbset, (current, property) => current.Include(property));
@@ -50,102 +40,41 @@ namespace Hangerd.EntityFramework
 			return dbset;
 		}
 
-		public virtual IQueryable<TEntity> GetAll(ISpecification<TEntity> spec, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)
+		public override void Add(TEntity entity)
 		{
-			return GetAll(tracking, eagerLoadingProperties)
-				.Where(spec.SatisfiedBy());
+			DbSet.Add(entity);
 		}
 
-		public virtual void Add(TEntity entity, bool recordModify = false)
-		{
-			_dbSet.Add(entity);
-
-			if (recordModify)
-				RecordModifiedProperties(entity);
-		}
-
-		public virtual void Update(TEntity entity, bool recordModify = false)
+		public override void Update(TEntity entity)
 		{
 			if (entity == null)
 				return;
 
-			_context.SetModified(entity);
-
-			if (recordModify)
-				RecordModifiedProperties(entity);
+			EfRepositoryContext.SetModified(entity);
 		}
 
-		public virtual void Delete(TEntity entity)
+		public override void Delete(TEntity entity)
 		{
 			if (entity == null)
 				return;
 
-			_context.Attach(entity);
+			EfRepositoryContext.Attach(entity);
 
-			_dbSet.Remove(entity);
-		}
-
-		private void RecordModifiedProperties(TEntity entity)
-		{
-			var dbContext = _context as DbContext;
-
-			if (dbContext == null)
-				return;
-
-			entity.ModifiedPropertiesRecords.Clear();
-
-			var dbEntityEntry = dbContext.Entry(entity);
-			var entityType = entity.GetType();
-
-			switch (dbEntityEntry.State)
-			{
-				case EntityState.Added:
-					foreach (var propertyName in dbEntityEntry.CurrentValues.PropertyNames)
-					{
-						var recordModifyAttribute = entityType.GetProperty(propertyName)
-							.GetCustomAttributes(false).OfType<RecordModifyAttribute>().SingleOrDefault();
-
-						if (recordModifyAttribute == null) 
-							continue;
-
-						var property = dbEntityEntry.Property(propertyName);
-
-						entity.RecordModifiedProperty(propertyName, null, property.CurrentValue);
-					}
-					break;
-				case EntityState.Modified:
-					foreach (var propertyName in dbEntityEntry.OriginalValues.PropertyNames)
-					{
-						var recordModifyAttribute = entityType.GetProperty(propertyName)
-							.GetCustomAttributes(false).OfType<RecordModifyAttribute>().SingleOrDefault();
-
-						if (recordModifyAttribute == null) 
-							continue;
-
-						var property = dbEntityEntry.Property(propertyName);
-
-						if ((property.OriginalValue == null && property.CurrentValue == null)
-						    || (property.OriginalValue != null && property.OriginalValue.Equals(property.CurrentValue)))
-							continue;
-
-						entity.RecordModifiedProperty(propertyName, property.OriginalValue, property.CurrentValue);
-					}
-					break;
-			}
+			DbSet.Remove(entity);
 		}
 
 		#region Sql
 
-		public IEnumerable<TEntity> ExecuteQuery(string sqlQuery, params object[] parameters)
+		public override IEnumerable<TEntity> ExecuteQuery(string sqlQuery, params object[] parameters)
 		{
-			var dbContext = _context as DbContext;
+			var dbContext = EfRepositoryContext as DbContext;
 
 			return dbContext != null ? dbContext.Database.SqlQuery<TEntity>(sqlQuery, parameters) : null;
 		}
 
-		public int ExecuteCommand(string sqlCommand, params object[] parameters)
+		public override int ExecuteCommand(string sqlCommand, params object[] parameters)
 		{
-			var dbContext = _context as DbContext;
+			var dbContext = EfRepositoryContext as DbContext;
 
 			return dbContext != null ? dbContext.Database.ExecuteSqlCommand(sqlCommand, parameters) : 0;
 		}

@@ -1,4 +1,6 @@
-﻿namespace Hangerd.Event.Bus
+﻿using Hangerd.Uow;
+
+namespace Hangerd.Event.Bus
 {
 	public interface IEventBus : IUnitOfWork
 	{

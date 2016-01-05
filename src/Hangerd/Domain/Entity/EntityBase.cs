@@ -1,22 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using Hangerd.Utility.Generator;
 
-namespace Hangerd.Entity
+namespace Hangerd.Domain.Entity
 {
 	[Serializable]
 	public abstract class EntityBase
 	{
-		private readonly Dictionary<string, ModifiedProperty> _modifiedPropertitiesRecords = new Dictionary<string, ModifiedProperty>();
-
 		public string Id { get; protected set; }
 
 		public DateTime LastModified { get; set; }
-
-		public Dictionary<string, ModifiedProperty> ModifiedPropertiesRecords
-		{
-			get { return _modifiedPropertitiesRecords; }
-		}
 
 		protected EntityBase()
 		{
@@ -32,12 +24,6 @@ namespace Hangerd.Entity
 		{
 			if (IsTransient())
 				Id = IdentityGenerator.NewSequentialGuid().ToString("N");
-		}
-
-		public void RecordModifiedProperty(string propertyName, object oldValue, object newValue)
-		{
-			if (!_modifiedPropertitiesRecords.ContainsKey(propertyName))
-				_modifiedPropertitiesRecords.Add(propertyName, new ModifiedProperty(oldValue, newValue));
 		}
 
 		public override bool Equals(object obj)
@@ -58,9 +44,6 @@ namespace Hangerd.Entity
 
 		public override int GetHashCode()
 		{
-			if (IsTransient())
-				return base.GetHashCode();
-
 			return Id.GetHashCode() ^ 31;
 		}
 

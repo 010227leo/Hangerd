@@ -4,8 +4,8 @@ namespace Hangerd.Event
 {
 	public interface IEvent
 	{
-		Guid Id { get; set; }
+		Guid Id { get; }
 
-		DateTime Timestamp { get; set; }
+		DateTime Timestamp { get; }
 	}
 }

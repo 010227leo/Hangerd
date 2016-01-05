@@ -1,4 +1,4 @@
-﻿namespace Hangerd.Specification
+﻿namespace Hangerd.Domain.Specification
 {
     /// <summary>
     /// Base class for composite specifications

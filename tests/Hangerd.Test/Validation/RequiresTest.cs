@@ -1,4 +1,4 @@
-﻿using Hangerd.Test.Entity;
+﻿using Hangerd.Test.Domain.Entity;
 using Hangerd.Validation;
 using NUnit.Framework;
 

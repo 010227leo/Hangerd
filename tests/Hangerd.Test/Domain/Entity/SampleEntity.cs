@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using Hangerd.Entity;
+using Hangerd.Domain.Entity;
 
-namespace Hangerd.Test.Entity
+namespace Hangerd.Test.Domain.Entity
 {
 	[Serializable]
-	public sealed class SampleEntity : EntityBase, IValidatable, IDeletable
+	public sealed class SampleEntity : EntityBase, IDeletable
 	{
 		public string Name { get; set; }
 
@@ -17,12 +17,6 @@ namespace Hangerd.Test.Entity
 		public SampleEntity()
 		{
 			GenerateNewId();
-		}
-
-		public void Validate()
-		{
-			if (string.IsNullOrWhiteSpace(Name))
-				throw new HangerdException("Name is null or empty.");
 		}
 
 		public SampleEntity Clone()

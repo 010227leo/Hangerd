@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Hangerd.Test.Entity
+namespace Hangerd.Test.Domain.Entity
 {
 	public class EntityTest
 	{

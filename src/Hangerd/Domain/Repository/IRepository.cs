@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Hangerd.Entity;
-using Hangerd.Specification;
+using Hangerd.Domain.Entity;
+using Hangerd.Domain.Specification;
 
-namespace Hangerd.Repository
+namespace Hangerd.Domain.Repository
 {
-	public interface IRepository<TEntity>
+	public interface IRepository<TContext, TEntity>
+		where TContext : class, IRepositoryContext
 		where TEntity : EntityBase
 	{
 		TEntity Get(string id, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties);
@@ -18,9 +19,9 @@ namespace Hangerd.Repository
 
 		IQueryable<TEntity> GetAll(ISpecification<TEntity> spec, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties);
 
-		void Add(TEntity entity, bool recordModify = false);
+		void Add(TEntity entity);
 
-		void Update(TEntity entity, bool recordModify = false);
+		void Update(TEntity entity);
 
 		void Delete(TEntity entity);
 

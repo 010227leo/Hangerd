@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Hangerd.Specification
+namespace Hangerd.Domain.Specification
 {
 	/// <summary>
 	/// Helper for rebinder parameters without use Invoke method in expressions 

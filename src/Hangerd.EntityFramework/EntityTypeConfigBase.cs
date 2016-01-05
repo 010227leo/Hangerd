@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity.ModelConfiguration;
-using Hangerd.Entity;
+using Hangerd.Domain.Entity;
 
 namespace Hangerd.EntityFramework
 {

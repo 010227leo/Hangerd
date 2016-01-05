@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hangerd
+namespace Hangerd.Uow
 {
 	public interface IUnitOfWork : IDisposable
 	{

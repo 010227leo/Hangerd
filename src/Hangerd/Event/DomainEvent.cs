@@ -1,6 +1,6 @@
 ﻿using System;
 using Hangerd.Components;
-using Hangerd.Entity;
+using Hangerd.Domain.Entity;
 
 namespace Hangerd.Event
 {
@@ -8,9 +8,14 @@ namespace Hangerd.Event
 	{
 		private readonly EntityBase _source;
 
-		public Guid Id { get; set; }
+		public EntityBase Source
+		{
+			get { return _source; }
+		}
 
-		public DateTime Timestamp { get; set; }
+		public Guid Id { get; private set; }
+
+		public DateTime Timestamp { get; private set; }
 
 		protected DomainEvent() { }
 
@@ -20,11 +25,6 @@ namespace Hangerd.Event
 
 			Id = Guid.NewGuid();
 			Timestamp = DateTime.Now;
-		}
-
-		public EntityBase Source
-		{
-			get { return _source; }
 		}
 
 		#region Public Static Methods

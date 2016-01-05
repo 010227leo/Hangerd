@@ -1,5 +1,5 @@
 ﻿using Hangerd.Event;
-using Hangerd.Test.Entity;
+using Hangerd.Test.Domain.Entity;
 
 namespace Hangerd.Test.Event
 {

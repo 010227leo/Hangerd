@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Hangerd.Components;
 using Microsoft.Practices.Unity;
 
 namespace Hangerd.Extensions
@@ -55,22 +54,6 @@ namespace Hangerd.Extensions
 			}
 		}
 
-		public static IUnityContainer RegisterTypeAsPerRequest(this IUnityContainer instance, Type fromType, Type toType)
-		{
-			lock (instance)
-			{
-				return instance.RegisterType(fromType, toType, new PerRequestLifetimeManager());
-			}
-		}
-
-		public static IUnityContainer RegisterTypeAsPerRequest<TFrom, TTo>(this IUnityContainer instance) where TTo : TFrom
-		{
-			lock (instance)
-			{
-				return instance.RegisterTypeAsPerRequest(typeof(TFrom), typeof(TTo));
-			}
-		}
-
 		#region Multiple
 
 		public static IUnityContainer RegisterMultipleTypesAsSingleton(this IUnityContainer instance, Type fromType, Type toType)
@@ -118,22 +101,6 @@ namespace Hangerd.Extensions
 			lock (instance)
 			{
 				return instance.RegisterMultipleTypesAsPerResolve(typeof(TFrom), typeof(TTo));
-			}
-		}
-
-		public static IUnityContainer RegisterMultipleTypesAsPerRequest(this IUnityContainer instance, Type fromType, Type toType)
-		{
-			lock (instance)
-			{
-				return instance.RegisterType(fromType, toType, toType.FullName, new PerRequestLifetimeManager());
-			}
-		}
-
-		public static IUnityContainer RegisterMultipleTypesAsPerRequest<TFrom, TTo>(this IUnityContainer instance) where TTo : TFrom
-		{
-			lock (instance)
-			{
-				return instance.RegisterMultipleTypesAsPerRequest(typeof(TFrom), typeof(TTo));
 			}
 		}
 

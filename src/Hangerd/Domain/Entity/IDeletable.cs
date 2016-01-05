@@ -1,4 +1,4 @@
-﻿namespace Hangerd.Entity
+﻿namespace Hangerd.Domain.Entity
 {
 	public interface IDeletable
 	{

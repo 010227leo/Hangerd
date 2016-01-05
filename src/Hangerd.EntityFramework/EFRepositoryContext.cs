@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
-using Hangerd.Entity;
+using Hangerd.Domain.Entity;
 
 namespace Hangerd.EntityFramework
 {
@@ -55,8 +54,6 @@ namespace Hangerd.EntityFramework
 
 				if (entity != null && entity.IsTransient())
 					entity.GenerateNewId();
-
-				ValidateEntity(dbEntityEntry);
 			}
 
 			foreach (var dbEntityEntry in ChangeTracker.Entries().Where(x => x.State == EntityState.Modified))
@@ -65,8 +62,6 @@ namespace Hangerd.EntityFramework
 
 				if (entity != null)
 					entity.LastModified = DateTime.Now;
-
-				ValidateEntity(dbEntityEntry);
 			}
 
 			foreach (var dbEntityEntry in ChangeTracker.Entries().Where(x => x.State == EntityState.Deleted))
@@ -82,14 +77,6 @@ namespace Hangerd.EntityFramework
 			}
 
 			return base.SaveChanges();
-		}
-
-		private static void ValidateEntity(DbEntityEntry dbEntityEntry)
-		{
-			var entity = dbEntityEntry.Entity as IValidatable;
-
-			if (entity != null)
-				entity.Validate();
 		}
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)

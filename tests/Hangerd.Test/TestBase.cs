@@ -5,13 +5,13 @@ namespace Hangerd.Test
 	public class TestBase
 	{
 		[SetUp]
-		protected virtual void TestSetUp()
+		protected void TestSetUp()
 		{
 			HangerdFramework.Start();
 		}
 
 		[TearDown]
-		protected virtual void TestTearDown()
+		protected void TestTearDown()
 		{
 			HangerdFramework.End();
 		}
