@@ -67,6 +67,7 @@
     <Compile Include="Components\LocalConfigService.cs" />
     <Compile Include="Components\LocalLoggingService.cs" />
     <Compile Include="Components\LocalServiceLocator.cs" />
+    <Compile Include="Domain\Repository\IRepositoryContext.cs" />
     <Compile Include="Uow\CallContextCurrentUowProvider.cs" />
     <Compile Include="Uow\ICurrentUowProvider.cs" />
     <Compile Include="Uow\UnitOfWorkManager.cs" />
@@ -105,7 +106,6 @@
     <Compile Include="Domain\Specification\ParametersRebinder.cs" />
     <Compile Include="Domain\Specification\Specification.cs" />
     <Compile Include="Domain\Specification\TrueSpecification.cs" />
-    <Compile Include="Domain\Repository\IRepositoryContext.cs" />
     <Compile Include="Uow\IUnitOfWork.cs" />
     <Compile Include="Utility\Generator\CodeGenerator.cs" />
     <Compile Include="Utility\Generator\IdentityGenerator.cs" />

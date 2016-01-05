@@ -7,8 +7,7 @@ using Hangerd.Domain.Specification;
 
 namespace Hangerd.Domain.Repository
 {
-	public abstract class RepositoryBase<TContext, TEntity> : IRepository<TContext, TEntity>
-		where TContext : class, IRepositoryContext
+	public abstract class RepositoryBase<TEntity> : IRepository<TEntity>
 		where TEntity : EntityBase
 	{
 		public virtual TEntity Get(string id, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)

@@ -9,7 +9,7 @@ using Hangerd.Uow;
 
 namespace Hangerd.EntityFramework
 {
-	public class EfRepository<TContext, TEntity> : RepositoryBase<TContext, TEntity>
+	public abstract class EfRepositoryBase<TContext, TEntity> : RepositoryBase<TEntity>
 		where TContext : class, IRepositoryContext
 		where TEntity : EntityBase
 	{
@@ -25,7 +25,7 @@ namespace Hangerd.EntityFramework
 			get { return EfRepositoryContext.CreateSet<TEntity>(); }
 		}
 
-		public EfRepository(ICurrentUowProvider contextProvider)
+		protected EfRepositoryBase(ICurrentUowProvider contextProvider)
 		{
 			_contextProvider = contextProvider;
 		}

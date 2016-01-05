@@ -59,9 +59,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefaultEfRepository.cs" />
     <Compile Include="EntityTypeConfigBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EfRepository.cs" />
+    <Compile Include="EfRepositoryBase.cs" />
     <Compile Include="EfRepositoryContext.cs" />
     <Compile Include="IEfRepositoryContext.cs" />
   </ItemGroup>
