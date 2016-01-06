@@ -8,24 +8,6 @@ namespace Hangerd.EntityFramework
 {
 	public abstract class HangerdDbContext : DbContext
 	{
-		public DbSet<TEntity> CreateSet<TEntity>()
-			where TEntity : EntityBase
-		{
-			return Set<TEntity>();
-		}
-
-		public void Attach<TEntity>(TEntity item)
-			where TEntity : EntityBase
-		{
-			Entry(item).State = EntityState.Unchanged;
-		}
-
-		public void SetModified<TEntity>(TEntity item)
-			where TEntity : EntityBase
-		{
-			Entry(item).State = EntityState.Modified;
-		}
-
 		public override int SaveChanges()
 		{
 			foreach (var dbEntityEntry in ChangeTracker.Entries().Where(x => x.State == EntityState.Added))

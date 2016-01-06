@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Remoting.Messaging;
-using Hangerd.Components;
 
 namespace Hangerd.Uow
 {
@@ -18,7 +17,6 @@ namespace Hangerd.Uow
 
             if (value == null)
             {
-				LocalLoggingService.Debug("FreeNamedDataSlot:" + uowKey);
 				CallContext.FreeNamedDataSlot(uowKey);
                 return;
             }

@@ -22,7 +22,7 @@ namespace Hangerd.EntityFramework.Repository
 
 		private IDbSet<TEntity> DbSet
 		{
-			get { return DbContext.CreateSet<TEntity>(); }
+			get { return DbContext.Set<TEntity>(); }
 		}
 
 		protected EfRepositoryBase(IEfDbContextProvider<TDbContext> dbContextProvider)
@@ -50,7 +50,7 @@ namespace Hangerd.EntityFramework.Repository
 			if (entity == null)
 				return;
 
-			DbContext.SetModified(entity);
+			DbContext.Entry(entity).State = EntityState.Modified;
 		}
 
 		public override void Delete(TEntity entity)
@@ -58,7 +58,7 @@ namespace Hangerd.EntityFramework.Repository
 			if (entity == null)
 				return;
 
-			DbContext.Attach(entity);
+			DbContext.Entry(entity).State = EntityState.Unchanged;
 
 			DbSet.Remove(entity);
 		}
