@@ -5,7 +5,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using Hangerd.Domain.Entity;
 using Hangerd.Domain.Repository;
-using Hangerd.EntityFramework.Uow;
 
 namespace Hangerd.EntityFramework.Repository
 {
@@ -13,7 +12,7 @@ namespace Hangerd.EntityFramework.Repository
 		where TDbContext : HangerdDbContext
 		where TEntity : EntityBase
 	{
-		private readonly IEfDbContextProvider<TDbContext> _dbContextProvider;
+		private readonly IDbContextProvider<TDbContext> _dbContextProvider;
 
 		private TDbContext DbContext
 		{
@@ -25,7 +24,7 @@ namespace Hangerd.EntityFramework.Repository
 			get { return DbContext.Set<TEntity>(); }
 		}
 
-		protected EfRepositoryBase(IEfDbContextProvider<TDbContext> dbContextProvider)
+		protected EfRepositoryBase(IDbContextProvider<TDbContext> dbContextProvider)
 		{
 			_dbContextProvider = dbContextProvider;
 		}

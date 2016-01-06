@@ -20,7 +20,7 @@ namespace Hangerd.EntityFramework
 		public override void Execute()
 		{
 			_container.RegisterTypeAsPerResolve<IRepositoryUow, EfRepositoryUow>();
-			_container.RegisterTypeAsSingleton(typeof (IEfDbContextProvider<>), typeof (EfDbContextProvider<>));
+			_container.RegisterTypeAsSingleton(typeof (IDbContextProvider<>), typeof (DbContextProvider<>));
 		}
 	}
 }

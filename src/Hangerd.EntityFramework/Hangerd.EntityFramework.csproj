@@ -61,12 +61,12 @@
   <ItemGroup>
     <Compile Include="HangerdDbContext.cs" />
     <Compile Include="Entity\EntityTypeConfigBase.cs" />
-    <Compile Include="Uow\IEfDbContextProvider.cs" />
+    <Compile Include="IDbContextProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterServiceTask.cs" />
     <Compile Include="Uow\EfRepositoryUow.cs" />
     <Compile Include="Repository\EfRepositoryBase.cs" />
-    <Compile Include="Uow\EfDbContextProvider.cs" />
+    <Compile Include="Uow\DbContextProvider.cs" />
     <Compile Include="Uow\RepositoryUowExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,6 @@
-namespace Hangerd.EntityFramework.Uow
+namespace Hangerd.EntityFramework
 {
-	public interface IEfDbContextProvider<out TDbContext>
+	public interface IDbContextProvider<out TDbContext>
         where TDbContext : HangerdDbContext
     {
         TDbContext DbContext { get; }
