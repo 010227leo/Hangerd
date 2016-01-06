@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 using Hangerd.Domain.Entity;
 
-namespace Hangerd.EntityFramework
+namespace Hangerd.EntityFramework.Entity
 {
 	public class EntityTypeConfigBase<TEntity> : EntityTypeConfiguration<TEntity>
 		where TEntity : EntityBase

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using Hangerd.Uow;
 
 namespace Hangerd.Event.Bus
 {
-	public class DirectEventBus : Disposable, IEventBus
+	public class DirectEventBus : UnitOfWorkBase, IEventBus
 	{
 		private readonly IEventDispatcher _eventDispatcher;
 		private readonly object _queueLock = new object();
@@ -21,9 +22,7 @@ namespace Hangerd.Event.Bus
 			}
 		}
 
-		#region IUnitOfWork
-
-		public void Commit()
+		protected override void CommitUow()
 		{
 			lock (_queueLock)
 			{
@@ -32,6 +31,14 @@ namespace Hangerd.Event.Bus
 			}
 		}
 
-		#endregion
+		protected override void InternalDispose()
+		{
+			lock (_queueLock)
+			{
+				_eventQueue.Clear();
+			}
+
+			base.InternalDispose();
+		}
 	}
 }

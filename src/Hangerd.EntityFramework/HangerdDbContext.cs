@@ -6,38 +6,25 @@ using Hangerd.Domain.Entity;
 
 namespace Hangerd.EntityFramework
 {
-	public abstract class EfRepositoryContext : DbContext, IEfRepositoryContext
+	public abstract class HangerdDbContext : DbContext
 	{
-		#region IUnitOfWork
-		 
-		public void Commit()
-		{
-			SaveChanges();
-		}
-
-		#endregion
-
-		#region IEfRepositoryContext
-
 		public DbSet<TEntity> CreateSet<TEntity>()
 			where TEntity : EntityBase
-        {
-            return Set<TEntity>();
-        }
+		{
+			return Set<TEntity>();
+		}
 
-        public void Attach<TEntity>(TEntity item)
-            where TEntity : EntityBase
-        {
-            Entry(item).State = EntityState.Unchanged;
-        }
-
-        public void SetModified<TEntity>(TEntity item)
+		public void Attach<TEntity>(TEntity item)
 			where TEntity : EntityBase
-        {
-            Entry(item).State = EntityState.Modified;
-        }
+		{
+			Entry(item).State = EntityState.Unchanged;
+		}
 
-		#endregion
+		public void SetModified<TEntity>(TEntity item)
+			where TEntity : EntityBase
+		{
+			Entry(item).State = EntityState.Modified;
+		}
 
 		public override int SaveChanges()
 		{

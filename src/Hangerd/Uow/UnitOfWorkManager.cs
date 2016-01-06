@@ -10,6 +10,11 @@ namespace Hangerd.Uow
 			var provider = LocalServiceLocator.GetService<ICurrentUowProvider>();
 			var uow = LocalServiceLocator.GetService<TUnitOfWork>();
 
+			uow.Completed += (sender, args) =>
+			{
+				provider.SetCurrent<TUnitOfWork>(null);
+			};
+
 			provider.SetCurrent(uow);
 
 			return uow;

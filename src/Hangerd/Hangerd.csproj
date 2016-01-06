@@ -67,9 +67,10 @@
     <Compile Include="Components\LocalConfigService.cs" />
     <Compile Include="Components\LocalLoggingService.cs" />
     <Compile Include="Components\LocalServiceLocator.cs" />
-    <Compile Include="Domain\Repository\IRepositoryContext.cs" />
+    <Compile Include="Domain\Repository\IRepositoryUow.cs" />
     <Compile Include="Uow\CallContextCurrentUowProvider.cs" />
     <Compile Include="Uow\ICurrentUowProvider.cs" />
+    <Compile Include="Uow\UnitOfWorkBase.cs" />
     <Compile Include="Uow\UnitOfWorkManager.cs" />
     <Compile Include="Dto\DtoBase.cs" />
     <Compile Include="Domain\Entity\EntityBase.cs" />

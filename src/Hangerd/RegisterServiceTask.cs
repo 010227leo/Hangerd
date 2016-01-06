@@ -17,7 +17,7 @@ namespace Hangerd
 
 		public override int Order
 		{
-			get { return 1; }
+			get { return 0; }
 		}
 
 		public override void Execute()

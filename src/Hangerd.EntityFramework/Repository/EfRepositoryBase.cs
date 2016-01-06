@@ -5,19 +5,19 @@ using System.Linq;
 using System.Linq.Expressions;
 using Hangerd.Domain.Entity;
 using Hangerd.Domain.Repository;
-using Hangerd.Uow;
+using Hangerd.EntityFramework.Uow;
 
-namespace Hangerd.EntityFramework
+namespace Hangerd.EntityFramework.Repository
 {
 	public abstract class EfRepositoryBase<TDbContext, TEntity> : RepositoryBase<TEntity>
-		where TDbContext : class, IRepositoryContext
+		where TDbContext : HangerdDbContext
 		where TEntity : EntityBase
 	{
-		private readonly ICurrentUowProvider _contextProvider;
+		private readonly IEfDbContextProvider<TDbContext> _dbContextProvider;
 
-		private IEfRepositoryContext DbContext
+		private TDbContext DbContext
 		{
-			get { return _contextProvider.GetCurrent<TDbContext>() as IEfRepositoryContext; }
+			get { return _dbContextProvider.DbContext; }
 		}
 
 		private IDbSet<TEntity> DbSet
@@ -25,9 +25,9 @@ namespace Hangerd.EntityFramework
 			get { return DbContext.CreateSet<TEntity>(); }
 		}
 
-		protected EfRepositoryBase(ICurrentUowProvider contextProvider)
+		protected EfRepositoryBase(IEfDbContextProvider<TDbContext> dbContextProvider)
 		{
-			_contextProvider = contextProvider;
+			_dbContextProvider = dbContextProvider;
 		}
 
 		public override IQueryable<TEntity> GetAll(bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)
