@@ -8,10 +8,13 @@ namespace Hangerd.Domain.Entity
 	{
 		public string Id { get; protected set; }
 
+		public DateTime CreateTime { get; private set; }
+
 		public DateTime LastModified { get; set; }
 
 		protected EntityBase()
 		{
+			CreateTime = DateTime.Now;
 			LastModified = DateTime.Now;
 		}
 
