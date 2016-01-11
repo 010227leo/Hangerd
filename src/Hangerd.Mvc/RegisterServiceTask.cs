@@ -11,7 +11,8 @@ namespace Hangerd.Mvc
 {
 	public class RegisterServiceTask : RegisterServiceBootstrapperTask
 	{
-		public RegisterServiceTask(IUnityContainer container) : base(container)
+		public RegisterServiceTask(IUnityContainer container)
+			: base(container)
 		{
 		}
 
@@ -35,12 +36,12 @@ namespace Hangerd.Mvc
 		{
 			BuildManagerWrapper.Current.ConcreteTypes
 				.Where(type => typeof (IController).IsAssignableFrom(type))
-				.Each(type => _container.RegisterType(typeof (IController), type));
+				.Each(type => IocContainer.RegisterType(typeof (IController), type));
 		}
 
 		private void RegisterFactories()
 		{
-			ControllerBuilder.Current.SetControllerFactory(new UnityControllerFactory(_container));
+			ControllerBuilder.Current.SetControllerFactory(new UnityControllerFactory(IocContainer));
 		}
 
 		private static void RegisterFilters()

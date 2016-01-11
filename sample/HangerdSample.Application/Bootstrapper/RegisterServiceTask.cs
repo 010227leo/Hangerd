@@ -8,14 +8,15 @@ namespace HangerdSample.Application.Bootstrapper
 {
 	public class RegisterServiceTask : RegisterServiceBootstrapperTask
 	{
-		public RegisterServiceTask(IUnityContainer container) : base(container)
+		public RegisterServiceTask(IUnityContainer container)
+			: base(container)
 		{
 		}
 
 		public override void Execute()
 		{
 			//application services
-			_container.RegisterTypeAsSingleton<IAccountService, AccountService>();
+			IocContainer.RegisterTypeAsSingleton<IAccountService, AccountService>();
 		}
 	}
 }

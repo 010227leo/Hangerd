@@ -8,7 +8,8 @@ namespace Hangerd.EntityFramework
 {
 	public class RegisterServiceTask : RegisterServiceBootstrapperTask
 	{
-		public RegisterServiceTask(IUnityContainer container) : base(container)
+		public RegisterServiceTask(IUnityContainer container)
+			: base(container)
 		{
 		}
 
@@ -19,8 +20,8 @@ namespace Hangerd.EntityFramework
 
 		public override void Execute()
 		{
-			_container.RegisterTypeAsPerResolve<IRepositoryContext, EfRepositoryContext>();
-			_container.RegisterTypeAsSingleton(typeof (IDbContextProvider<>), typeof (DbContextProvider<>));
+			IocContainer.RegisterTypeAsPerResolve<IRepositoryContext, EfRepositoryContext>();
+			IocContainer.RegisterTypeAsSingleton(typeof (IDbContextProvider<>), typeof (DbContextProvider<>));
 		}
 	}
 }

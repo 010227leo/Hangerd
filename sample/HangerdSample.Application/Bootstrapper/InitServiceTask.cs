@@ -10,7 +10,8 @@ namespace HangerdSample.Application.Bootstrapper
 {
 	public class InitServiceTask : InitServiceBootstrapperTask
 	{
-		public InitServiceTask(IUnityContainer container) : base(container)
+		public InitServiceTask(IUnityContainer container)
+			: base(container)
 		{
 		}
 

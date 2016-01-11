@@ -11,7 +11,8 @@ namespace Hangerd
 {
 	public class RegisterServiceTask : RegisterServiceBootstrapperTask
 	{
-		public RegisterServiceTask(IUnityContainer container) : base(container)
+		public RegisterServiceTask(IUnityContainer container)
+			: base(container)
 		{
 		}
 
@@ -22,17 +23,17 @@ namespace Hangerd
 
 		public override void Execute()
 		{
-			_container.RegisterTypeAsSingleton<ICacheProvider, MemoryCacheProvider>();
-			_container.RegisterTypeAsSingleton<IEventDispatcher, EventDispatcher>();
-			_container.RegisterTypeAsSingleton<ICurrentUowProvider, CallContextCurrentUowProvider>();
-			_container.RegisterTypeAsPerResolve<IEventBus, DirectEventBus>();
-			_container.RegisterType(typeof (IMemoryQueueService<>), typeof (MemoryQueueService<>));
+			IocContainer.RegisterTypeAsSingleton<ICacheProvider, MemoryCacheProvider>();
+			IocContainer.RegisterTypeAsSingleton<IEventDispatcher, EventDispatcher>();
+			IocContainer.RegisterTypeAsSingleton<ICurrentUowProvider, CallContextCurrentUowProvider>();
+			IocContainer.RegisterTypeAsPerResolve<IEventBus, DirectEventBus>();
+			IocContainer.RegisterType(typeof (IMemoryQueueService<>), typeof (MemoryQueueService<>));
 		}
 
 		protected override void InternalDispose()
 		{
-			_container.Resolve<ICacheProvider>().Dispose();
-			_container.Resolve<IEventDispatcher>().Dispose();
+			IocContainer.Resolve<ICacheProvider>().Dispose();
+			IocContainer.Resolve<IEventDispatcher>().Dispose();
 		}
 	}
 }

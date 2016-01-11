@@ -4,8 +4,10 @@ namespace Hangerd.Bootstrapper
 {
 	public abstract class RegisterServiceBootstrapperTask : BootstrapperTask
 	{
-		protected RegisterServiceBootstrapperTask(IUnityContainer container) : base(container)
-		{ }
+		protected RegisterServiceBootstrapperTask(IUnityContainer container)
+			: base(container)
+		{
+		}
 
 		public override int Order
 		{

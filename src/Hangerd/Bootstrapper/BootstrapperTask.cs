@@ -4,11 +4,11 @@ namespace Hangerd.Bootstrapper
 {
 	public abstract class BootstrapperTask : Disposable
 	{
-		protected readonly IUnityContainer _container;
+		protected readonly IUnityContainer IocContainer;
 
 		protected BootstrapperTask(IUnityContainer container)
 		{
-			_container = container;
+			IocContainer = container;
 		}
 
 		public virtual int Order

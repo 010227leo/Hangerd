@@ -7,7 +7,8 @@ namespace Hangerd.Mongodb
 {
 	public class RegisterServiceTask : RegisterServiceBootstrapperTask
 	{
-		public RegisterServiceTask(IUnityContainer container) : base(container)
+		public RegisterServiceTask(IUnityContainer container)
+			: base(container)
 		{
 		}
 
@@ -18,8 +19,8 @@ namespace Hangerd.Mongodb
 
 		public override void Execute()
 		{
-			_container.RegisterTypeAsSingleton<IMongodbInsertService, MongodbInsertService>();
-			_container.RegisterTypeAsSingleton<IMongodbQueryService, MongodbQueryService>();
+			IocContainer.RegisterTypeAsSingleton<IMongodbInsertService, MongodbInsertService>();
+			IocContainer.RegisterTypeAsSingleton<IMongodbQueryService, MongodbQueryService>();
 		}
 	}
 }

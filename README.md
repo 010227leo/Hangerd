@@ -43,7 +43,7 @@ public class RegisterServiceTask : RegisterServiceBootstrapperTask
 
 	public override void Execute()
 	{
-		_container.RegisterTypeAsSingleton<IMyService, MyService>();
+		IocContainer.RegisterTypeAsSingleton<IMyService, MyService>();
 	}
 }
 
@@ -98,7 +98,7 @@ public class RegisterServiceTask : RegisterServiceBootstrapperTask
 
 	public override void Execute()
 	{
-		_container.RegisterMultipleTypesAsPerResolve<IDomainEventHandler<AccountNameModifiedEvent>, AccountNameModifiedEventHandler>();
+		IocContainer.RegisterMultipleTypesAsPerResolve<IDomainEventHandler<AccountNameModifiedEvent>, AccountNameModifiedEventHandler>();
 	}
 }
 	

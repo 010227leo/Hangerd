@@ -11,17 +11,18 @@ namespace HangerdSample.Domain.Bootstrapper
 {
 	public class RegisterServiceTask : RegisterServiceBootstrapperTask
 	{
-		public RegisterServiceTask(IUnityContainer container) : base(container)
+		public RegisterServiceTask(IUnityContainer container)
+			: base(container)
 		{
 		}
 
 		public override void Execute()
 		{
 			//domain services
-			_container.RegisterTypeAsSingleton<IAccountDomainService, AccountDomainService>();
+			IocContainer.RegisterTypeAsSingleton<IAccountDomainService, AccountDomainService>();
 
 			//domain events
-			_container.RegisterMultipleTypesAsPerResolve<IDomainEventHandler<AccountCreatedEvent>, AccountCreatedEventHandler>();
+			IocContainer.RegisterMultipleTypesAsPerResolve<IDomainEventHandler<AccountCreatedEvent>, AccountCreatedEventHandler>();
 		}
 	}
 }
