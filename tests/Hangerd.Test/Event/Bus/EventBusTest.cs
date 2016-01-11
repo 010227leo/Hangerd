@@ -14,21 +14,18 @@ namespace Hangerd.Test.Event.Bus
 		[Test]
 		public void PublishAndCommitTest()
 		{
+			var dispatcher = LocalServiceLocator.GetService<IEventDispatcher>();
+
+			if (dispatcher == null)
+				Assert.Fail("EventDispatcher is null");
+
+			//dispatcher.AutoRegister();
+
+			dispatcher.Register<TestEvent, TestEventHandler1>();
+			dispatcher.Register<TestEvent, TestEventHandler2>();
+
 			using (var bus = UnitOfWorkManager.Begin<IEventBus>())
 			{
-				if (bus == null)
-					Assert.Fail("EventBus is null");
-
-				var dispatcher = LocalServiceLocator.GetService<IEventDispatcher>();
-
-				if (dispatcher == null)
-					Assert.Fail("EventDispatcher is null");
-
-				//dispatcher.AutoRegister();
-
-				dispatcher.Register<TestEvent, TestEventHandler1>();
-				dispatcher.Register<TestEvent, TestEventHandler2>();
-
 				EventHandledResults = new List<string>();
 
 				bus.Publish(new TestEvent());

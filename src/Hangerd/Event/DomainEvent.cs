@@ -1,6 +1,8 @@
 ﻿using System;
 using Hangerd.Components;
 using Hangerd.Domain.Entity;
+using Hangerd.Event.Bus;
+using Hangerd.Uow;
 
 namespace Hangerd.Event
 {
@@ -36,6 +38,14 @@ namespace Hangerd.Event
 
 			foreach (var handler in handlers)
 				handler.Handle(domainEvent);
+
+			var uowProvider = LocalServiceLocator.GetService<ICurrentUowProvider>();
+			var eventBus = uowProvider.GetCurrent<IEventBus>();
+
+			if (eventBus != null)
+			{
+				eventBus.Publish(domainEvent);
+			}
 		}
 
 		#endregion

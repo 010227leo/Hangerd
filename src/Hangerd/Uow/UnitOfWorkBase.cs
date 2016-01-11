@@ -4,8 +4,9 @@ namespace Hangerd.Uow
 {
 	public abstract class UnitOfWorkBase : Disposable, IUnitOfWork
 	{
-		public string Id { get; private set; }
 		public event EventHandler Completed;
+
+		public string Id { get; private set; }
 
 		protected UnitOfWorkBase()
 		{

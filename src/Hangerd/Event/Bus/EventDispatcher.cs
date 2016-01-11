@@ -28,7 +28,7 @@ namespace Hangerd.Event.Bus
 				var handlerTypes = concreteTypes
 					.Where(t => genericHandlerType.IsAssignableFrom(t));
 
-				foreach (var handler in handlerTypes.Select(Activator.CreateInstance))
+				foreach (var handler in handlerTypes)
 					RegisterHandler(eventType, handler);
 			}
 		}
@@ -37,14 +37,12 @@ namespace Hangerd.Event.Bus
 			where TEvent : class, IEvent
 			where TEventHandler : IEventHandler<TEvent>
 		{
-			var handler = Activator.CreateInstance(typeof (TEventHandler));
-
-			RegisterHandler(typeof (TEvent), handler);
+			RegisterHandler(typeof (TEvent), typeof (TEventHandler));
 		}
 
-		private void RegisterHandler(Type eventType, object handler)
+		private void RegisterHandler(Type eventType, Type handlerType)
 		{
-			var handlerType = handler.GetType();
+			var handler = Activator.CreateInstance(handlerType);
 
 			if (_handlers.ContainsKey(eventType))
 			{
