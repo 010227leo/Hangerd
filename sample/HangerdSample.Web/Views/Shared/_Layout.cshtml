@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>HangerdSample</title>
+	<link href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<header>
+		<nav role="navigation">
+			<div class="navbar navbar-inverse">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+
+						<a class="navbar-brand" href="@Url.Action("Index", "Home")" title="HangerdSample" rel="homepage">HangerdSample</a>
+					</div>
+					<div class="navbar-collapse collapse navbar-responsive-collapse">
+						<ul class="nav navbar-nav navbar-right">
+							@{
+								var currentAccount = HangerdSample.Web.Authentication.AccountLoginContext.Current;
+							}
+
+							@if (currentAccount != null)
+							{
+								<li class="menu-item menu-item-type-post_type menu-item-object-page">
+									<p class="navbar-text"><span class="glyphicon glyphicon-user"></span> @currentAccount.LoginName</p>
+								</li>
+								<li class="menu-item menu-item-type-post_type menu-item-object-page">
+									<a href="@Url.Action("SignOut", "Account")"><span class="glyphicon glyphicon-off"></span> 注销</a>
+								</li>
+							}
+							else
+							{
+								<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="@Url.Action("Login", "Account")">登录</a></li>
+								<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="@Url.Action("Register", "Account")">注册</a></li>
+							}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<div class="container">
+		@RenderBody()
+	</div>
+
+	<footer class="clearfix">
+		<div class="container">
+			<hr>
+			<div id="footer-wrapper">
+				<div class="row">
+					<div class="copyright text-center">
+						&copy; Copyright 2015 <a href="mailto:leo010227@outlook.com" rel="home">leo010227@outlook.com</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script src="//cdn.bootcss.com/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+	<script src="//cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js" type="text/javascript"></script>
+
+	@RenderSection("scripts", false)
+</body>
+</html>
