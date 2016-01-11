@@ -8,11 +8,11 @@ using Microsoft.Practices.ObjectBuilder2;
 
 namespace Hangerd.EntityFramework.Uow
 {
-	public class EfRepositoryUow : UnitOfWorkBase, IRepositoryUow
+	public class EfRepositoryContext : UnitOfWorkBase, IRepositoryContext
 	{
 		private readonly IDictionary<Type, HangerdDbContext> _activeDbContexts;
 
-		public EfRepositoryUow()
+		public EfRepositoryContext()
 		{
 			_activeDbContexts = new Dictionary<Type, HangerdDbContext>();
 		}

@@ -10,7 +10,7 @@ namespace Hangerd.EntityFramework.Uow
 
 		public TDbContext DbContext
 		{
-			get { return _currentUowProvider.GetCurrent<IRepositoryUow>().GetDbContext<TDbContext>(); }
+			get { return _currentUowProvider.GetCurrent<IRepositoryContext>().GetDbContext<TDbContext>(); }
 		}
 
 		public DbContextProvider(ICurrentUowProvider currentUowProvider)

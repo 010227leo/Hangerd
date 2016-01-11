@@ -2,7 +2,7 @@
 
 namespace Hangerd.Domain.Repository
 {
-	public interface IRepositoryUow : IUnitOfWork
+	public interface IRepositoryContext : IUnitOfWork
 	{
 	}
 }

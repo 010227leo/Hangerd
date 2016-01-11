@@ -5,13 +5,13 @@ namespace Hangerd.EntityFramework.Uow
 {
     public static class RepositoryUowExtensions
     {
-		public static TDbContext GetDbContext<TDbContext>(this IRepositoryUow unitOfWork) 
+		public static TDbContext GetDbContext<TDbContext>(this IRepositoryContext unitOfWork) 
             where TDbContext : HangerdDbContext
         {
-			if (!(unitOfWork is EfRepositoryUow))
-				throw new ArgumentException("unitOfWork is not type of " + typeof(EfRepositoryUow).FullName, "unitOfWork");
+			if (!(unitOfWork is EfRepositoryContext))
+				throw new ArgumentException("unitOfWork is not type of " + typeof(EfRepositoryContext).FullName, "unitOfWork");
 
-			return ((EfRepositoryUow) unitOfWork).GetOrCreateDbContext<TDbContext>();
+			return ((EfRepositoryContext) unitOfWork).GetOrCreateDbContext<TDbContext>();
         }
     }
 }
