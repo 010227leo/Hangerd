@@ -18,7 +18,7 @@ A lightweight and efficient .NET based application development framework. It pro
 - Unity v3.5.1404.0
 - Newtonsoft.Json v6.0.1
 
-## Sample
+## Usage
 
 - **How to start**
 
@@ -43,7 +43,7 @@ public class RegisterServiceTask : RegisterServiceBootstrapperTask
 
 	public override void Execute()
 	{
-		container.RegisterTypeAsSingleton<IMyService, MyService>();
+		_container.RegisterTypeAsSingleton<IMyService, MyService>();
 	}
 }
 
@@ -98,7 +98,7 @@ public class RegisterServiceTask : RegisterServiceBootstrapperTask
 
 	public override void Execute()
 	{
-		container.RegisterMultipleTypesAsPerResolve<IDomainEventHandler<AccountNameModifiedEvent>, AccountNameModifiedEventHandler>();
+		_container.RegisterMultipleTypesAsPerResolve<IDomainEventHandler<AccountNameModifiedEvent>, AccountNameModifiedEventHandler>();
 	}
 }
 	
