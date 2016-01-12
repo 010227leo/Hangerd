@@ -1,23 +1,10 @@
 ﻿using System;
 using Hangerd.Components;
-using Hangerd.Domain.Repository;
-using Hangerd.Event.Bus;
-using Hangerd.Uow;
 
 namespace Hangerd
 {
 	public abstract class HangerdServiceBase
 	{
-		protected static IRepositoryContext BeginContext()
-		{
-			return UnitOfWorkManager.Begin<IRepositoryContext>();
-		}
-
-		protected static IEventBus BeginEventBus()
-		{
-			return UnitOfWorkManager.Begin<IEventBus>();
-		}
-
 		protected static HangerdResult<TResult> TryReturn<TResult>(Func<TResult> operate, string successMessage = null)
 		{
 			try

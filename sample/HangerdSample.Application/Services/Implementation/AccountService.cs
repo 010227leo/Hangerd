@@ -2,6 +2,8 @@
 using System.Linq;
 using AutoMapper;
 using Hangerd;
+using Hangerd.Domain.Repository;
+using Hangerd.Event.Bus;
 using Hangerd.Extensions;
 using Hangerd.Uow;
 using Hangerd.Validation;
@@ -32,7 +34,7 @@ namespace HangerdSample.Application.Services.Implementation
 
 		public AccountDto GetAccount(string id)
 		{
-			using (BeginContext())
+			using (UnitOfWorkManager.Begin<IRepositoryContext>())
 			{
 				return Mapper.Map<Account, AccountDto>(_accountRepository.Get(id, false));
 			}
@@ -42,7 +44,7 @@ namespace HangerdSample.Application.Services.Implementation
 		{
 			return TryReturn(() =>
 			{
-				using (BeginContext())
+				using (UnitOfWorkManager.Begin<IRepositoryContext>())
 				{
 					if (string.IsNullOrWhiteSpace(loginName) || string.IsNullOrWhiteSpace(password))
 						throw new HangerdException("用户名或密码为空");
@@ -62,7 +64,7 @@ namespace HangerdSample.Application.Services.Implementation
 
 		public IEnumerable<AccountDto> GetAccounts(int pageIndex, int pageSize, out int totalCount)
 		{
-			using (BeginContext())
+			using (UnitOfWorkManager.Begin<IRepositoryContext>())
 			{
 				var accounts = _accountRepository.GetAll(DeletableSpecifications<Account>.NotDeleted(), false)
 					.OrderByDescending(a => a.CreateTime)
@@ -76,7 +78,8 @@ namespace HangerdSample.Application.Services.Implementation
 		{
 			return TryOperate(() =>
 			{
-				using (IUnitOfWork context = BeginContext(), eventBus = BeginEventBus())
+				using (var eventBus = UnitOfWorkManager.Begin<IEventBus>())
+				using (var context = UnitOfWorkManager.Begin<IRepositoryContext>())
 				{
 					var newAccount = _accountDomainService.RegisterNewAccount(
 						_accountRepository, accountDto.LoginName, accountDto.Password, accountDto.Name);
@@ -93,7 +96,7 @@ namespace HangerdSample.Application.Services.Implementation
 		{
 			return TryOperate(() =>
 			{
-				using (var context = BeginContext())
+				using (var context = UnitOfWorkManager.Begin<IRepositoryContext>())
 				{
 					var account = _accountRepository.Get(accountId, true);
 
@@ -113,7 +116,7 @@ namespace HangerdSample.Application.Services.Implementation
 		{
 			return TryOperate(() =>
 			{
-				using (var context = BeginContext())
+				using (var context = UnitOfWorkManager.Begin<IRepositoryContext>())
 				{
 					var account = _accountRepository.Get(accountId, true);
 
