@@ -4,9 +4,14 @@ namespace Hangerd.Extensions
 {
 	public static class JsonExtensions
 	{
-		public static string ObjectToJson(this object obj, Formatting formatting = Formatting.None)
+		public static string ObjectToJson(this object obj, bool indented = false)
 		{
-			return JsonConvert.SerializeObject(obj, formatting);
+			var options = new JsonSerializerSettings();
+
+			if (indented)
+				options.Formatting = Formatting.Indented;
+
+			return JsonConvert.SerializeObject(obj, options);
 		}
 
 		public static T JsonToObject<T>(this string json)
