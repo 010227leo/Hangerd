@@ -5,7 +5,7 @@ namespace Hangerd
 {
 	public abstract class HangerdServiceBase
 	{
-		protected static HangerdResult<TResult> TryReturn<TResult>(Func<TResult> operate, string successMessage = null)
+		protected virtual HangerdResult<TResult> Try<TResult>(Func<TResult> operate, string successMessage = null)
 		{
 			try
 			{
@@ -19,13 +19,13 @@ namespace Hangerd
 			{
 				LocalLoggingService.Exception(ex);
 
-				return new HangerdResult<TResult>(default(TResult), "系统异常,请在日志中查看详情");
+				return new HangerdResult<TResult>(default(TResult), "系统异常，请在日志中查看详情");
 			}
 		}
 
-		protected static HangerdResult<bool> TryOperate(Action operate, string successMessage = null)
+		protected virtual HangerdResult<bool> Try(Action operate, string successMessage = null)
 		{
-			return TryReturn(() =>
+			return Try(() =>
 			{
 				operate();
 

@@ -42,7 +42,7 @@ namespace HangerdSample.Application.Services.Implementation
 
 		public HangerdResult<AccountDto> GetAccountForLogin(string loginName, string password)
 		{
-			return TryReturn(() =>
+			return Try(() =>
 			{
 				using (UnitOfWorkManager.Begin<IRepositoryContext>())
 				{
@@ -76,7 +76,7 @@ namespace HangerdSample.Application.Services.Implementation
 
 		public HangerdResult<bool> RegisterAccount(AccountDto accountDto)
 		{
-			return TryOperate(() =>
+			return Try(() =>
 			{
 				using (var eventBus = UnitOfWorkManager.Begin<IEventBus>())
 				using (var context = UnitOfWorkManager.Begin<IRepositoryContext>())
@@ -94,7 +94,7 @@ namespace HangerdSample.Application.Services.Implementation
 
 		public HangerdResult<bool> ChangeAccountPassword(string accountId, string oldPassword, string newPassword)
 		{
-			return TryOperate(() =>
+			return Try(() =>
 			{
 				using (var context = UnitOfWorkManager.Begin<IRepositoryContext>())
 				{
@@ -114,7 +114,7 @@ namespace HangerdSample.Application.Services.Implementation
 
 		public HangerdResult<bool> RemoveAccount(string accountId)
 		{
-			return TryOperate(() =>
+			return Try(() =>
 			{
 				using (var context = UnitOfWorkManager.Begin<IRepositoryContext>())
 				{
