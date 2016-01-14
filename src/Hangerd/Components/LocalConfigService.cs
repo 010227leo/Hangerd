@@ -9,8 +9,8 @@ namespace Hangerd.Components
 {
 	public static class LocalConfigService
 	{
-		private static readonly string _localConfigDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config");
-		private static readonly ConcurrentDictionary<string, object> _configCache = new ConcurrentDictionary<string, object>();
+		private static readonly string LocalConfigDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config");
+		private static readonly ConcurrentDictionary<string, object> ConfigCache = new ConcurrentDictionary<string, object>();
 
 		public static T GetConfig<T>(T defaultValue)
 		{
@@ -25,7 +25,7 @@ namespace Hangerd.Components
 
 			var fileFullName = GetConfigFileFullName(fileName);
 
-			if (_configCache.TryGetValue(fileFullName, out instance))
+			if (ConfigCache.TryGetValue(fileFullName, out instance))
 				return (T) instance;
 
 			if (!File.Exists(fileFullName))
@@ -56,7 +56,7 @@ namespace Hangerd.Components
 				{
 					instance = (T) xmlSerializer.Deserialize(sr);
 
-					_configCache.TryAdd(fileFullName, instance);
+					ConfigCache.TryAdd(fileFullName, instance);
 
 					return (T) instance;
 				}
@@ -108,18 +108,18 @@ namespace Hangerd.Components
 
 		private static bool EnsureConfigDirectoryExists()
 		{
-			if (Directory.Exists(_localConfigDirectory))
+			if (Directory.Exists(LocalConfigDirectory))
 				return true;
 
 			try
 			{
-				Directory.CreateDirectory(_localConfigDirectory);
+				Directory.CreateDirectory(LocalConfigDirectory);
 
 				return true;
 			}
 			catch (Exception ex)
 			{
-				LocalLoggingService.Exception("Failed to create directory {0}:{1}", _localConfigDirectory, ex.Message);
+				LocalLoggingService.Exception("Failed to create directory {0}:{1}", LocalConfigDirectory, ex.Message);
 
 				return false;
 			}
@@ -127,7 +127,7 @@ namespace Hangerd.Components
 
 		private static string GetConfigFileFullName(string fileName)
 		{
-			return Path.Combine(_localConfigDirectory, fileName);
+			return Path.Combine(LocalConfigDirectory, fileName);
 		}
 	}
 }

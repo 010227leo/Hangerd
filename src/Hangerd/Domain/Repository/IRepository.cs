@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Hangerd.Domain.Entity;
-using Hangerd.Domain.Specification;
+using Hangerd.Specification;
 
 namespace Hangerd.Domain.Repository
 {

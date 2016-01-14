@@ -7,9 +7,9 @@ namespace HangerdSample.Web.Authentication
 	public class AccountLoginAuthAttribute : LoginAuthAttribute
 	{
 		public AccountLoginAuthAttribute()
-			: base("Login", "Account", string.Empty)
+			: base("SignIn", "Account", string.Empty)
 		{
-			DefaultAjaxResult = "{\"Success\":false,\"Message\":\"操作失败，请重新登录\"}";
+			DefaultAjaxResult = "{\"Success\":false,\"Message\":\"Error\"}";
 		}
 
 		protected override bool LoginAuthorizeCore(HttpContextBase httpContext)

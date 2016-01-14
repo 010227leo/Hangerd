@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Hangerd.Domain.Specification
+namespace Hangerd.Specification
 {
 	/// <summary>
     /// Extension methods for adding AND and OR with parameters rebinder

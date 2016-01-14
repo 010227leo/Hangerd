@@ -1,5 +1,5 @@
 ﻿using Hangerd.Domain.Entity;
-using Hangerd.Domain.Specification;
+using Hangerd.Specification;
 
 namespace HangerdSample.Domain.Specifications
 {
@@ -8,12 +8,12 @@ namespace HangerdSample.Domain.Specifications
 	{
 		public static Specification<TEntity> Default
 		{
-			get { return new DirectSpecification<TEntity>(e => true); }
+			get { return new DirectSpecification<TEntity>(x => true); }
 		}
 
 		public static Specification<TEntity> IdEquals(string id)
 		{
-			return new DirectSpecification<TEntity>(e => e.Id == id);
+			return new DirectSpecification<TEntity>(x => x.Id == id);
 		}
 	}
 }

@@ -1,4 +1,4 @@
-﻿using Hangerd.Domain.Specification;
+﻿using Hangerd.Specification;
 using HangerdSample.Domain.Models;
 
 namespace HangerdSample.Domain.Specifications

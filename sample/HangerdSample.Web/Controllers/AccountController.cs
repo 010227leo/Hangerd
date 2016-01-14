@@ -20,9 +20,9 @@ namespace HangerdSample.Web.Controllers
 			_accountService = accountService;
 		}
 
-		#region Login
+		#region SignIn
 
-		public ActionResult Login()
+		public ActionResult SignIn()
 		{
 			if (AccountLoginContext.Current != null)
 				return RedirectToAction("Index", "Home");
@@ -31,9 +31,9 @@ namespace HangerdSample.Web.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult Login(LoginModel model)
+		public ActionResult SignIn(LoginModel model)
 		{
-			var result = _accountService.GetAccountForLogin(model.LoginName, model.Password);
+			var result = _accountService.GetAccount(model.LoginName, model.Password);
 			var success = result.Value != null;
 
 			if (success)
@@ -46,20 +46,20 @@ namespace HangerdSample.Web.Controllers
 		{
 			LoginHelper.SignOut();
 
-			return RedirectToAction("Login");
+			return RedirectToAction("SignIn");
 		}
 
 		#endregion
 
-		#region Register
+		#region SignUp
 
-		public ActionResult Register()
+		public ActionResult SignUp()
 		{
 			return View();
 		}
 
 		[HttpPost]
-		public ActionResult Register(AccountRegisterModel model)
+		public ActionResult SignUp(AccountSignUpModel model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -68,9 +68,9 @@ namespace HangerdSample.Web.Controllers
 				return JsonContent(new { Success = false, Message = errorMessage });
 			}
 
-			var result = _accountService.RegisterAccount(new AccountDto
+			var result = _accountService.SignUpAccount(new AccountDto
 			{
-				LoginName = model.LoginName,
+				LoginName = model.Email,
 				Password = model.Password,
 				Name = model.Name
 			});

@@ -40,26 +40,26 @@ namespace HangerdSample.Application.Services.Implementation
 			}
 		}
 
-		public HangerdResult<AccountDto> GetAccountForLogin(string loginName, string password)
+		public HangerdResult<AccountDto> GetAccount(string email, string password)
 		{
 			return Try(() =>
 			{
 				using (UnitOfWorkManager.Begin<IRepositoryContext>())
 				{
-					if (string.IsNullOrWhiteSpace(loginName) || string.IsNullOrWhiteSpace(password))
-						throw new HangerdException("用户名或密码为空");
+					if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+						throw new HangerdException("Email or password is empty");
 
-					var spec = DeletableSpecifications<Account>.NotDeleted() & AccountSpecifications.LoginNameEquals(loginName);
+					var spec = DeletableSpecifications<Account>.NotDeleted() & AccountSpecifications.LoginNameEquals(email);
 					var account = _accountRepository.Get(spec, false);
 
-					Requires.NotNull(account, "用户名不存在");
+					Requires.NotNull(account, "Account not exist");
 
 					if (!account.ValidatePassword(password))
-						throw new HangerdException("密码错误");
+						throw new HangerdException("Wrong password");
 
 					return Mapper.Map<Account, AccountDto>(account);
 				}
-			}, "登录成功");
+			});
 		}
 
 		public IEnumerable<AccountDto> GetAccounts(int pageIndex, int pageSize, out int totalCount)
@@ -74,22 +74,22 @@ namespace HangerdSample.Application.Services.Implementation
 			}
 		}
 
-		public HangerdResult<bool> RegisterAccount(AccountDto accountDto)
+		public HangerdResult<bool> SignUpAccount(AccountDto accountDto)
 		{
 			return Try(() =>
 			{
 				using (var eventBus = UnitOfWorkManager.Begin<IEventBus>())
 				using (var context = UnitOfWorkManager.Begin<IRepositoryContext>())
 				{
-					var newAccount = _accountDomainService.RegisterNewAccount(
+					var account = _accountDomainService.SignUpAccount(
 						_accountRepository, accountDto.LoginName, accountDto.Password, accountDto.Name);
 
-					_accountRepository.Add(newAccount);
+					_accountRepository.Add(account);
 
 					context.Commit();
 					eventBus.Commit();
 				}
-			}, "注册成功");
+			}, "Success");
 		}
 
 		public HangerdResult<bool> ChangeAccountPassword(string accountId, string oldPassword, string newPassword)
@@ -100,10 +100,10 @@ namespace HangerdSample.Application.Services.Implementation
 				{
 					var account = _accountRepository.Get(accountId, true);
 
-					Requires.NotNull(account, "账号信息不存在");
+					Requires.NotNull(account, "Account not exist");
 				
 					if (!account.ValidatePassword(oldPassword))
-						throw new HangerdException("原密码错误");
+						throw new HangerdException("Wrong password");
 
 					account.ChangePassword(newPassword);
 
@@ -120,7 +120,7 @@ namespace HangerdSample.Application.Services.Implementation
 				{
 					var account = _accountRepository.Get(accountId, true);
 
-					Requires.NotNull(account, "账号信息不存在");
+					Requires.NotNull(account, "Account not exist");
 
 					_accountRepository.Delete(account);
 

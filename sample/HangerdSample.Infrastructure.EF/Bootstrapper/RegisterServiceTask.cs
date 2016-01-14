@@ -15,9 +15,6 @@ namespace HangerdSample.Infrastructure.EF.Bootstrapper
 
 		public override void Execute()
 		{
-			//DbContext
-			IocContainer.RegisterType<HangerdSampleDbContext>();
-
 			//Repository
 			IocContainer.RegisterTypeAsSingleton<IAccountRepository, AccountRepository>();
 		}

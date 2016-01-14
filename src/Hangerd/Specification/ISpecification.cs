@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Hangerd.Domain.Specification
+namespace Hangerd.Specification
 {
 	public interface ISpecification<T>
     {

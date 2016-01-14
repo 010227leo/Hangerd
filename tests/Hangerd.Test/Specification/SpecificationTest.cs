@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Hangerd.Domain.Specification;
+using Hangerd.Specification;
 using Hangerd.Test.Domain.Entity;
 using NUnit.Framework;
 

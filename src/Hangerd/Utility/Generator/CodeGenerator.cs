@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Hangerd.Utility.Generator
 {
-	public class CodeGenerator
+	public static class CodeGenerator
 	{
 		private static readonly Dictionary<CharacterType, string> CodeSet = new Dictionary<CharacterType, string>
 		{

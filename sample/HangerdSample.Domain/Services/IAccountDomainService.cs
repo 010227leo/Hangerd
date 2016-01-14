@@ -5,9 +5,6 @@ namespace HangerdSample.Domain.Services
 {
 	public interface IAccountDomainService
 	{
-		/// <summary>
-		/// 注册Account
-		/// </summary>
-		Account RegisterNewAccount(IAccountRepository repository, string loginName, string unencryptedPassword, string name);
+		Account SignUpAccount(IAccountRepository repository, string email, string unencryptedPassword, string name);
 	}
 }

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Hangerd.Domain.Specification
+namespace Hangerd.Specification
 {
 	/// <summary>
 	/// NotEspecification convert a original specification with NOT logic operator

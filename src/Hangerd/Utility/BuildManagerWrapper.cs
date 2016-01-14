@@ -10,19 +10,19 @@ using Hangerd.Extensions;
 
 namespace Hangerd.Utility
 {
-	public class BuildManagerWrapper
+	public sealed class BuildManagerWrapper
 	{
-		private static readonly BuildManagerWrapper _current = new BuildManagerWrapper();
+		private static readonly BuildManagerWrapper CurrentWrapper = new BuildManagerWrapper();
 		private IEnumerable<Assembly> _referencedAssemblies;
 		private IEnumerable<Type> _publicTypes;
 		private IEnumerable<Type> _concreteTypes;
 
 		public static BuildManagerWrapper Current
 		{
-			get { return _current; }
+			get { return CurrentWrapper; }
 		}
 
-		public virtual IEnumerable<Assembly> Assemblies
+		public IEnumerable<Assembly> Assemblies
 		{
 			get
 			{
@@ -46,20 +46,18 @@ namespace Hangerd.Utility
 						}
 					}
 
-					return _referencedAssemblies ?? 
-						(_referencedAssemblies = allAssemblies
-							.Where(assembly => assembly != null && !assembly.GlobalAssemblyCache)
-							.Distinct(new LambdaComparer<Assembly>((x, y) => x.FullName == y.FullName))
-							.ToList());
+					return _referencedAssemblies ??
+					       (_referencedAssemblies = allAssemblies
+						       .Where(assembly => assembly != null && !assembly.GlobalAssemblyCache)
+						       .Distinct(new LambdaComparer<Assembly>((x, y) => x.FullName == y.FullName))
+						       .ToList());
 				}
-				else
-				{
-					return _referencedAssemblies ?? 
-						(_referencedAssemblies = BuildManager.GetReferencedAssemblies()
-							.Cast<Assembly>()
-							.Where(assembly => !assembly.GlobalAssemblyCache)
-							.ToList());
-				}
+
+				return _referencedAssemblies ??
+				       (_referencedAssemblies = BuildManager.GetReferencedAssemblies()
+					       .Cast<Assembly>()
+					       .Where(assembly => !assembly.GlobalAssemblyCache)
+					       .ToList());
 			}
 		}
 

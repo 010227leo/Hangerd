@@ -5,10 +5,10 @@ using System.Threading;
 
 namespace Hangerd.Components
 {
-	public class LocalLoggingService
+	public static class LocalLoggingService
 	{
 		private const int ChangePathInterval = 15 * 60 * 1000;
-		private static readonly object _locker = new object();
+		private static readonly object Locker = new object();
 		private static Timer _timer;
 		private static StreamWriter _streamWriter;
 
@@ -32,7 +32,7 @@ namespace Hangerd.Components
 
 		private static void CloseStreamWriter()
 		{
-			lock (_locker)
+			lock (Locker)
 			{
 				if (_streamWriter != null)
 					_streamWriter.Close();
@@ -41,7 +41,7 @@ namespace Hangerd.Components
 
 		private static void InitStreamWriter()
 		{
-			lock (_locker)
+			lock (Locker)
 			{
 				_streamWriter = new StreamWriter(GetLogFileName(), true, Encoding.UTF8, 1024)
 				{
@@ -113,7 +113,7 @@ namespace Hangerd.Components
 
 		private static void InternalAddLog(LogLevel logType, string message)
 		{
-			lock (_locker)
+			lock (Locker)
 			{
 				if (_streamWriter == null)
 					throw new Exception("StreamWriter has not init.");

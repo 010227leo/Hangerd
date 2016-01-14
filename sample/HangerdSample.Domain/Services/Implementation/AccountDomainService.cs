@@ -6,12 +6,12 @@ namespace HangerdSample.Domain.Services.Implementation
 {
 	public class AccountDomainService : IAccountDomainService
 	{
-		public Account RegisterNewAccount(IAccountRepository repository, string loginName, string unencryptedPassword, string name)
+		public Account SignUpAccount(IAccountRepository repository, string email, string unencryptedPassword, string name)
 		{
-			if (repository.ExistLoginName(loginName))
-				throw new HangerdException("登录账号已存在");
+			if (repository.ExistLoginName(email))
+				throw new HangerdException("Email is already taken");
 
-			return new Account(loginName, unencryptedPassword, name);
+			return new Account(email, unencryptedPassword, name);
 		}
 	}
 }

@@ -7,12 +7,12 @@ namespace Hangerd
 {
 	public static class HangerdFramework
 	{
-		private static readonly IUnityContainer _container = new UnityContainer();
+		private static readonly IUnityContainer IocContainer = new UnityContainer();
 		private static BootstrapperManager _bootstrapperManager;
 
 		public static IUnityContainer Container
 		{
-			get { return _container; }
+			get { return IocContainer; }
 		}
 
 		[MethodImpl(MethodImplOptions.Synchronized)]
@@ -21,7 +21,7 @@ namespace Hangerd
 			LocalLoggingService.Init();
 			LocalLoggingService.Info("Hangerd start!");
 
-			_bootstrapperManager = new BootstrapperManager(_container);
+			_bootstrapperManager = new BootstrapperManager(IocContainer);
 			_bootstrapperManager.Execute();
 
 			LocalLoggingService.Info("Hangerd start complete!");

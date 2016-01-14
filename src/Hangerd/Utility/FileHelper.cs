@@ -7,7 +7,7 @@ using Hangerd.Components;
 
 namespace Hangerd.Utility
 {
-	public class FileHelper
+	public static class FileHelper
 	{
 		public static void Upload(Stream stream, string physicalPath, string fileName)
 		{

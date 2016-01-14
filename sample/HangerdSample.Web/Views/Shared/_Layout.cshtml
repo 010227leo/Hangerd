@@ -32,13 +32,13 @@
 									<p class="navbar-text"><span class="glyphicon glyphicon-user"></span> @currentAccount.LoginName</p>
 								</li>
 								<li class="menu-item menu-item-type-post_type menu-item-object-page">
-									<a href="@Url.Action("SignOut", "Account")"><span class="glyphicon glyphicon-off"></span> 注销</a>
+									<a href="@Url.Action("SignOut", "Account")"><span class="glyphicon glyphicon-off"></span> Sign Out</a>
 								</li>
 							}
 							else
 							{
-								<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="@Url.Action("Login", "Account")">登录</a></li>
-								<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="@Url.Action("Register", "Account")">注册</a></li>
+								<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="@Url.Action("SignIn", "Account")">Sign In</a></li>
+								<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="@Url.Action("SignUp", "Account")">Sign Up</a></li>
 							}
 						</ul>
 					</div>
@@ -57,7 +57,7 @@
 			<div id="footer-wrapper">
 				<div class="row">
 					<div class="copyright text-center">
-						&copy; Copyright 2015 <a href="mailto:leo010227@outlook.com" rel="home">leo010227@outlook.com</a>
+						&copy; Copyright 2016 <a href="mailto:leo010227@outlook.com" rel="home">leo010227@outlook.com</a>
 					</div>
 				</div>
 			</div>

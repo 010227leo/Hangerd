@@ -1,5 +1,5 @@
 ﻿using Hangerd.Domain.Entity;
-using Hangerd.Domain.Specification;
+using Hangerd.Specification;
 
 namespace HangerdSample.Domain.Specifications
 {
