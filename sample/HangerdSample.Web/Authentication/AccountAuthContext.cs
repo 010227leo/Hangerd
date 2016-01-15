@@ -14,7 +14,7 @@ namespace HangerdSample.Web.Authentication
 		{
 			get
 			{
-				if (HttpContext.Current == null || !FormsAuthenticationHelper.IsSignIn())
+				if (!FormsAuthenticationHelper.IsSignIn())
 					return null;
 
 				var account = HttpContext.Current.Items[AccountCachingKey] as AccountDto;

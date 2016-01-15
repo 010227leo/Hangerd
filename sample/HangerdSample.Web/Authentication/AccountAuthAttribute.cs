@@ -1,5 +1,4 @@
 ﻿using System.Web;
-using System.Web.Mvc;
 using Hangerd.Mvc.Attributes;
 
 namespace HangerdSample.Web.Authentication
@@ -18,10 +17,6 @@ namespace HangerdSample.Web.Authentication
 				return false;
 
 			return AccountAuthContext.Current != null;
-		}
-
-		protected override void OnRolePrivilegeCheck(AuthorizationContext filterContext)
-		{
 		}
 	}
 }

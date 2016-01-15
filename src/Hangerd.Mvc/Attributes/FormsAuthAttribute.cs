@@ -42,9 +42,11 @@ namespace Hangerd.Mvc.Attributes
 			return FormsAuthenticationHelper.IsSignIn();
 		}
 
-		protected abstract void OnRolePrivilegeCheck(AuthorizationContext filterContext);
+		protected virtual void OnRolePrivilegeCheck(AuthorizationContext filterContext)
+		{
+		}
 
-		protected virtual void RedirectToSigninPage(AuthorizationContext filterContext)
+		protected void RedirectToSigninPage(AuthorizationContext filterContext)
 		{
 			var routeValue = new RouteValueDictionary
 			{
@@ -59,7 +61,7 @@ namespace Hangerd.Mvc.Attributes
 			filterContext.Result = new RedirectToRouteResult(routeValue);
 		}
 
-		protected virtual void ResponseDefaultAjaxResult(AuthorizationContext filterContext)
+		protected void ResponseDefaultAjaxResult(AuthorizationContext filterContext)
 		{
 			filterContext.Result = new ContentResult { Content = DefaultAjaxResult ?? string.Empty };
 		}

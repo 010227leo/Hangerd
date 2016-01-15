@@ -34,7 +34,7 @@ namespace Hangerd.Mvc.Authentication
 
 		public static string GetUserData()
 		{
-			return IsSignIn() ? ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.UserData : string.Empty;
+			return IsSignIn() ? ((FormsIdentity) HttpContext.Current.User.Identity).Ticket.UserData : string.Empty;
 		}
 	}
 }
