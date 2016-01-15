@@ -23,7 +23,7 @@
 					<div class="navbar-collapse collapse navbar-responsive-collapse">
 						<ul class="nav navbar-nav navbar-right">
 							@{
-								var currentAccount = HangerdSample.Web.Authentication.AccountLoginContext.Current;
+								var currentAccount = HangerdSample.Web.Authentication.AccountAuthContext.Current;
 							}
 
 							@if (currentAccount != null)

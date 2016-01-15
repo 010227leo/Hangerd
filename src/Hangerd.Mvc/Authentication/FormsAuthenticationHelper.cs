@@ -4,19 +4,14 @@ using System.Web.Security;
 
 namespace Hangerd.Mvc.Authentication
 {
-	public static class LoginHelper
+	public static class FormsAuthenticationHelper
 	{
-		public static bool IsLogin()
-		{
-			return HttpContext.Current != null && HttpContext.Current.User.Identity.IsAuthenticated;
-		}
-
 		public static void SignOut()
 		{
 			FormsAuthentication.SignOut();
 		}
 
-		public static void Login(string userId, string userData, DateTime expiration)
+		public static void SignIn(string userId, string userData, DateTime expiration)
 		{
 			if (HttpContext.Current == null)
 				return;
@@ -27,14 +22,19 @@ namespace Hangerd.Mvc.Authentication
 			HttpContext.Current.Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encryptTicket));
 		}
 
+		public static bool IsSignIn()
+		{
+			return HttpContext.Current != null && HttpContext.Current.User.Identity.IsAuthenticated;
+		}
+
 		public static string GetUserId()
 		{
-			return IsLogin() ? HttpContext.Current.User.Identity.Name : string.Empty;
+			return IsSignIn() ? HttpContext.Current.User.Identity.Name : string.Empty;
 		}
 
 		public static string GetUserData()
 		{
-			return IsLogin() ? ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.UserData : string.Empty;
+			return IsSignIn() ? ((FormsIdentity)HttpContext.Current.User.Identity).Ticket.UserData : string.Empty;
 		}
 	}
 }

@@ -6,7 +6,7 @@ using HangerdSample.Application.Services;
 
 namespace HangerdSample.Web.Authentication
 {
-	public static class AccountLoginContext
+	public static class AccountAuthContext
 	{
 		private const string AccountCachingKey = "HangerdSample.Web.AccountCachingKey";
 
@@ -14,7 +14,7 @@ namespace HangerdSample.Web.Authentication
 		{
 			get
 			{
-				if (HttpContext.Current == null || !LoginHelper.IsLogin())
+				if (HttpContext.Current == null || !FormsAuthenticationHelper.IsSignIn())
 					return null;
 
 				var account = HttpContext.Current.Items[AccountCachingKey] as AccountDto;
@@ -24,7 +24,7 @@ namespace HangerdSample.Web.Authentication
 
 				var accountService = LocalServiceLocator.GetService<IAccountService>();
 
-				account = accountService.Get(LoginHelper.GetUserId());
+				account = accountService.Get(FormsAuthenticationHelper.GetUserId());
 
 				if (account != null)
 					HttpContext.Current.Items.Add(AccountCachingKey, account);

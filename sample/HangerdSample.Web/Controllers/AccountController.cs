@@ -24,7 +24,7 @@ namespace HangerdSample.Web.Controllers
 
 		public ActionResult SignIn()
 		{
-			if (AccountLoginContext.Current != null)
+			if (AccountAuthContext.Current != null)
 				return RedirectToAction("Index", "Home");
 
 			return View();
@@ -37,14 +37,14 @@ namespace HangerdSample.Web.Controllers
 			var success = result.Value != null;
 
 			if (success)
-				LoginHelper.Login(result.Value.Id, string.Empty, DateTime.Now.AddHours(2));
+				FormsAuthenticationHelper.SignIn(result.Value.Id, string.Empty, DateTime.Now.AddHours(2));
 
 			return OperationJsonResult(success, result.Message);
 		}
 
 		public ActionResult SignOut()
 		{
-			LoginHelper.SignOut();
+			FormsAuthenticationHelper.SignOut();
 
 			return RedirectToAction("SignIn");
 		}
@@ -80,7 +80,7 @@ namespace HangerdSample.Web.Controllers
 
 		#endregion
 
-		[AccountLoginAuth]
+		[AccountAuth]
 		public ActionResult List()
 		{
 			var totalCount = 0;
@@ -91,7 +91,7 @@ namespace HangerdSample.Web.Controllers
 			return View(account);
 		}
 
-		[AccountLoginAuth(Ajax = true)]
+		[AccountAuth(Ajax = true)]
 		public ContentResult Remove(string id)
 		{
 			var result = _accountService.Remove(id);

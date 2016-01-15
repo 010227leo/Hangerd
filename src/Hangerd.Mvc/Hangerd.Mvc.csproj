@@ -85,9 +85,9 @@
     <Compile Include="Extensions\HtmlExtention.cs" />
     <Compile Include="UnityControllerFactory.cs" />
     <Compile Include="Attributes\ExceptionHandlerAttribute.cs" />
-    <Compile Include="Attributes\LoginAuthAttribute.cs" />
+    <Compile Include="Attributes\FormsAuthAttribute.cs" />
     <Compile Include="HangerdController.cs" />
-    <Compile Include="Authentication\LoginHelper.cs" />
+    <Compile Include="Authentication\FormsAuthenticationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterServiceTask.cs" />
     <Compile Include="ViewModels\LoginModel.cs" />

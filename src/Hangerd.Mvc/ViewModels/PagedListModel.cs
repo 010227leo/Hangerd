@@ -8,7 +8,7 @@ namespace Hangerd.Mvc.ViewModels
 
 		public int PageSize { get; set; }
 
-		public int TotalNumber { get; set; }
+		public int TotalCount { get; set; }
 
 		public IEnumerable<TDto> List { get; set; }
 	}

@@ -6,7 +6,7 @@ namespace HangerdSample.Web.Controllers
 {
 	public class HomeController : HangerdController
 	{
-		[AccountLoginAuth]
+		[AccountAuth]
 		public ActionResult Index()
 		{
 			return View();

@@ -22,7 +22,7 @@ namespace Hangerd.Mongodb.Test
 					Data = new TestData
 					{
 						Operator = string.Format("010227-{0}", i),
-						OperationType = "login",
+						OperationType = "register",
 						IsSuccess = true,
 						OperationTime = DateTime.Now
 					}

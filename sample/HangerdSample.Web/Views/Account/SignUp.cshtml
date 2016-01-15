@@ -9,7 +9,7 @@
 
 	<hr />
 
-	<form id="formLogin" class="form-horizontal">
+	<form id="formSignup" class="form-horizontal">
 		<div class="form-group">
 			<label class="col-md-3 control-label">Email:</label>
 			<div class="col-md-5">
@@ -73,7 +73,7 @@
 				type: "POST",
 				dataType: "json",
 				url: "@Url.Action("SignUp", "Account")",
-				data: $("#formLogin").serialize(),
+				data: $("#formSignup").serialize(),
 				success: function (result) {
 					alert(result.Message);
 

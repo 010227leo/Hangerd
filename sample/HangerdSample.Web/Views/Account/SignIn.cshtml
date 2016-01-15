@@ -7,7 +7,7 @@
 
 	<hr />
 
-	<form id="formLogin" class="form-horizontal">
+	<form id="formSignin" class="form-horizontal">
 		<div class="form-group">
 			<label for="txtEmail" class="col-md-3 control-label">Email</label>
 			<div class="col-md-5">
@@ -34,7 +34,7 @@
 
 @section scripts {
 	<script type="text/javascript">
-		$("#formLogin").keypress(function (e) {
+		$("#formSignin").keypress(function (e) {
 			var keyCode = e.keyCode || e.charCode;
 
 			if (keyCode === 13) {
@@ -58,7 +58,7 @@
 				type: "POST",
 				dataType: "json",
 				url: "@Url.Action("SignIn", "Account")",
-				data: $("#formLogin").serialize(),
+				data: $("#formSignin").serialize(),
 				success: function (result) {
 					if (result.Success) {
 						window.location.href = "@Url.Action("Index", "Home")";

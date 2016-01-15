@@ -8,8 +8,8 @@ namespace Hangerd.Test.Validation
 		[Test]
 		public void IsEmailAddressTest()
 		{
-			const string inputRight = "010227leo@Gmail.com";
-			const string inputWrong = "http://www.google.com";
+			const string inputRight = "leo010227@outlook.com";
+			const string inputWrong = "http://api.hangerd.com/signin?code=123456";
 
 			Assert.IsTrue(InputValidator.IsEmailAddress(inputRight));
 			Assert.IsFalse(InputValidator.IsEmailAddress(inputWrong));
@@ -28,8 +28,8 @@ namespace Hangerd.Test.Validation
 		[Test]
 		public void IsMobileNumberTest()
 		{
-			const string inputRight = "13812345678";
-			const string inputWrong = "a1s2d3e@google.com";
+			const string inputRight = "13000000000";
+			const string inputWrong = "leo010227@outlook.com";
 
 			Assert.IsTrue(InputValidator.IsMobileNumber(inputRight));
 			Assert.IsFalse(InputValidator.IsMobileNumber(inputWrong));
@@ -38,8 +38,8 @@ namespace Hangerd.Test.Validation
 		[Test]
 		public void IsUrlAddressTest()
 		{
-			const string inputRight = "http://api.efufc.com/login?returnUrl=null";
-			const string inputWrong = "010227leo@Gmail.com";
+			const string inputRight = "http://api.hangerd.com/signin?code=123456";
+			const string inputWrong = "leo010227@outlook.com";
 
 			Assert.IsTrue(InputValidator.IsUrlAddress(inputRight));
 			Assert.IsFalse(InputValidator.IsUrlAddress(inputWrong));

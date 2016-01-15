@@ -4,20 +4,20 @@ using Hangerd.Mvc.Attributes;
 
 namespace HangerdSample.Web.Authentication
 {
-	public class AccountLoginAuthAttribute : LoginAuthAttribute
+	public class AccountAuthAttribute : FormsAuthAttribute
 	{
-		public AccountLoginAuthAttribute()
-			: base("SignIn", "Account", string.Empty)
+		public AccountAuthAttribute()
+			: base("SignIn", "Account")
 		{
 			DefaultAjaxResult = "{\"Success\":false,\"Message\":\"Error\"}";
 		}
 
-		protected override bool LoginAuthorizeCore(HttpContextBase httpContext)
+		protected override bool AuthorizeCore(HttpContextBase httpContext)
 		{
-			if (!base.LoginAuthorizeCore(httpContext))
+			if (!base.AuthorizeCore(httpContext))
 				return false;
 
-			return AccountLoginContext.Current != null;
+			return AccountAuthContext.Current != null;
 		}
 
 		protected override void OnRolePrivilegeCheck(AuthorizationContext filterContext)
