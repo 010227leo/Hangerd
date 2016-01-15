@@ -18,8 +18,8 @@ namespace Hangerd.Bootstrapper
 			container.RegisterInstance(container);
 
 			BuildManagerWrapper.Current.ConcreteTypes
-				.Where(type => typeof(BootstrapperTask).IsAssignableFrom(type))
-				.Each(type => container.RegisterMultipleTypesAsSingleton(typeof(BootstrapperTask), type));
+				.Where(type => typeof (BootstrapperTask).IsAssignableFrom(type))
+				.Each(type => container.RegisterMultipleTypesAsSingleton(typeof (BootstrapperTask), type));
 		}
 
 		public void Execute()
@@ -34,7 +34,8 @@ namespace Hangerd.Bootstrapper
 				}
 				catch (Exception ex)
 				{
-					LocalLoggingService.Exception("Bootstrapper execute error '{0}'，Message:{1}", task.GetType().FullName, ex.ToString());
+					LocalLoggingService.Exception("Bootstrapper execute error '{0}'，Message:{1}", task.GetType().FullName, ex.Message);
+					LocalLoggingService.Exception(ex);
 				}
 			});
 		}
@@ -51,7 +52,8 @@ namespace Hangerd.Bootstrapper
 				}
 				catch (Exception ex)
 				{
-					LocalLoggingService.Exception("Bootstrapper dispose error '{0}'，Message:{1}", task.GetType().FullName, ex.ToString());
+					LocalLoggingService.Exception("Bootstrapper dispose error '{0}'，Message:{1}", task.GetType().FullName, ex.Message);
+					LocalLoggingService.Exception(ex);
 				}
 			});
 		}

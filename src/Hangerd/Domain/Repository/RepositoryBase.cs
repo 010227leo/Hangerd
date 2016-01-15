@@ -10,23 +10,27 @@ namespace Hangerd.Domain.Repository
 	public abstract class RepositoryBase<TEntity> : IRepository<TEntity>
 		where TEntity : EntityBase
 	{
-		public virtual TEntity Get(string id, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)
+		public virtual TEntity Get(string id, bool tracking,
+			params Expression<Func<TEntity, dynamic>>[] includeProperties)
 		{
 			return string.IsNullOrWhiteSpace(id)
 				? null
-				: GetAll(tracking, eagerLoadingProperties).FirstOrDefault(e => e.Id == id);
+				: GetAll(tracking, includeProperties).FirstOrDefault(e => e.Id == id);
 		}
 
-		public virtual TEntity Get(ISpecification<TEntity> spec, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)
+		public virtual TEntity Get(
+			ISpecification<TEntity> spec, bool tracking, params Expression<Func<TEntity, dynamic>>[] includeProperties)
 		{
-			return GetAll(tracking, eagerLoadingProperties).FirstOrDefault(spec.SatisfiedBy());
+			return GetAll(tracking, includeProperties).FirstOrDefault(spec.SatisfiedBy());
 		}
 
-		public virtual IQueryable<TEntity> GetAll(ISpecification<TEntity> spec, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)
+		public virtual IQueryable<TEntity> GetAll(
+			ISpecification<TEntity> spec, bool tracking, params Expression<Func<TEntity, dynamic>>[] includeProperties)
 		{
-			return GetAll(tracking, eagerLoadingProperties).Where(spec.SatisfiedBy());
+			return GetAll(tracking, includeProperties).Where(spec.SatisfiedBy());
 		}
-		public abstract IQueryable<TEntity> GetAll(bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties);
+
+		public abstract IQueryable<TEntity> GetAll(bool tracking, params Expression<Func<TEntity, dynamic>>[] includeProperties);
 
 		public abstract void Add(TEntity entity);
 

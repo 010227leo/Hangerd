@@ -48,8 +48,8 @@ namespace Hangerd.Mvc.Attributes
 		{
 			var routeValue = new RouteValueDictionary
 			{
-				{"Controller", _loginController},
-				{"Action", _loginAction}
+				{ "Controller", _loginController },
+				{ "Action", _loginAction }
 			};
 
 			if (_loginArea != null)
@@ -63,12 +63,12 @@ namespace Hangerd.Mvc.Attributes
 
 		protected virtual void ResponseDefaultAjaxResult(AuthorizationContext filterContext)
 		{
-			filterContext.Result = new ContentResult {Content = DefaultAjaxResult ?? string.Empty};
+			filterContext.Result = new ContentResult { Content = DefaultAjaxResult ?? string.Empty };
 		}
 
 		protected void ResponseViewResult(AuthorizationContext filterContext, string viewName)
 		{
-			filterContext.Result = new ViewResult {ViewName = viewName};
+			filterContext.Result = new ViewResult { ViewName = viewName };
 		}
 	}
 }

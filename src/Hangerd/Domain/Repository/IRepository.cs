@@ -10,13 +10,13 @@ namespace Hangerd.Domain.Repository
 	public interface IRepository<TEntity>
 		where TEntity : EntityBase
 	{
-		TEntity Get(string id, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties);
+		TEntity Get(string id, bool tracking, params Expression<Func<TEntity, dynamic>>[] includeProperties);
 
-		TEntity Get(ISpecification<TEntity> spec, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties);
+		TEntity Get(ISpecification<TEntity> spec, bool tracking, params Expression<Func<TEntity, dynamic>>[] includeProperties);
 
-		IQueryable<TEntity> GetAll(bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties);
+		IQueryable<TEntity> GetAll(bool tracking, params Expression<Func<TEntity, dynamic>>[] includeProperties);
 
-		IQueryable<TEntity> GetAll(ISpecification<TEntity> spec, bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties);
+		IQueryable<TEntity> GetAll(ISpecification<TEntity> spec, bool tracking, params Expression<Func<TEntity, dynamic>>[] includeProperties);
 
 		void Add(TEntity entity);
 

@@ -24,7 +24,7 @@ namespace HangerdSample.Web.Authentication
 
 				var accountService = LocalServiceLocator.GetService<IAccountService>();
 
-				account = accountService.GetAccount(LoginHelper.GetUserId());
+				account = accountService.Get(LoginHelper.GetUserId());
 
 				if (account != null)
 					HttpContext.Current.Items.Add(AccountCachingKey, account);

@@ -20,7 +20,7 @@ namespace HangerdSample.Web.Controllers
 			_accountService = accountService;
 		}
 
-		#region SignIn
+		#region Sign In
 
 		public ActionResult SignIn()
 		{
@@ -33,7 +33,7 @@ namespace HangerdSample.Web.Controllers
 		[HttpPost]
 		public ActionResult SignIn(LoginModel model)
 		{
-			var result = _accountService.GetAccount(model.LoginName, model.Password);
+			var result = _accountService.Get(model.LoginName, model.Password);
 			var success = result.Value != null;
 
 			if (success)
@@ -51,7 +51,7 @@ namespace HangerdSample.Web.Controllers
 
 		#endregion
 
-		#region SignUp
+		#region Sign Up
 
 		public ActionResult SignUp()
 		{
@@ -68,7 +68,7 @@ namespace HangerdSample.Web.Controllers
 				return JsonContent(new { Success = false, Message = errorMessage });
 			}
 
-			var result = _accountService.SignUpAccount(new AccountDto
+			var result = _accountService.SignUp(new AccountDto
 			{
 				LoginName = model.Email,
 				Password = model.Password,
@@ -79,5 +79,24 @@ namespace HangerdSample.Web.Controllers
 		}
 
 		#endregion
+
+		[AccountLoginAuth]
+		public ActionResult List()
+		{
+			var totalCount = 0;
+			var account = _accountService.GetList(0, 0, ref totalCount);
+
+			ViewBag.TotalCount = totalCount;
+
+			return View(account);
+		}
+
+		[AccountLoginAuth(Ajax = true)]
+		public ContentResult Remove(string id)
+		{
+			var result = _accountService.Remove(id);
+
+			return OperationJsonResult(result);
+		}
 	}
 }

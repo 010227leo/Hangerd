@@ -25,10 +25,8 @@ namespace Hangerd.Extensions
 		/// <summary>
 		/// if pageIndex is 0 and pageSize is 0, return all
 		/// </summary>
-		public static IQueryable<T> Paging<T>(this IOrderedQueryable<T> instance, int pageIndex, int pageSize, out int totalNumber)
+		public static IQueryable<T> Paging<T>(this IOrderedQueryable<T> instance, int pageIndex, int pageSize, ref int totalNumber)
 		{
-			totalNumber = 0;
-
 			if (instance == null) 
 				return null;
 

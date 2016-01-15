@@ -1,0 +1,60 @@
+﻿@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<HangerdSample.Application.Dtos.AccountDto>
+
+<div class="clearfix">
+	<h4>Accounts</h4>
+
+	<hr />
+
+	<div class="panel panel-default">
+		<div class="panel-heading">Total: @ViewBag.TotalCount</div>
+		<table class="table text-center">
+			<thead>
+				<tr>
+					<th class="text-center">Email</th>
+					<th class="text-center">Name</th>
+					<th class="text-center">Create Time</th>
+					<th class="text-center"></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var account in Model)
+				{
+					<tr>
+						<td>@account.LoginName</td>
+						<td>@account.Name</td>
+						<td>@account.CreateTime</td>
+						<td>
+							<button type="button" class="btn btn-xs btn-danger" onclick="remove('@account.Id')">Remove</button>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+@section scripts {
+	<script type="text/javascript">
+		function remove(id) {
+			if (!confirm("Sure ?"))
+				return;
+
+			$.ajax({
+				type: "POST",
+				dataType: "json",
+				url: "@Url.Action("Remove", "Account")",
+				data: { id: id },
+				success: function (result) {
+					alert(result.Message);
+
+					if (result.Success)
+						window.location.reload();
+				}
+			});
+		}
+	</script>
+}

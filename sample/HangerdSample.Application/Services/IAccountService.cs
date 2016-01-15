@@ -6,16 +6,16 @@ namespace HangerdSample.Application.Services
 {
 	public interface IAccountService
 	{
-		AccountDto GetAccount(string id);
+		AccountDto Get(string id);
 
-		HangerdResult<AccountDto> GetAccount(string email, string password);
+		HangerdResult<AccountDto> Get(string email, string password);
 
-		IEnumerable<AccountDto> GetAccounts(int pageIndex, int pageSize, out int totalCount);
+		IEnumerable<AccountDto> GetList(int pageIndex, int pageSize, ref int totalCount);
 
-		HangerdResult<bool> SignUpAccount(AccountDto accountDto);
+		HangerdResult<bool> SignUp(AccountDto accountDto);
 
-		HangerdResult<bool> ChangeAccountPassword(string accountId, string oldPassword, string newPassword);
+		HangerdResult<bool> ChangePassword(string accountId, string oldPassword, string newPassword);
 
-		HangerdResult<bool> RemoveAccount(string accountId);
+		HangerdResult<bool> Remove(string accountId);
 	}
 }

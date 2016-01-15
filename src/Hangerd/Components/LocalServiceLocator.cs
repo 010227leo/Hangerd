@@ -15,7 +15,7 @@ namespace Hangerd.Components
 			catch (Exception ex)
 			{
 				LocalLoggingService.Exception("LocalServiceLocator Resolve error '{0}', Message:{1}",
-					typeof(T).FullName, ex.ToString());
+					typeof (T).FullName, ex.ToString());
 
 				return default(T);
 			}

@@ -1,7 +1,6 @@
 ﻿namespace Hangerd.Domain.Entity
 {
-	public class ValueObjectBase<T>
-		where T : new()
+	public class ValueObjectBase<T> where T : new()
 	{
 		protected ValueObjectBase()
 		{

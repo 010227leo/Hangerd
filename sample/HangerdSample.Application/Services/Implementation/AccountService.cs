@@ -32,7 +32,7 @@ namespace HangerdSample.Application.Services.Implementation
 			_accountDomainService = accountDomainService;
 		}
 
-		public AccountDto GetAccount(string id)
+		public AccountDto Get(string id)
 		{
 			using (UnitOfWorkManager.Begin<IRepositoryContext>())
 			{
@@ -40,7 +40,7 @@ namespace HangerdSample.Application.Services.Implementation
 			}
 		}
 
-		public HangerdResult<AccountDto> GetAccount(string email, string password)
+		public HangerdResult<AccountDto> Get(string email, string password)
 		{
 			return Try(() =>
 			{
@@ -62,19 +62,19 @@ namespace HangerdSample.Application.Services.Implementation
 			});
 		}
 
-		public IEnumerable<AccountDto> GetAccounts(int pageIndex, int pageSize, out int totalCount)
+		public IEnumerable<AccountDto> GetList(int pageIndex, int pageSize, ref int totalCount)
 		{
 			using (UnitOfWorkManager.Begin<IRepositoryContext>())
 			{
 				var accounts = _accountRepository.GetAll(DeletableSpecifications<Account>.NotDeleted(), false)
 					.OrderByDescending(a => a.CreateTime)
-					.Paging(pageIndex, pageSize, out totalCount);
+					.Paging(pageIndex, pageSize, ref totalCount);
 
 				return Mapper.Map<IEnumerable<Account>, IEnumerable<AccountDto>>(accounts);
 			}
 		}
 
-		public HangerdResult<bool> SignUpAccount(AccountDto accountDto)
+		public HangerdResult<bool> SignUp(AccountDto accountDto)
 		{
 			return Try(() =>
 			{
@@ -92,7 +92,7 @@ namespace HangerdSample.Application.Services.Implementation
 			}, "Success");
 		}
 
-		public HangerdResult<bool> ChangeAccountPassword(string accountId, string oldPassword, string newPassword)
+		public HangerdResult<bool> ChangePassword(string accountId, string oldPassword, string newPassword)
 		{
 			return Try(() =>
 			{
@@ -109,10 +109,10 @@ namespace HangerdSample.Application.Services.Implementation
 
 					context.Commit();
 				}
-			});
+			}, "Success");
 		}
 
-		public HangerdResult<bool> RemoveAccount(string accountId)
+		public HangerdResult<bool> Remove(string accountId)
 		{
 			return Try(() =>
 			{
@@ -126,7 +126,7 @@ namespace HangerdSample.Application.Services.Implementation
 
 					context.Commit();
 				}
-			});
+			}, "Success");
 		}
 	}
 }

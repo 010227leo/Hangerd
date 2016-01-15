@@ -8,8 +8,7 @@ namespace Hangerd.Event.Bus
 {
 	public class EventDispatcher : Disposable, IEventDispatcher
 	{
-		private readonly Dictionary<Type, Dictionary<Type, object>> _handlers =
-			new Dictionary<Type, Dictionary<Type, object>>();
+		private readonly Dictionary<Type, Dictionary<Type, object>> _handlers = new Dictionary<Type, Dictionary<Type, object>>();
 
 		public virtual void Clear()
 		{
@@ -80,7 +79,7 @@ namespace Hangerd.Event.Bus
 				}
 				catch (Exception ex)
 				{
-					LocalLoggingService.Exception("DispatchEvent error!Handler:{0}, message: {1}",
+					LocalLoggingService.Exception("DispatchEvent error! Handler:{0}, message: {1}",
 						eventHandler.GetType().FullName, ex.Message);
 				}
 			}

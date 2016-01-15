@@ -29,12 +29,12 @@ namespace Hangerd.EntityFramework.Repository
 			_dbContextProvider = dbContextProvider;
 		}
 
-		public override IQueryable<TEntity> GetAll(bool tracking, params Expression<Func<TEntity, dynamic>>[] eagerLoadingProperties)
+		public override IQueryable<TEntity> GetAll(bool tracking, params Expression<Func<TEntity, dynamic>>[] includeProperties)
 		{
 			var dbset = tracking ? DbSet : DbSet.AsNoTracking();
 
-			if (eagerLoadingProperties != null && eagerLoadingProperties.Length > 0)
-				dbset = eagerLoadingProperties.Aggregate(dbset, (current, property) => current.Include(property));
+			if (includeProperties != null && includeProperties.Length > 0)
+				dbset = includeProperties.Aggregate(dbset, (current, property) => current.Include(property));
 
 			return dbset;
 		}
