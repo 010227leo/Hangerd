@@ -34,7 +34,7 @@ protected void Application_End()
 }
 ```
 
-- **Ioc**
+- **IoC**
 
 ```csharp
 public class RegisterServiceTask : RegisterServiceBootstrapperTask
@@ -53,7 +53,7 @@ static void Main(string[] args)
 }
 ```
 
-- **Domain entity**
+- **Domain model**
 
 ```csharp
 public abstract class Account : EntityBase, IDeletable
@@ -72,7 +72,7 @@ public abstract class Account : EntityBase, IDeletable
 }
 ```
 
-- **Domain event**
+- **Domain event & Event handler**
 
 ```csharp
 public class AccountNameModifiedEvent : DomainEvent
